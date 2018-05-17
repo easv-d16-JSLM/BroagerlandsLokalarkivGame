@@ -6,8 +6,8 @@ namespace BLAG.Common.Models
 {
     class AnswerPicture : AnswerBase
     {
-        public IList<Object> Picture;
-        public Object CorrectObject;
+        public IList<String> PictureIndexList;
+        public String CorrectPictureIndex;
 
     }
 }
