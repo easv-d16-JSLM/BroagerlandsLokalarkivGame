@@ -1,0 +1,7 @@
+language: csharp
+mono: none
+dotnet: 2.1.200
+script:
+ - dotnet restore
+ - cd BLAG.Common; dotnet build; dotnet publish
+ - cd ../BLAG.Server; dotnet build; dotnet publish
