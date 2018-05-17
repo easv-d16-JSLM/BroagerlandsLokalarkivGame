@@ -7,16 +7,15 @@ namespace BLAG.Common
 {
     public class ScoreCalculator
     {
-        public int Score(QuestionBase question, TimeSpan time)
+        public double Score(QuestionBase question, TimeSpan time)
         {
-            var timeLapsed = time.TotalMilliseconds / question.Time.TotalMilliseconds;
+            var timeLapsed = time.TotalMilliseconds;
+            var timeMax = question.Time.TotalMilliseconds;
 
-            if (timeLapsed >= 0.8)
-                return question.Points * 100;
-
-            var percentage = timeLapsed <= 0.5 ? 50 : timeLapsed;
-
-            return Convert.ToInt32(question.Points * percentage);
+            if (1 - timeLapsed / timeMax >= 0.9)
+                return question.Points;
+            
+            return question.Points * 1.05 - ((timeLapsed / timeMax) / 2) * question.Points;
         }
     }
 }
