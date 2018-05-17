@@ -7,7 +7,8 @@ namespace BLAG.Common.Models
 {
     public class QuestionAudio : QuestionBase
     {
+        // Collection of STRINGS, CHANGE LATER - not supposed to be string
         [Required]
-        public object Audio { get; set; }
+        public String Audio { get; set; }
     }
 }

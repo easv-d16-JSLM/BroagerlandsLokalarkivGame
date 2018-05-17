@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BLAG.Common.Models
 {
-    class AnswerTextChoice : AnswerBase
+    public class AnswerTextChoice : AnswerBase
     {
         [Required]
         public IList<String> TextChoices;

@@ -5,10 +5,11 @@ using System.Text;
 
 namespace BLAG.Common.Models
 {
-    class AnswerPicture : AnswerBase
+    public class AnswerPicture : AnswerBase
     {
+        // Collection of STRINGS, CHANGE LATER - not supposed to be string
         [Required]
-        public IList<Object> PictureList;
+        public IList<String> PictureList;
         [Required]
         public int CorrectPictureIndex;
 

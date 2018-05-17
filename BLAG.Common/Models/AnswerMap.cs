@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BLAG.Common.Models
 {
-    class AnswerMap : AnswerBase
+    public class AnswerMap : AnswerBase
     {
         [Required]
         public double Latitude;

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BLAG.Common.Models
 {
-    class AnswerNumber : AnswerBase
+    public class AnswerNumber : AnswerBase
     {
         [Required]
         public double CorrectValue; 
