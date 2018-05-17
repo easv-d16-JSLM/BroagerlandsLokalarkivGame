@@ -4,4 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Geolocation">
+      <HintPath>..\..\..\..\.nuget\packages\geolocation\1.1.1\lib\Geolocation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
