@@ -22,16 +22,7 @@ import { AudioComponent } from './question/audio/audio.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    FormsModule,
-    RouterModule.forRoot([
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
-      {path: 'announcement', component: AnnouncementComponent},
-      {path: 'audio', component: AudioComponent},
-      {path: 'image', component: ImageComponent},
-      {path: 'text', component: TextComponent},
-      {path: 'video', component: VideoComponent}
-    ])
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
