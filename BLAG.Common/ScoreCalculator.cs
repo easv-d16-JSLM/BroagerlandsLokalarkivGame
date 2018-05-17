@@ -7,6 +7,7 @@ namespace BLAG.Common
 {
     public class ScoreCalculator
     {
+
         public double Score(QuestionBase question, TimeSpan time)
         {
             var timeLapsed = time.TotalMilliseconds;
