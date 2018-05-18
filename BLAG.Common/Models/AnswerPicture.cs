@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLAG.Common.Models
 {
-    class AnswerPicture : AnswerBase<int>
+    public class AnswerPicture : AnswerBase<int>
     {
         public IList<Object> PictureList;
         public int CorrectPictureIndex;
