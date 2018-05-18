@@ -1,6 +1,6 @@
-export class Text {
+export class Audio {
     id: number;
-    text: string;
+    audio: any;
     points: number;
     time: number;
   }
