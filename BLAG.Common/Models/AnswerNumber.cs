@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BLAG.Common.Models
 {
-    class AnswerNumber : AnswerBase<double>
+    public class AnswerNumber : AnswerBase<double>
     {
         public double CorrectValue;
         protected override double GetCorrectness(double userAnswer)
