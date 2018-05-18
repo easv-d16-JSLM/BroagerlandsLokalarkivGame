@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BLAG.Server.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,13 +25,16 @@ namespace BLAG.Server.Migrations
                 name: "QuestionBase",
                 columns: table => new
                 {
+                    Audio = table.Column<byte[]>(nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Discriminator = table.Column<string>(nullable: false),
                     Points = table.Column<int>(nullable: false),
                     QuestionnaireId = table.Column<int>(nullable: false),
                     Time = table.Column<TimeSpan>(nullable: false),
-                    Text = table.Column<string>(maxLength: 500, nullable: true)
+                    Image = table.Column<byte[]>(nullable: true),
+                    Text = table.Column<string>(maxLength: 500, nullable: true),
+                    Video = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {

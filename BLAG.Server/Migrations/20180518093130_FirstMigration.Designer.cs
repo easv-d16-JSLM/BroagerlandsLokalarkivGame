@@ -12,9 +12,10 @@ using System;
 namespace BLAG.Server.Migrations
 {
     [DbContext(typeof(BlagContext))]
-    partial class BlagContextModelSnapshot : ModelSnapshot
+    [Migration("20180518093130_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,6 +111,30 @@ namespace BLAG.Server.Migrations
                     b.ToTable("Questionnaires");
                 });
 
+            modelBuilder.Entity("BLAG.Common.Models.QuestionAudio", b =>
+                {
+                    b.HasBaseType("BLAG.Common.Models.QuestionBase");
+
+                    b.Property<byte[]>("Audio")
+                        .IsRequired();
+
+                    b.ToTable("QuestionAudio");
+
+                    b.HasDiscriminator().HasValue("QuestionAudio");
+                });
+
+            modelBuilder.Entity("BLAG.Common.Models.QuestionImage", b =>
+                {
+                    b.HasBaseType("BLAG.Common.Models.QuestionBase");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired();
+
+                    b.ToTable("QuestionImage");
+
+                    b.HasDiscriminator().HasValue("QuestionImage");
+                });
+
             modelBuilder.Entity("BLAG.Common.Models.QuestionText", b =>
                 {
                     b.HasBaseType("BLAG.Common.Models.QuestionBase");
@@ -121,6 +146,18 @@ namespace BLAG.Server.Migrations
                     b.ToTable("QuestionText");
 
                     b.HasDiscriminator().HasValue("QuestionText");
+                });
+
+            modelBuilder.Entity("BLAG.Common.Models.QuestionVideo", b =>
+                {
+                    b.HasBaseType("BLAG.Common.Models.QuestionBase");
+
+                    b.Property<byte[]>("Video")
+                        .IsRequired();
+
+                    b.ToTable("QuestionVideo");
+
+                    b.HasDiscriminator().HasValue("QuestionVideo");
                 });
 
             modelBuilder.Entity("BLAG.Common.Models.AnswerMap", b =>

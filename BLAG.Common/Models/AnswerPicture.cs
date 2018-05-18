@@ -7,9 +7,8 @@ namespace BLAG.Common.Models
 {
     public class AnswerPicture : AnswerBase
     {
-        // Collection of STRINGS, CHANGE LATER - not supposed to be string
         [Required]
-        public IList<String> PictureList;
+        public IList<byte[]> PictureList;
         [Required]
         public int CorrectPictureIndex;
 

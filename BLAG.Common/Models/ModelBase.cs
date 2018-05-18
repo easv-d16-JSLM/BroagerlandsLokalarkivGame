@@ -2,7 +2,7 @@
 
 namespace BLAG.Common.Models
 {
-    public abstract class ModelBase
+    public class ModelBase
     {
         [Required]
         public int Id { get; set; }

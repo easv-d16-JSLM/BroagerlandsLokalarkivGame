@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using BLAG.Common.Models;
 using BLAG.Server.Data;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace BLAG.Server
 {
@@ -28,6 +29,13 @@ namespace BLAG.Server
         {
             services.AddMvc();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
+
+            services.AddMvc();
+
             // Should be: var connection = Configuration.GetConnectionString("DefaultConnection");
             var connection = @"Server=LOCALHOST;Database=Blag;uid=sa;pwd=seba0830;";
 
@@ -38,6 +46,13 @@ namespace BLAG.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
