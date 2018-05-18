@@ -8,7 +8,9 @@ namespace BLAG.Common.Models
 {
     public class AnswerMap : AnswerBase<Coordinate>
     {
+        [Required]
         public Coordinate Location;
+        [Required]
         public int Precision;
 
         protected override double GetCorrectness(Coordinate userAnswer)
