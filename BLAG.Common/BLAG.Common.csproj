@@ -7,10 +7,16 @@
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Reference Include="Microsoft.Build.Framework">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.Build.Framework.dll</HintPath>
+    <PackageReference Include="Geolocation" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Geolocation">
+      <HintPath>..\..\..\..\.nuget\packages\geolocation\1.1.1\lib\Geolocation.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -9,7 +9,6 @@ namespace BLAG.Common.Models
         public int Points { get; set; }
         [Required]
         public Questionnaire Questionnaire { get; set; } 
-        
         public TimeSpan Time { get; set; }
     }
 }
