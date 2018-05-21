@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BLAG.Common.Models
+﻿namespace BLAG.Common.Models
 {
     public class QuestionAnnouncement : QuestionBase
     {

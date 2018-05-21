@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace BLAG.Common.Models
 {
     public class QuestionImage : QuestionBase
     {
-
-        [Required]
-        public byte[] Image { get; set; }
+        // String will hold the ID of where the image file is saved in LiteDB
+        public String Image { get; set; }
     }
 }

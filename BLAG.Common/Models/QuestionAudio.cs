@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿
+using System;
 
 namespace BLAG.Common.Models
 {
     public class QuestionAudio : QuestionBase
     {
-        [Required]
-        public byte[] Audio { get; set; }
+        // String will hold the ID of where the audio file is saved in LiteDB
+        public String Audio { get; set; }
     }
 }

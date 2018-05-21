@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace BLAG.Common.Models
 {
     public class QuestionVideo : QuestionBase
     {
-        [Required]
-        public byte[] Video { get; set; }
+        // String will hold the ID of where the video file is saved in LiteDB
+        public String Video { get; set; }
     }
 }

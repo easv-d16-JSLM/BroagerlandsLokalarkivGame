@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace BLAG.Common.Models
 {
     public class AnswerPicture : AnswerBase<int>
     {
-        [Required]
-        public IList<byte[]> PictureList;
-        [Required]
+        // String will hold the ID of where the image file is saved in LiteDB
+        public IList<String> PictureList;
         public int CorrectPictureIndex;
 
         protected override double GetCorrectness(int userAnswer)

@@ -1,12 +1,10 @@
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace BLAG.Common.Models
 {
     public abstract class AnswerBase<TAnswer> : ModelBase
 
     {
-        [Required]
         public QuestionBase Question { get; set; }
 
         public double CalculateScore(TAnswer userAnswer, int pointsMax, TimeSpan timeMax, TimeSpan userTime)
