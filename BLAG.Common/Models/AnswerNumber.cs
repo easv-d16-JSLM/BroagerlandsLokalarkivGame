@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BLAG.Common.Models
 {
     public class AnswerNumber : AnswerBase<double>
     {
         public double CorrectValue;
+        public int EndValue;
+        public int Precision;
+        public int StartValue;
+
         protected override double GetCorrectness(double userAnswer)
         {
-            return userAnswer.Equals(CorrectValue) ? 1 : 0;
+            var test = Math.Exp(-Math.Pow(userAnswer - CorrectValue, 2) / (2 * Math.Pow(Precision, 2)));
+            return test;
         }
     }
 }
