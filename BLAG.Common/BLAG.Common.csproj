@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Geolocation" Version="1.1.1" />
+    <PackageReference Include="Geolocation.NetStandard" Version="1.1.1" />
   </ItemGroup>
 
   <ItemGroup>
