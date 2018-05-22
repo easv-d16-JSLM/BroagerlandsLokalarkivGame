@@ -13,7 +13,7 @@ namespace BLAG.Server.Controllers
 
         public AnswerMapController(LiteRepository db)
         {
-            this._db = db;
+            _db = db;
         }
 
         // GET: api/AnswerMap
@@ -29,21 +29,21 @@ namespace BLAG.Server.Controllers
         {
             return _db.SingleById<AnswerMap>(id);
         }
-        
+
         // POST: api/AnswerMap
         [HttpPost]
-        public void Post([FromBody]AnswerMap answerMap)
+        public void Post([FromBody] AnswerMap answerMap)
         {
             _db.Insert(answerMap);
         }
-        
+
         // PUT: api/AnswerMap/5
         [HttpPut]
-        public void Put([FromBody]AnswerMap answerMap)
+        public void Put([FromBody] AnswerMap answerMap)
         {
             _db.Update(answerMap);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

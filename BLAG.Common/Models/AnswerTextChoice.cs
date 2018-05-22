@@ -4,8 +4,8 @@ namespace BLAG.Common.Models
 {
     public class AnswerTextChoice : AnswerBase<string>
     {
+        public string CorrectChoice;
         public IList<string> TextChoices;
-        public string CorrectChoice; 
 
         protected override double GetCorrectness(string userAnswer)
         {

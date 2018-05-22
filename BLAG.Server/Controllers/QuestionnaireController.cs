@@ -13,7 +13,7 @@ namespace BLAG.Server.Controllers
 
         public QuestionnaireController(LiteRepository db)
         {
-            this._db = db;
+            _db = db;
         }
 
         // GET: api/Questionnaire
@@ -29,21 +29,21 @@ namespace BLAG.Server.Controllers
         {
             return _db.SingleById<Questionnaire>(id);
         }
-        
+
         // POST: api/Questionnaire
         [HttpPost]
-        public void Post([FromBody]Questionnaire questionnaire)
+        public void Post([FromBody] Questionnaire questionnaire)
         {
             _db.Insert(questionnaire);
         }
-        
+
         // PUT: api/Questionnaire/5
         [HttpPut]
-        public void Put([FromBody]Questionnaire questionnaire)
+        public void Put([FromBody] Questionnaire questionnaire)
         {
             _db.Update(questionnaire);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

@@ -9,10 +9,10 @@ namespace BLAG.Common.Models
         public int Precision;
 
         protected override double GetCorrectness(Coordinate userAnswer)
-        { 
-            var distance = Geolocation.GeoCalculator.GetDistance(Location, userAnswer, 1, DistanceUnit.Meters);
+        {
+            var distance = GeoCalculator.GetDistance(Location, userAnswer, 1, DistanceUnit.Meters);
 
-            return Math.Min(Precision / distance,1);
+            return Math.Min(Precision / distance, 1);
         }
     }
 }

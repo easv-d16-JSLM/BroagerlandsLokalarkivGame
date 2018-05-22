@@ -13,7 +13,7 @@ namespace BLAG.Server.Controllers
 
         public AnswerNumberController(LiteRepository db)
         {
-            this._db = db;
+            _db = db;
         }
 
         // GET: api/AnswerNumber
@@ -29,21 +29,21 @@ namespace BLAG.Server.Controllers
         {
             return _db.SingleById<AnswerNumber>(id);
         }
-        
+
         // POST: api/AnswerNumber
         [HttpPost]
-        public void Post([FromBody]AnswerNumber answerNumber)
+        public void Post([FromBody] AnswerNumber answerNumber)
         {
             _db.Insert(answerNumber);
         }
-        
+
         // PUT: api/AnswerNumber/5
         [HttpPut]
-        public void Put([FromBody]AnswerNumber answerNumber)
+        public void Put([FromBody] AnswerNumber answerNumber)
         {
             _db.Update(answerNumber);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

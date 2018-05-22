@@ -13,7 +13,7 @@ namespace BLAG.Server.Controllers
 
         public QuestionAudioController(LiteRepository db)
         {
-            this._db = db;
+            _db = db;
         }
 
         // GET: api/QuestionAudio
@@ -29,21 +29,21 @@ namespace BLAG.Server.Controllers
         {
             return _db.SingleById<QuestionAudio>(id);
         }
-        
+
         // POST: api/QuestionAudio
         [HttpPost]
-        public void Post([FromBody]QuestionAudio questionAudio)
+        public void Post([FromBody] QuestionAudio questionAudio)
         {
             _db.Insert(questionAudio);
         }
-        
+
         // PUT: api/QuestionAudio/5
         [HttpPut]
-        public void Put([FromBody]QuestionAudio questionAudio)
+        public void Put([FromBody] QuestionAudio questionAudio)
         {
             _db.Update(questionAudio);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

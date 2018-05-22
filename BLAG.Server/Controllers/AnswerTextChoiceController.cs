@@ -13,8 +13,9 @@ namespace BLAG.Server.Controllers
 
         public AnswerTextChoiceController(LiteRepository db)
         {
-            this._db = db;
+            _db = db;
         }
+
         // GET: api/AnswerTextChoice
         [HttpGet]
         public IEnumerable<AnswerTextChoice> Get()
@@ -28,21 +29,21 @@ namespace BLAG.Server.Controllers
         {
             return _db.SingleById<AnswerTextChoice>(id);
         }
-        
+
         // POST: api/AnswerTextChoice
         [HttpPost]
-        public void Post([FromBody]AnswerTextChoice answerTextChoice)
+        public void Post([FromBody] AnswerTextChoice answerTextChoice)
         {
             _db.Insert(answerTextChoice);
         }
-        
+
         // PUT: api/AnswerTextChoice/5
         [HttpPut]
-        public void Put([FromBody]AnswerTextChoice answerTextChoice)
+        public void Put([FromBody] AnswerTextChoice answerTextChoice)
         {
             _db.Update(answerTextChoice);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

@@ -13,7 +13,7 @@ namespace BLAG.Server.Controllers
 
         public QuestionImageController(LiteRepository db)
         {
-            this._db = db;
+            _db = db;
         }
 
         // GET: api/QuestionImage
@@ -29,21 +29,21 @@ namespace BLAG.Server.Controllers
         {
             return _db.SingleById<QuestionImage>(id);
         }
-        
+
         // POST: api/QuestionImage
         [HttpPost]
-        public void Post([FromBody]QuestionImage questionImage)
+        public void Post([FromBody] QuestionImage questionImage)
         {
             _db.Insert(questionImage);
         }
-        
+
         // PUT: api/QuestionImage/5
         [HttpPut]
-        public void Put([FromBody]QuestionImage questionImage)
+        public void Put([FromBody] QuestionImage questionImage)
         {
             _db.Update(questionImage);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
