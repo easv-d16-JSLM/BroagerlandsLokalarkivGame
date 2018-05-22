@@ -6,7 +6,7 @@ using ReactiveUI;
 
 namespace BLAG.App.ViewModels
 {
-    public class AnswerTextChoiceViewModel : ReactiveObject
+    public class AnswerTextChoiceViewModel : ViewModelBase
     {
         private readonly AnswerTextChoice _model;
 

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ui:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BLAG.App.Views.AnswerTextChoiceView">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
-      </StackLayout>
-  </ContentView.Content>
-</ContentView>
+             xmlns:ui="clr-namespace:BLAG.App.Views"
+             xmlns:vms="clr-namespace:BLAG.App.ViewModels"
+             x:Class="BLAG.App.Views.AnswerTextChoiceView"
+             x:TypeArguments="vms:AnswerTextChoiceViewModel">
+    <ListView x:Name="AnswerList">
+    </ListView>
+</ui:ContentPageBase>
