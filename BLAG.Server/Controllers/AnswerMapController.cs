@@ -24,11 +24,10 @@ namespace BLAG.Server.Controllers
         }
 
         // GET: api/AnswerMap/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public AnswerMap Get(int id)
         {
-            var answer = _db.SingleById<AnswerMap>(id);
-            return answer;
+            return _db.SingleById<AnswerMap>(id);
         }
         
         // POST: api/AnswerMap
