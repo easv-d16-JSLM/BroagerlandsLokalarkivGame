@@ -5,7 +5,6 @@ namespace BLAG.Common.Models
 {
     public class AnswerMap : AnswerBase<Coordinate>
     {
-
         public Coordinate Location;
         public int Precision;
 

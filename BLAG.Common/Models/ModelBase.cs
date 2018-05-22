@@ -1,7 +1,10 @@
-﻿namespace BLAG.Common.Models
+﻿using LiteDB;
+
+namespace BLAG.Common.Models
 {
     public class ModelBase
     {
-        public int Id { get; set; }
+        [BsonId]
+        public ObjectId Id { get; set; }
     }
 }

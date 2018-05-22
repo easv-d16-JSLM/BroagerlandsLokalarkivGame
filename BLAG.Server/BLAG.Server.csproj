@@ -19,4 +19,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BLAG.Common\BLAG.Common.csproj" />
+  </ItemGroup>
+
 </Project>
