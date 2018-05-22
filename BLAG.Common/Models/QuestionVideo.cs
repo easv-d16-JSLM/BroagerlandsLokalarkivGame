@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BLAG.Common.Models
+﻿namespace BLAG.Common.Models
 {
     public class QuestionVideo : QuestionBase
     {
-        public object Video { get; set; }
+        // String will hold the ID of where the video file is saved in LiteDB
+        public string Video { get; set; }
     }
 }

@@ -1,9 +1,12 @@
-﻿using System;
+using System;
+using LiteDB;
 
 namespace BLAG.Common.Models
 {
     public abstract class AnswerBase<TAnswer> : ModelBase
+
     {
+        [BsonRef("questions")]
         public QuestionBase Question { get; set; }
 
         public double CalculateScore(TAnswer userAnswer, int pointsMax, TimeSpan timeMax, TimeSpan userTime)

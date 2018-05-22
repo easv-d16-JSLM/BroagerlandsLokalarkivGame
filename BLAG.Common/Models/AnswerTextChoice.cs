@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace BLAG.Common.Models
 {
     public class AnswerTextChoice : AnswerBase<string>
     {
-        public IList<String> TextChoices;
-        public String CorrectChoice;
-
+        public string CorrectChoice;
+        public IList<string> TextChoices;
 
         protected override double GetCorrectness(string userAnswer)
         {

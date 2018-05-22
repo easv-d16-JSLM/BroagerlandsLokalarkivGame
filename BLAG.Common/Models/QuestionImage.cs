@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BLAG.Common.Models
+﻿namespace BLAG.Common.Models
 {
     public class QuestionImage : QuestionBase
     {
-        public object Image { get; set; }
+        // String will hold the ID of where the image file is saved in LiteDB
+        public string Image { get; set; }
     }
 }

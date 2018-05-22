@@ -1,10 +1,11 @@
-﻿using System;
-
+using System;
 namespace BLAG.Common.Models
+
 {
     public class AnswerNumber : AnswerBase<double>
     {
         public double CorrectValue;
+
         public int EndValue;
         public int Precision;
         public int StartValue;
