@@ -1,0 +1,17 @@
+<h2>{{ video.id }} Details</h2>
+<div><span>id: </span>{{video.id}}</div>
+<div>
+  <label>video:
+    <input type="file" [(ngModel)]="video.video" placeholder="video">
+  </label>
+</div>
+<div>
+  <label>points:
+    <input type="number" step="1" min="10" max="10000" [(ngModel)]="video.points" placeholder={{video.points}}>
+  </label>
+</div>
+<div>
+  <label>time:
+      <input type="number" step="1" min="1" max="10000" [(ngModel)]="video.time" placeholder={{video.time}}>
+  </label>
+</div>
