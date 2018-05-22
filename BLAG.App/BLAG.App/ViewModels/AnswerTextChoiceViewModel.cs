@@ -8,11 +8,13 @@ namespace BLAG.App.ViewModels
 {
     public class AnswerTextChoiceViewModel : ViewModelBase
     {
-        private readonly AnswerTextChoice _model;
+        public AnswerTextChoice Model { get; }
 
         public AnswerTextChoiceViewModel(AnswerTextChoice model)
         {
-            _model = model;
+            Model = model;
         }
+
+        public string SelectedAnswer { get; set; }
     }
 }

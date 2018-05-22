@@ -5,6 +5,5 @@
              xmlns:vms="clr-namespace:BLAG.App.ViewModels"
              x:Class="BLAG.App.Views.AnswerTextChoiceView"
              x:TypeArguments="vms:AnswerTextChoiceViewModel">
-    <ListView x:Name="AnswerList">
-    </ListView>
+    <ListView x:Name="AnswerList" />
 </ui:ContentPageBase>
