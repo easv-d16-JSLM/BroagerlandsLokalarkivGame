@@ -1,5 +1,5 @@
 ﻿using System;
-using BLAG.Common.Models;
+using BLAG.Common.Models.Question;
 
 namespace BLAG.Common
 {

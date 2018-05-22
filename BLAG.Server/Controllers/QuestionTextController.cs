@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BLAG.Common.Models;
+﻿using System.Collections.Generic;
+using BLAG.Common.Models.Question;
 using LiteDB;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BLAG.Server.Controllers
@@ -17,8 +13,9 @@ namespace BLAG.Server.Controllers
 
         public QuestionTextController(LiteRepository db)
         {
-            this._db = db;
+            _db = db;
         }
+
         // GET: api/QuestionText
         [HttpGet]
         public IEnumerable<QuestionText> Get()
@@ -32,21 +29,21 @@ namespace BLAG.Server.Controllers
         {
             return _db.SingleById<QuestionText>(id);
         }
-        
+
         // POST: api/QuestionText
         [HttpPost]
-        public void Post([FromBody]QuestionText questionText)
+        public void Post([FromBody] QuestionText questionText)
         {
             _db.Insert(questionText);
         }
-        
+
         // PUT: api/QuestionText/5
         [HttpPut]
-        public void Put([FromBody]QuestionText questionText)
+        public void Put([FromBody] QuestionText questionText)
         {
             _db.Update(questionText);
         }
-        
+
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)

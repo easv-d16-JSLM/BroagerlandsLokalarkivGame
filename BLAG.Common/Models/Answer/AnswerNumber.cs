@@ -1,14 +1,14 @@
 using System;
-namespace BLAG.Common.Models
+
+namespace BLAG.Common.Models.Answer
 
 {
     public class AnswerNumber : AnswerBase<double>
     {
-        public double CorrectValue;
+        public double CorrectValue { get; set; }
 
-        public int EndValue;
-        public int Precision;
-        public int StartValue;
+        public int Precision { get; set; }
+
 
         protected override double GetCorrectness(double userAnswer)
         {

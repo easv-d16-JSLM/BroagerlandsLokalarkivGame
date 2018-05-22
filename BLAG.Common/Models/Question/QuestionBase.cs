@@ -1,7 +1,7 @@
 ﻿using System;
 using LiteDB;
 
-namespace BLAG.Common.Models
+namespace BLAG.Common.Models.Question
 {
     public class QuestionBase : ModelBase
     {

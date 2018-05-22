@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using BLAG.Common.Models.Question;
 
 namespace BLAG.Common.Models
 {

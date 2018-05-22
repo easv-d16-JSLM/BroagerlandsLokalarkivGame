@@ -1,5 +1,5 @@
 using System;
-using BLAG.Common.Models;
+using BLAG.Common.Models.Question;
 using FluentAssertions;
 using Xunit;
 
@@ -24,7 +24,7 @@ namespace BLAG.Common.Tests
             //Arrange
             var calc = new ScoreCalculator();
             var time = TimeSpan.FromSeconds(seconds);
-            var q = new QuestionText() {Points = 100, Time = TimeSpan.FromSeconds(50)};
+            var q = new QuestionText {Points = 100, Time = TimeSpan.FromSeconds(50)};
             //Act
             var result = calc.Score(q, time);
             //Assert
