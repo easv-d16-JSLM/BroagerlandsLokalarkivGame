@@ -1,5 +1,5 @@
 ﻿using System;
-using BLAG.Common.Models;
+using BLAG.Common.Models.Answer;
 using FluentAssertions;
 using Xunit;
 

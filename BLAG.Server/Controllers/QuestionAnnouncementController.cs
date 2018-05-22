@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BLAG.Common.Models;
+using BLAG.Common.Models.Question;
 using LiteDB;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,12 +1,12 @@
 ﻿using System;
 using Geolocation;
 
-namespace BLAG.Common.Models
+namespace BLAG.Common.Models.Answer
 {
     public class AnswerMap : AnswerBase<Coordinate>
     {
-        public Coordinate Location;
-        public int Precision;
+        public Coordinate Location { get; set; }
+        public int Precision { get; set; }
 
         protected override double GetCorrectness(Coordinate userAnswer)
         {

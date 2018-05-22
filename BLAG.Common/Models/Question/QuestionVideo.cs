@@ -1,4 +1,4 @@
-﻿namespace BLAG.Common.Models
+﻿namespace BLAG.Common.Models.Question
 {
     public class QuestionVideo : QuestionBase
     {
