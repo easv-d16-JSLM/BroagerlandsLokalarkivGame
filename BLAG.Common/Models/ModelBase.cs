@@ -1,9 +1,7 @@
-﻿using LiteDB;
-
-namespace BLAG.Common.Models
+﻿namespace BLAG.Common.Models
 {
     public class ModelBase
     {
-        public ObjectId Id { get; set; }
+        public int Id { get; set; }
     }
 }
