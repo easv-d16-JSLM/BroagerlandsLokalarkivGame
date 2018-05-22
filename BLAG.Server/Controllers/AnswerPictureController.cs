@@ -38,12 +38,14 @@ namespace BLAG.Server.Controllers
         [HttpPost]
         public void Post([FromBody]AnswerPicture answerPicture)
         {
+            _db.Insert(answerPicture);
         }
         
         // PUT: api/AnswerPicture/5
         [HttpPut]
         public void Put([FromBody]AnswerPicture answerPicture)
         {
+            _db.Update(answerPicture);
         }
         
         // DELETE: api/ApiWithActions/5
