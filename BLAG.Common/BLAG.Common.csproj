@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,12 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="Geolocation.NetStandard" Version="1.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Geolocation">
-      <HintPath>..\..\..\..\.nuget\packages\geolocation\1.1.1\lib\Geolocation.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
