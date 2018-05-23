@@ -10,6 +10,7 @@ import { AnnouncementComponent } from './question/announcement/announcement.comp
 import { ImageComponent } from './question/image/image.component';
 import { VideoComponent } from './question/video/video.component';
 import { AudioComponent } from './question/audio/audio.component';
+import { ViewComponent } from './question/text/view/view.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AudioComponent } from './question/audio/audio.component';
     AnnouncementComponent,
     ImageComponent,
     VideoComponent,
-    AudioComponent
+    AudioComponent,
+    ViewComponent
   ],
   imports: [
     BrowserModule,
