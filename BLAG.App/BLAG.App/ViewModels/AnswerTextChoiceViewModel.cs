@@ -1,20 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BLAG.Common.Models;
+﻿using BLAG.Common.Models;
 using ReactiveUI;
 
 namespace BLAG.App.ViewModels
 {
     public class AnswerTextChoiceViewModel : ViewModelBase
     {
-        public AnswerTextChoice Model { get; }
+        private string _selectedAnswer;
 
         public AnswerTextChoiceViewModel(AnswerTextChoice model)
         {
             Model = model;
         }
 
-        public string SelectedAnswer { get; set; }
+        public AnswerTextChoice Model { get; }
+
+
+        //put answers to observable list
+        
+
+        public string SelectedAnswer
+        {
+            get => _selectedAnswer;
+            set => this.RaiseAndSetIfChanged(ref _selectedAnswer, value);
+        }
     }
 }
