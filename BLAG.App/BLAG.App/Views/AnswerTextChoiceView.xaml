@@ -5,5 +5,14 @@
              xmlns:vms="clr-namespace:BLAG.App.ViewModels"
              x:Class="BLAG.App.Views.AnswerTextChoiceView"
              x:TypeArguments="vms:AnswerTextChoiceViewModel">
-    <ListView x:Name="AnswerList" />
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="AnswerList"/>
+        <Button Grid.Row="1" Text="Submit"></Button>
+    </Grid>
 </ui:ContentPageBase>

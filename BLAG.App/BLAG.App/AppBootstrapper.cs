@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using BLAG.App.ViewModels;
 using BLAG.App.Views;
 using BLAG.Common.Models;
-using DynamicData;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 using Splat;
@@ -14,28 +12,34 @@ namespace BLAG.App
 {
     public class AppBootstrapper : ReactiveObject, IScreen
     {
-        public RoutingState Router { get; protected set; }
-
         public AppBootstrapper()
         {
             Router = new RoutingState();
             Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
             Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
                 typeof(IViewFor<AnswerTextChoiceViewModel>));
-            //Locator.CurrentMutable.Register(() => new UpcomingMoviesCellView(),
-            //    typeof(IViewFor<UpcomingMoviesCellViewModel>));
+            Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
+                typeof(IViewFor<AnswerTextChoiceCellViewModel>));
             //Locator.CurrentMutable.Register(() => new MovieDetailView(), typeof(IViewFor<MovieDetailViewModel>));
 
             //Locator.CurrentMutable.Register(() => new Cache(), typeof(ICache<,>));
             //Locator.CurrentMutable.Register(() => new ApiService(), typeof(IApiService));
 
 
-            this
-                .Router
+            Router
                 .NavigateAndReset
-                .Execute(new AnswerTextChoiceViewModel(new AnswerTextChoice(){CorrectChoice = "asd",TextChoices = new List<string>{"1","2"}}))
+                .Execute(new AnswerTextChoiceViewModel(new AnswerTextChoice
+                {
+                    CorrectChoice = "asd",
+                    TextChoices =
+                        Enumerable.Repeat(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum tincidunt urna, et laoreet odio tempus id. Pellentesque turpis nisi, fringilla quis libero ac, egestas placerat est. Phasellus sagittis ligula nec nulla convallis gravida. Etiam a quam at lorem commodo fermentum. Donec ipsum metus, interdum in libero at, viverra ultricies est.",
+                            10).ToList()
+                }))
                 .Subscribe();
         }
+
+        public RoutingState Router { get; protected set; }
 
         public Page CreateMainPage()
         {
