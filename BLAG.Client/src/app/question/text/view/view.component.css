@@ -10,4 +10,18 @@ html, body {
     height: 100%;
 }
 
+.grid-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 30vh 50vh 20vh
+  }
+
+  .item1 {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    text-align: center;
+    justify-content: center;
+  }
+
 
