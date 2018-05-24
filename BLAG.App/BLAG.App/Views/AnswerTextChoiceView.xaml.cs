@@ -22,7 +22,7 @@ namespace BLAG.App.Views
 		    {
 		        ViewModel.SelectedAnswer = null;
 
-		        this.OneWayBind(ViewModel, x => x.Model.TextChoices, x => x.AnswerList.ItemsSource)
+		        this.OneWayBind(ViewModel, x => x.Answers, x => x.AnswerList.ItemsSource)
 		            .DisposeWith(disposables);
 
 		        this.Bind(ViewModel, x => x.SelectedAnswer, x => x.AnswerList.SelectedItem)
