@@ -1,6 +1,6 @@
 export class Image {
     id: number;
-    image: any;
+    image: string;
     points: number;
     time: number;
   }
