@@ -6,7 +6,7 @@ import { Text } from '../text';
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
-export class ViewComponent implements OnInit {
+export class TextViewComponent implements OnInit {
 
   constructor() { }
 
