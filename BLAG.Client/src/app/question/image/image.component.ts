@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Image } from './image'
 
 @Component({
-  selector: 'app-image-view',
+  selector: 'app-image',
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.css']
 })
