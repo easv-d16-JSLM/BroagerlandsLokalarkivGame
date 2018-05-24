@@ -13,6 +13,7 @@ import { AudioComponent } from './question/audio/audio.component';
 import { TextViewComponent } from './question/text/view/view.component';
 import { ImageViewComponent } from './question/image/view/view.component';
 import { VideoViewComponent } from './question/video/view/view.component';
+import { AudioViewComponent } from './question/audio/view/view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { VideoViewComponent } from './question/video/view/view.component';
     AudioComponent,
     TextViewComponent,
     ImageViewComponent,
-    VideoViewComponent
+    VideoViewComponent,
+    AudioViewComponent
   ],
   imports: [
     BrowserModule,
