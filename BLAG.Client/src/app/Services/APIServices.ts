@@ -109,7 +109,25 @@ export class APIService {
     //    return this._http.get(this.myAppUrl + 'api/AnswerTextChoice/' + id)  
     //        .pipe(map((response: Response) => response.json()))  
     //        .pipe(catchError(this.errorHandler))  
-    //}  
+    //} 
+
+    //postTextAnswer(Answer) {  
+    //    return this._http.post(this.myAppUrl + 'api/AnswerTextChoice', Answer)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //}
+
+    //putTextAnswerById(id: number, Answer) {  
+    //    return this._http.put(this.myAppUrl + 'api/AnswerTextChoice/' + id, Answer)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //}
+
+    //deleteTextAnswerById(id: number) {  
+    //    return this._http.delete(this.myAppUrl + 'api/ApiWithActions/' + id)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //}
 
     getTextAnswerById(id: number): Observable<Text> {
         
@@ -117,24 +135,21 @@ export class APIService {
             .pipe(catchError(this.errorHandler));
     }
 
-
-    postTextAnswer(Answer) {  
-        return this._http.post(this.myAppUrl + 'api/AnswerTextChoice', Answer)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
+    postTextAnswer (text: Text): Observable<Text> {
+        return this._http.post<Text>('api/AnswerTextChoice/', text)
+            .pipe(catchError(this.errorHandler));
     }
 
-    putTextAnswerById(id: number, Answer) {  
-        return this._http.put(this.myAppUrl + 'api/AnswerTextChoice/' + id, Answer)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
+    updateTextAnswer (text: Text): Observable<any> {
+        return this._http.put('api/AnswerTextChoice/', text)
+            .pipe(catchError(this.errorHandler));
     }
 
-    deleteTextAnswerById(id: number) {  
-        return this._http.delete(this.myAppUrl + 'api/ApiWithActions/' + id)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
-    } 
+    deleteTextAnswerById (id: number): Observable<Text> {     
+        return this._http.delete<Text>('api/ApiWithActions/' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+ 
     //Announcments
     getQuestionAnnouncment() {  
         return this._http.get(this.myAppUrl + 'api/QuestionAnnouncement')  
@@ -233,29 +248,52 @@ export class APIService {
             .pipe(catchError(this.errorHandler))  
     }  
     
-    getTextQuestionById(id: number) {  
-        return this._http.get(this.myAppUrl + 'api/QuestionText/' + id)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
-    } 
+    //getTextQuestionById(id: number) {  
+    //    return this._http.get(this.myAppUrl + 'api/QuestionText/' + id)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //} 
     
-    postTextQuestion(TextQuestion) {  
-        return this._http.post(this.myAppUrl + 'api/QuestionText/', TextQuestion)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
-    } 
+    //postTextQuestion(TextQuestion) {  
+    //    return this._http.post(this.myAppUrl + 'api/QuestionText/', TextQuestion)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //} 
     
-    updateTextQuestion(id: number, TextQuestion) {  
-        return this._http.put(this.myAppUrl + 'api/QuestionText/' + id, TextQuestion)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
-    } 
+    //updateTextQuestion(id: number, TextQuestion) {  
+    //    return this._http.put(this.myAppUrl + 'api/QuestionText/' + id, TextQuestion)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //} 
     
-    deleteTextQuestion(id: number) {  
-        return this._http.delete(this.myAppUrl + 'api/ApiWithActions/' + id)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
-    } 
+    //deleteTextQuestion(id: number) {  
+    //    return this._http.delete(this.myAppUrl + 'api/ApiWithActions/' + id)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //} 
+
+    getTextQuestionById(id: number): Observable<Text> {
+        
+        return this._http.get<Text>('api/QuestionText/' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    postTextQuestion (text: Text): Observable<Text> {
+        return this._http.post<Text>('api/QuestionText/', text)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    updateTextQuestion (text: Text): Observable<any> {
+        return this._http.put('api/QuestionText/', text)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    deleteTextQuestionById (id: number): Observable<Text> {     
+        return this._http.delete<Text>('api/ApiWithActions/' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+
+
     //Video Question
     getVideoQuestions() {  
         return this._http.get(this.myAppUrl + 'api/QuestionVideo')  
