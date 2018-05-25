@@ -15,6 +15,8 @@ import { ImageViewComponent } from './question/image/view/view.component';
 import { VideoViewComponent } from './question/video/view/view.component';
 import { AudioViewComponent } from './question/audio/view/view.component';
 import { AnnouncementViewComponent } from './question/announcement/view/view.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { AnnouncementViewComponent } from './question/announcement/view/view.com
     ImageViewComponent,
     VideoViewComponent,
     AudioViewComponent,
-    AnnouncementViewComponent
+    AnnouncementViewComponent,
+    NavigationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
