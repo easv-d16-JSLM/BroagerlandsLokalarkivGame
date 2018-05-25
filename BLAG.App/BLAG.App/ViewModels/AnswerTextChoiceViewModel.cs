@@ -2,16 +2,16 @@
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using DynamicData;
-using DynamicData.Alias;
 using DynamicData.ReactiveUI;
 using ReactiveUI;
-
 
 namespace BLAG.App.ViewModels
 {
     public class AnswerTextChoiceViewModel : ViewModelBase
     {
-        private readonly ReactiveList<AnswerTextChoiceCellViewModel> _answers = new ReactiveList<AnswerTextChoiceCellViewModel>();
+        private readonly ReactiveList<AnswerTextChoiceCellViewModel> _answers =
+            new ReactiveList<AnswerTextChoiceCellViewModel>();
+
         private string _selectedAnswer;
 
         public AnswerTextChoiceViewModel(IObservable<IChangeSet<string>> answers)
@@ -26,7 +26,6 @@ namespace BLAG.App.ViewModels
                     .Subscribe()
                     .DisposeWith(d);
             });
-            
         }
 
         public IReadOnlyReactiveList<AnswerTextChoiceCellViewModel> Answers => _answers;
