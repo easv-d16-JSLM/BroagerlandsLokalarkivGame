@@ -1,9 +1,7 @@
 ﻿using System;
-using System.IO;
 using LiteDB;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Net.Http.Headers;
 
 namespace BLAG.Server.Controllers
 {
@@ -24,7 +22,7 @@ namespace BLAG.Server.Controllers
         {
             var fi = _db.FileStorage.FindById(id);
             var stream = _db.FileStorage.OpenRead(id);
-            return File(stream,fi.MimeType, fi.Filename);
+            return File(stream, fi.MimeType, fi.Filename);
         }
 
         // POST: api/File

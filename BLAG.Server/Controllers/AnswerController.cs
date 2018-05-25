@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using BLAG.Common.Models;
-using BLAG.Common.Models.Answer;
 using LiteDB;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,48 +7,48 @@ namespace BLAG.Server.Controllers
 {
     [Produces("application/json")]
     [Route("api/AnswerTextChoice")]
-    public class AnswerTextChoiceController : Controller
+    public class AnswerController : Controller
     {
         private readonly LiteRepository _db;
 
-        public AnswerTextChoiceController(LiteRepository db)
+        public AnswerController(LiteRepository db)
         {
             _db = db;
         }
 
         // GET: api/AnswerTextChoice
         [HttpGet]
-        public IEnumerable<AnswerTextChoice> Get()
+        public IEnumerable<Answer> Get()
         {
-            return _db.Fetch<AnswerTextChoice>();
+            return _db.Fetch<Answer>();
         }
 
         // GET: api/AnswerTextChoice/5
         [HttpGet("{id}")]
-        public AnswerTextChoice Get(int id)
+        public Answer Get(int id)
         {
-            return _db.SingleById<AnswerTextChoice>(id);
+            return _db.SingleById<Answer>(id);
         }
 
         // POST: api/AnswerTextChoice
         [HttpPost]
-        public void Post([FromBody] AnswerTextChoice answerTextChoice)
+        public void Post([FromBody] Answer answer)
         {
-            _db.Insert(answerTextChoice);
+            _db.Insert(answer);
         }
 
         // PUT: api/AnswerTextChoice/5
         [HttpPut]
-        public void Put([FromBody] AnswerTextChoice answerTextChoice)
+        public void Put([FromBody] Answer answer)
         {
-            _db.Update(answerTextChoice);
+            _db.Update(answer);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            _db.Delete<AnswerTextChoice>(id);
+            _db.Delete<Answer>(id);
         }
     }
 }

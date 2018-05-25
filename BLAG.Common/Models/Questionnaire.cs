@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using BLAG.Common.Models.Question;
+using BLAG.Common.Models;
 
 namespace BLAG.Common.Models
 {
     public class Questionnaire : ModelBase
     {
-        public IList<QuestionBase> Questions { get; set; }
+        public IList<Question> Questions { get; set; }
     }
 }
