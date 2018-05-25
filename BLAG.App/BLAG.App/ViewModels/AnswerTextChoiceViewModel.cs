@@ -1,28 +1,35 @@
-﻿using System.Linq;
-using BLAG.Common.Models;
+﻿using System;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using DynamicData;
+using DynamicData.Alias;
+using DynamicData.ReactiveUI;
 using ReactiveUI;
+
 
 namespace BLAG.App.ViewModels
 {
     public class AnswerTextChoiceViewModel : ViewModelBase
     {
-        private SourceList<AnswerTextChoiceCellViewModel> _answers = new SourceList<AnswerTextChoiceCellViewModel>();
+        private readonly ReactiveList<AnswerTextChoiceCellViewModel> _answers = new ReactiveList<AnswerTextChoiceCellViewModel>();
         private string _selectedAnswer;
 
-        public AnswerTextChoiceViewModel(AnswerTextChoice model)
+        public AnswerTextChoiceViewModel(IObservable<IChangeSet<string>> answers)
         {
-            Answers.AddRange(model.TextChoices.Select(s=> new AnswerTextChoiceCellViewModel(s)));
+            this.WhenActivated(d =>
+            {
+                answers
+                    .Transform(answer => new AnswerTextChoiceCellViewModel(answer))
+                    .ObserveOn(RxApp.MainThreadScheduler)
+                    .Bind(_answers)
+                    .DisposeMany()
+                    .Subscribe()
+                    .DisposeWith(d);
+            });
+            
         }
 
-        public SourceList<AnswerTextChoiceCellViewModel> Answers
-        {
-            get => _answers;
-            set => this.RaiseAndSetIfChanged(ref _answers, value);
-        }
-
-
-        //put answers to observable list
+        public IReadOnlyReactiveList<AnswerTextChoiceCellViewModel> Answers => _answers;
 
 
         public string SelectedAnswer

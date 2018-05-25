@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Reactive.Linq;
 using BLAG.App.ViewModels;
 using BLAG.App.Views;
 using BLAG.Common.Models;
+using DynamicData;
 using ReactiveUI;
 using ReactiveUI.XamForms;
 using Splat;
@@ -28,14 +30,14 @@ namespace BLAG.App
 
             Router
                 .NavigateAndReset
-                .Execute(new AnswerTextChoiceViewModel(new AnswerTextChoice
+                .Execute(new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(2)).Select(i=> new AnswerTextChoice
                 {
                     CorrectChoice = "asd",
                     TextChoices =
                         Enumerable.Repeat(
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum tincidunt urna, et laoreet odio tempus id. Pellentesque turpis nisi, fringilla quis libero ac, egestas placerat est. Phasellus sagittis ligula nec nulla convallis gravida. Etiam a quam at lorem commodo fermentum. Donec ipsum metus, interdum in libero at, viverra ultricies est.",
-                            10).ToList()
-                }))
+                            Convert.ToInt32(i)).ToList()
+                }).Select(a=>a.TextChoices.AsEnumerable()).ToObservableChangeSet()))
                 .Subscribe();
         }
 
