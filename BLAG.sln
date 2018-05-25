@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLAG.Common.Tests", "BLAG.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLAG.Server", "BLAG.Server\BLAG.Server.csproj", "{BAC22A47-9DF9-456C-8AA9-DC25CA6779C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLAG.Server.Tests", "BLAG.Server.Tests\BLAG.Server.Tests.csproj", "{D5BE452E-8F5F-4700-A75F-2086C24B4A1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLAG.Server.Tests", "BLAG.Server.Tests\BLAG.Server.Tests.csproj", "{D5BE452E-8F5F-4700-A75F-2086C24B4A1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
