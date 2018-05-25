@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Image } from './image'
+import { Image } from '../image';
 
 @Component({
-  selector: 'app-image',
-  templateUrl: './image.component.html',
-  styleUrls: ['./image.component.css']
+  selector: 'app-image-view',
+  templateUrl: './view.component.html',
+  styleUrls: ['./view.component.css']
 })
-export class ImageComponent implements OnInit {
+export class ImageViewComponent implements OnInit {
+
+  constructor() { }
 
   image: Image = {
     id: 1,
@@ -14,9 +16,7 @@ export class ImageComponent implements OnInit {
     points: 1,
     time: 10,
   };
-
-  constructor() { }
-
+  
   ngOnInit() {
   }
 
