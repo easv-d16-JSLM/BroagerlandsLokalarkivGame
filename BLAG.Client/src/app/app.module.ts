@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
+import { HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TextComponent } from './question/text/text.component';
 import { AnnouncementComponent } from './question/announcement/announcement.component';

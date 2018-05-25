@@ -1,47 +1,51 @@
 import { Injectable, Inject } from '@angular/core';  
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http, Response } from '@angular/http';  
-import { Observable } from 'rxjs';  
+import { Observable, of } from 'rxjs';  
 import { Router } from '@angular/router';  
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
+import { Text } from '../question/text/text';
 import 'rxjs/add/operator/catchError';  
 import 'rxjs/add/observable/throw';  
 import 'rxjs/add/operator/map'
   
 @Injectable()  
-export class QuestionService {  
+export class APIService {  
     myAppUrl: string = "";  
   
-    constructor(private _http: Http, @Inject('BASE_URL') baseUrl: string) {  
+    constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {  
         this.myAppUrl = baseUrl;  
     }  
+
+
     //Answer Map
     getAnswerMap() {  
         return this._http.get(this.myAppUrl + 'api/AnswerMap')  
-            .pipe(map(res => res.json()))  
+            .pipe(map((response: Response) => response.json()))    
             .pipe(catchError(this.errorHandler));  
     }
 
     getAnswerMapById(id: number) {  
         return this._http.get(this.myAppUrl + 'api/AnswerMap/' + id)  
-            .pipe(map(res => res.json()))  
+            .pipe(map((response: Response) => response.json()))   
             .pipe(catchError(this.errorHandler));  
     }
 
     postAnswerMap(Answer) {  
         return this._http.post(this.myAppUrl + 'api/AnswerMap', Answer)  
-            .pipe(map(res => res.json()))  
+            .pipe(map((response: Response) => response.json()))   
             .pipe(catchError(this.errorHandler));  
     }
 
     updateAnswerMapById(id: number, Answer) {  
         return this._http.put(this.myAppUrl + 'api/AnswerMap/' + id, Answer)  
-            .pipe(map(res => res.json()))  
+            .pipe(map((response: Response) => response.json()))    
             .pipe(catchError(this.errorHandler));  
     }
 
     deleteAnswerMapById(id: number) {  
         return this._http.delete(this.myAppUrl + 'api/ApiWithActions/' + id)  
-            .pipe(map(res => res.json()))  
+            .pipe(map((response: Response) => response.json()))  
             .pipe(catchError(this.errorHandler));  
     }
     //Answers
@@ -100,11 +104,19 @@ export class QuestionService {
             .pipe(catchError(this.errorHandler))  
     } 
     //Text Answer
-    getTextAnswerById(id: number) {  
-        return this._http.get(this.myAppUrl + 'api/AnswerTextChoice/' + id)  
-            .pipe(map((response: Response) => response.json()))  
-            .pipe(catchError(this.errorHandler))  
-    }  
+
+    //getTextAnswerById(id: number) {  
+    //    return this._http.get(this.myAppUrl + 'api/AnswerTextChoice/' + id)  
+    //        .pipe(map((response: Response) => response.json()))  
+    //        .pipe(catchError(this.errorHandler))  
+    //}  
+
+    getTextAnswerById(id: number): Observable<Text> {
+        
+        return this._http.get<Text>('api/AnswerTextChoice/' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+
 
     postTextAnswer(Answer) {  
         return this._http.post(this.myAppUrl + 'api/AnswerTextChoice', Answer)  
