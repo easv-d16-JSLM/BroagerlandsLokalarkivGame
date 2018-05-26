@@ -25,7 +25,10 @@ namespace BLAG.App.Views
 		        this.OneWayBind(ViewModel, x => x.Answers, x => x.AnswerList.ItemsSource)
 		            .DisposeWith(disposables);
 
-		        this.Bind(ViewModel, x => x.SelectedAnswer, x => x.AnswerList.SelectedItem)
+		        this.OneWayBind(ViewModel, x => x.Answers.Count, x => x.Title)
+		            .DisposeWith(disposables);
+
+                this.Bind(ViewModel, x => x.SelectedAnswer, x => x.AnswerList.SelectedItem)
 		            .DisposeWith(disposables);
 
 		        //AnswerList

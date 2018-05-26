@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Reactive.Linq;
 using BLAG.App.ViewModels;
 using BLAG.App.Views;
@@ -13,6 +12,9 @@ namespace BLAG.App
 {
     public class AppBootstrapper : ReactiveObject, IScreen
     {
+        private const string SampleText =
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum tincidunt urna, et laoreet odio tempus id. Pellentesque turpis nisi, fringilla quis libero ac, egestas placerat est. Phasellus sagittis ligula nec nulla convallis gravida. Etiam a quam at lorem commodo fermentum. Donec ipsum metus, interdum in libero at, viverra ultricies est.";
+
         public AppBootstrapper()
         {
             Router = new RoutingState();
@@ -27,12 +29,13 @@ namespace BLAG.App
             //Locator.CurrentMutable.Register(() => new ApiService(), typeof(IApiService));
 
 
+            var viewModel = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
+                .Select(_ => SampleText)
+                .Delay(TimeSpan.FromSeconds(2)).ToObservableChangeSet());
+            viewModel.Activator.Activate();
             Router
                 .NavigateAndReset
-                .Execute(new AnswerTextChoiceViewModel(Observable.Return(2).Delay(TimeSpan.FromSeconds(2)).Select(i =>
-                    Enumerable.Repeat(
-                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus fermentum tincidunt urna, et laoreet odio tempus id. Pellentesque turpis nisi, fringilla quis libero ac, egestas placerat est. Phasellus sagittis ligula nec nulla convallis gravida. Etiam a quam at lorem commodo fermentum. Donec ipsum metus, interdum in libero at, viverra ultricies est.",
-                        Convert.ToInt32(i))).ToObservableChangeSet()))
+                .Execute(viewModel)
                 .Subscribe();
         }
 
