@@ -1,11 +1,11 @@
 ﻿using System;
-using BLAG.Common.Models.Question;
+using BLAG.Common.Models;
 
 namespace BLAG.Common
 {
     public class ScoreCalculator
     {
-        public double Score(QuestionBase question, TimeSpan time)
+        public double Score(Question question, TimeSpan time)
         {
             var timeLapsed = time.TotalMilliseconds;
             var timeMax = question.Time.TotalMilliseconds;
