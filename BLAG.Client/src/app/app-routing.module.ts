@@ -7,6 +7,7 @@ import { ImageComponent }   from './question/image/image.component';
 import { VideoComponent }   from './question/video/video.component';
 import { TextComponent }   from './question/text/text.component';
 import { TextViewComponent }   from './question/text/view/view.component';
+import { QuestionnaireComponent }   from './questionnaire/questionnaire/questionnaire.component';
 
 
 
@@ -16,6 +17,8 @@ const routes: Routes = [
   { path: 'question/view', component: AudioComponent },
   { path: 'answer/view', component: AnnouncementComponent },
   { path: 'answer/edit', component: ImageComponent },
+  { path: 'questionnaire/view', component: QuestionnaireComponent },
+  { path: 'questionnaire/edit', component: QuestionnaireComponent },
 
 ];
 
