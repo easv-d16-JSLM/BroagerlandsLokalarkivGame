@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<v:ContentPageBase x:TypeArguments="vm:StartViewModel" xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:v="clr-namespace:BLAG.App.Views;assembly=BLAG.App"
+                   xmlns:vm="clr-namespace:BLAG.App.ViewModels;assembly=BLAG.App"
+                   x:Class="BLAG.App.Views.StartView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="Url" Placeholder="Hostname" />
+            <Entry x:Name="Code" Placeholder="Join Code" />
+            <Entry x:Name="Name" Placeholder="Username" />
+            <Button x:Name="Start" Text="Start" />
+        </StackLayout>
+    </ContentPage.Content>
+</v:ContentPageBase>
