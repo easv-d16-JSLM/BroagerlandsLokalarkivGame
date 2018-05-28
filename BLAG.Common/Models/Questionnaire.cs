@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using BLAG.Common.Models.Question;
 
 namespace BLAG.Common.Models
 {

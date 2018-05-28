@@ -1,0 +1,17 @@
+<h2>{{ audio.id }} Details</h2>
+<div><span>id: </span>{{audio.id}}</div>
+<div>
+  <label>audio:
+    <input type="file" [(ngModel)]="audio.audio" placeholder="Audio">
+  </label>
+</div>
+<div>
+  <label>points:
+    <input type="number" step="1" min="10" max="10000" [(ngModel)]="audio.points" placeholder={{audio.points}}>
+  </label>
+</div>
+<div>
+  <label>time:
+      <input type="number" step="1" min="1" max="10000" [(ngModel)]="audio.time" placeholder={{audio.time}}>
+  </label>
+</div>

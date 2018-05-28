@@ -1,0 +1,17 @@
+<h2>{{ image.id }} Details</h2>
+<div><span>id: </span>{{image.id}}</div>
+<div>
+  <label>image:
+    <input type="file" [(ngModel)]="image.image" placeholder="image">
+  </label>
+</div>
+<div>
+  <label>points:
+    <input type="number" step="1" min="10" max="10000" [(ngModel)]="image.points" placeholder={{image.points}}>
+  </label>
+</div>
+<div>
+  <label>time:
+      <input type="number" step="1" min="1" max="10000" [(ngModel)]="image.time" placeholder={{image.time}}>
+  </label>
+</div>

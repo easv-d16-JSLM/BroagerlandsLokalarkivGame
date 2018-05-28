@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using BLAG.Common.Models;
+using BLAG.Common.Models.Question;
 
 namespace BLAG.Common
 {
     public class ScoreCalculator
     {
-
         public double Score(QuestionBase question, TimeSpan time)
         {
             var timeLapsed = time.TotalMilliseconds;
@@ -15,8 +12,8 @@ namespace BLAG.Common
 
             if (1 - timeLapsed / timeMax >= 0.9)
                 return question.Points;
-            
-            return question.Points * 1.05 - ((timeLapsed / timeMax) / 2) * question.Points;
+
+            return question.Points * 1.05 - timeLapsed / timeMax / 2 * question.Points;
         }
     }
 }

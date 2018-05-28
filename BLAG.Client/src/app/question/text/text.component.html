@@ -1,0 +1,17 @@
+<h2>{{ text.id }} Details</h2>
+<div><span>id: </span>{{text.id}}</div>
+<div>
+  <label>text:
+    <input type="text" [(ngModel)]="text.text" placeholder={{text.text}}>
+  </label>
+</div>
+<div>
+  <label>points:
+    <input type="number" step="1" min="10" max="10000" [(ngModel)]="text.points" placeholder={{text.points}}>
+  </label>
+</div>
+<div>
+  <label>time:
+      <input type="number" step="1" min="1" max="10000" [(ngModel)]="text.time" placeholder={{text.time}}>
+  </label>
+</div>
