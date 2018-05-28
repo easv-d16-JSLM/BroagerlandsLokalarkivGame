@@ -17,6 +17,7 @@ import { AudioViewComponent } from './question/audio/view/view.component';
 import { AnnouncementViewComponent } from './question/announcement/view/view.component';
 import { AppRoutingModule } from './app-routing.module';
 import { QuestionnaireComponent } from './questionnaire/questionnaire/questionnaire.component';
+import { AnswerComponent } from './answer/answer/answer.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { QuestionnaireComponent } from './questionnaire/questionnaire/questionna
     VideoViewComponent,
     AudioViewComponent,
     AnnouncementViewComponent,
-    QuestionnaireComponent
+    QuestionnaireComponent,
+    AnswerComponent
   ],
   imports: [
     BrowserModule,
