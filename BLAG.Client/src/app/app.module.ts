@@ -17,6 +17,9 @@ import { AudioViewComponent } from './question/audio/view/view.component';
 import { AnnouncementViewComponent } from './question/announcement/view/view.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
+import { ConnectComponent } from './home/connect/connect.component';
+import { WaitComponent } from './home/wait/wait.component';
+import { QuestionsComponent } from './settings/questions/questions.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { HomeComponent } from './home/home.component';
     AudioViewComponent,
     AnnouncementViewComponent,
     NavigationComponent,
-    HomeComponent
+    HomeComponent,
+    ConnectComponent,
+    WaitComponent,
+    QuestionsComponent
   ],
   imports: [
     BrowserModule,
