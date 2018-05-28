@@ -15,7 +15,7 @@ import { ImageViewComponent } from './question/image/view/view.component';
 import { VideoViewComponent } from './question/video/view/view.component';
 import { AudioViewComponent } from './question/audio/view/view.component';
 import { AnnouncementViewComponent } from './question/announcement/view/view.component';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 
 
 @NgModule({

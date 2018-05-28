@@ -5,9 +5,9 @@ import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';  
 import { map, catchError, tap } from 'rxjs/operators';
 import { Text } from '../question/text/text';
-import 'rxjs/add/operator/catchError';  
-import 'rxjs/add/observable/throw';  
-import 'rxjs/add/operator/map'
+//import 'rxjs/add/operator/catch';  
+//import 'rxjs/add/observable/throw';  
+//import 'rxjs/add/operator/map';
   
 @Injectable()  
 export class APIService {  
