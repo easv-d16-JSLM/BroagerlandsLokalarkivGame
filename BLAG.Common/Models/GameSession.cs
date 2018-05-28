@@ -7,6 +7,7 @@ namespace BLAG.Common.Models
     {
         public Questionnaire Questionnaire { get; set; }
         public DateTime StartTime { get; set; }
+        public string JoinCode { get; set; }
 
         public void StartGame()
         {

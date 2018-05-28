@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using BLAG.Common.Models;
 using LiteDB;
 using Microsoft.AspNetCore.Mvc;
@@ -17,16 +16,17 @@ namespace BLAG.Server.Controllers
             _db = db;
         }
 
-        // GET: api/GameSession/5
-        [HttpGet("{id}")]
-        public GameSession Get(int id)
+        [HttpPost("{id}")]
+        public GameSession Create(int questionnaireId)
         {
-            var questionnaire = _db.SingleById<Questionnaire>(id);
-            var newGameSession = new GameSession();
-            newGameSession.Questionnaire = questionnaire;
-            newGameSession.JoinCode = GenerateJoinCode();
-            _db.Insert(newGameSession);
-            return _db.Fetch<GameSession>().LastOrDefault();
+            var questionnaire = _db.SingleById<Questionnaire>(questionnaireId);
+            var newGameSession = new GameSession
+            {
+                Questionnaire = questionnaire,
+                JoinCode = GenerateJoinCode()
+            };
+            var id = _db.Insert(newGameSession);
+            return _db.SingleById<GameSession>(id);
         }
 
 
