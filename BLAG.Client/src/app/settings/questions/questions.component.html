@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Content</th>
+      <th scope="col">Type</th>
+      <th scope="col">Time</th>
+      <th scope="col">Points</th>
+      <th scope="col">Modify</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let x of questionsExamples">
+      <td>{{x.Content}}</td>
+      <td>{{x.Questiontype}}</td>
+      <td>{{x.Time}}</td>
+      <td>{{x.Points}}</td>
+      <td>
+        <a asp-action="Edit" asp-route-id="#">
+          <i class="glyphicon glyphicon-user">Edit</i>
+        </a> |
+        <a asp-action="Details" asp-route-id="#">
+          <i class="fa fa-fw fa-search">Delete</i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
