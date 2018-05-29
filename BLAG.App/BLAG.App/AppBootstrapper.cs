@@ -18,12 +18,13 @@ namespace BLAG.App
                 typeof(IViewFor<AnswerTextChoiceViewModel>));
             Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
                 typeof(IViewFor<AnswerTextChoiceCellViewModel>));
-            Locator.CurrentMutable.Register(() => new StartView(), 
+            Locator.CurrentMutable.Register(() => new StartView(),
                 typeof(IViewFor<StartViewModel>));
             //Locator.CurrentMutable.Register(() => new MovieDetailView(), typeof(IViewFor<MovieDetailViewModel>));
 
             //Locator.CurrentMutable.Register(() => new Cache(), typeof(ICache<,>));
             //Locator.CurrentMutable.Register(() => new ApiService(), typeof(IApiService));
+            Locator.CurrentMutable.RegisterConstant(new DebugLogger {Level = LogLevel.Debug}, typeof(ILogger));
 
             Router
                 .NavigateAndReset

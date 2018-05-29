@@ -9,17 +9,18 @@ namespace BLAG.App.ViewModels
 {
     public class StartViewModel : ViewModelBase
     {
-        private string _joinCode = "";
-        private string _url = "";
-        private string _username = "";
+        private string _joinCode;
+        private string _url;
+        private string _username;
 
         public StartViewModel()
         {
-            var canConnect = this.WhenAnyValue(x => x.Url, x => x.JoinCode, x => x.Username)
-                .Select(tuple => Uri.IsWellFormedUriString(tuple.Item1, UriKind.Absolute) &&
-                                 Regex.IsMatch(tuple.Item2, @"^[a-z]{5}$") &&
-                                 Regex.IsMatch(tuple.Item3, @"^[A-Za-z]{3,20}$"));
-
+            var canConnect = this.WhenAnyValue(x => x.Url, x => x.JoinCode, x => x.Username, (url, code, name) =>
+                    Uri.IsWellFormedUriString(url, UriKind.Absolute) &&
+                    Regex.IsMatch(code, @"^[a-z]{5}$") &&
+                    Regex.IsMatch(name, @"^[A-Za-z]{3,20}$"))
+                .Log(this, "Can connect?");
+            canConnect.Subscribe();
             Connect = ReactiveCommand.Create(() =>
             {
                 var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
