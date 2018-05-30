@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using DynamicData;
 using DynamicData.ReactiveUI;
@@ -16,16 +15,12 @@ namespace BLAG.App.ViewModels
 
         public AnswerTextChoiceViewModel(IObservable<IChangeSet<string>> answers)
         {
-            this.WhenActivated(d =>
-            {
-                answers
-                    .Transform(answer => new AnswerTextChoiceCellViewModel(answer))
-                    .ObserveOn(RxApp.MainThreadScheduler)
-                    .Bind(_answers)
-                    .DisposeMany()
-                    .Subscribe()
-                    .DisposeWith(d);
-            });
+            answers
+                .Transform(answer => new AnswerTextChoiceCellViewModel(answer))
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Bind(_answers)
+                .DisposeMany()
+                .Subscribe();
         }
 
         public IReadOnlyReactiveList<AnswerTextChoiceCellViewModel> Answers => _answers;

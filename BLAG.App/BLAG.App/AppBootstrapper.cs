@@ -1,4 +1,5 @@
 ﻿using System;
+using BLAG.App.Helpers;
 using BLAG.App.Services;
 using BLAG.App.ViewModels;
 using BLAG.App.Views;
@@ -15,26 +16,26 @@ namespace BLAG.App
         {
             Router = new RoutingState();
 
-            Locator.CurrentMutable.InitializeSplat();
-            Locator.CurrentMutable.InitializeReactiveUI();
+            using (var d = this.Log().Measure("IoC setup"))
+            {
+                Locator.CurrentMutable.InitializeSplat();
+                Locator.CurrentMutable.InitializeReactiveUI();
 
-            Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
-            Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
-                typeof(IViewFor<AnswerTextChoiceViewModel>));
-            Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
-                typeof(IViewFor<AnswerTextChoiceCellViewModel>));
-            Locator.CurrentMutable.Register(() => new StartView(),
-                typeof(IViewFor<StartViewModel>));
+                Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
+                Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
+                    typeof(IViewFor<AnswerTextChoiceViewModel>));
+                Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
+                    typeof(IViewFor<AnswerTextChoiceCellViewModel>));
+                Locator.CurrentMutable.Register(() => new StartView(),
+                    typeof(IViewFor<StartViewModel>));
 
+                Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
+            }
 
-            Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
-
-            this.Log().Debug("setup done");
-
-
+            var startViewModel = new StartViewModel();
             Router
                 .NavigateAndReset
-                .Execute(new StartViewModel())
+                .Execute(startViewModel)
                 .Subscribe();
         }
 

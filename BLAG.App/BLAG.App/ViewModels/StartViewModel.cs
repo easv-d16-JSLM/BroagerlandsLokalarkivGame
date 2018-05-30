@@ -25,7 +25,6 @@ namespace BLAG.App.ViewModels
                 var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
                     .Select(_ => DateTime.Now.Humanize())
                     .Delay(TimeSpan.FromSeconds(2)).ToObservableChangeSet());
-                vm.Activator.Activate();
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
             }, canConnect);
         }
