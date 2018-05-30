@@ -1,4 +1,5 @@
 ﻿using System;
+using BLAG.App.Services;
 using BLAG.App.ViewModels;
 using BLAG.App.Views;
 using ReactiveUI;
@@ -24,7 +25,7 @@ namespace BLAG.App
 
             //Locator.CurrentMutable.Register(() => new Cache(), typeof(ICache<,>));
             //Locator.CurrentMutable.Register(() => new ApiService(), typeof(IApiService));
-            Locator.CurrentMutable.RegisterConstant(new DebugLogger {Level = LogLevel.Debug}, typeof(ILogger));
+            Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
 
             Router
                 .NavigateAndReset

@@ -17,6 +17,8 @@ namespace BLAG.App.Views
                 this.Bind(ViewModel, x => x.Url, x => x.Url.Text).DisposeWith(d);
                 this.Bind(ViewModel, x => x.JoinCode, x => x.Code.Text).DisposeWith(d);
                 this.Bind(ViewModel, x => x.Username, x => x.Name.Text).DisposeWith(d);
+                //does not bind?
+
                 this.BindCommand(ViewModel, x => x.Connect, x => x.Start).DisposeWith(d);
             });
         }

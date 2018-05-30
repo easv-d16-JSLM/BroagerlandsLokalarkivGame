@@ -9,7 +9,7 @@ namespace BLAG.App.ViewModels
 {
     public class StartViewModel : ViewModelBase
     {
-        private string _joinCode;
+        private string _joinCode = "abcde";
         private string _url;
         private string _username;
 
@@ -20,7 +20,6 @@ namespace BLAG.App.ViewModels
                     Regex.IsMatch(code, @"^[a-z]{5}$") &&
                     Regex.IsMatch(name, @"^[A-Za-z]{3,20}$"))
                 .Log(this, "Can connect?");
-            canConnect.Subscribe();
             Connect = ReactiveCommand.Create(() =>
             {
                 var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))

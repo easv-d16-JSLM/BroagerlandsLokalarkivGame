@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ReactiveUI.XamForms;
+﻿using ReactiveUI.XamForms;
 
 namespace BLAG.App.Views
 {

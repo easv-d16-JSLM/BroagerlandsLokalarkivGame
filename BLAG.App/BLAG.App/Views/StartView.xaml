@@ -9,7 +9,7 @@
         <StackLayout>
             <Entry x:Name="Url" Placeholder="Hostname" />
             <Entry x:Name="Code" Placeholder="Join Code" />
-            <Entry x:Name="Name" Placeholder="Username" />
+            <Entry x:Name="Name" Placeholder="Username" /> 
             <Button x:Name="Start" Text="Start" />
         </StackLayout>
     </ContentPage.Content>
