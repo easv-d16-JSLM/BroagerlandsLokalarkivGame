@@ -2,7 +2,6 @@
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using DynamicData;
-using Humanizer;
 using ReactiveUI;
 
 namespace BLAG.App.ViewModels
@@ -16,17 +15,22 @@ namespace BLAG.App.ViewModels
         public StartViewModel()
         {
             var canConnect = this.WhenAnyValue(x => x.Url, x => x.JoinCode, x => x.Username, (url, code, name) =>
-                    Uri.IsWellFormedUriString(url, UriKind.Absolute) &&
-                    Regex.IsMatch(code, @"^[a-z]{5}$") &&
-                    Regex.IsMatch(name, @"^[A-Za-z]{3,20}$"))
-                .Log(this, "Can connect?");
+                url != null &&
+                Uri.IsWellFormedUriString(url, UriKind.Absolute) &&
+                code != null &&
+                Regex.IsMatch(code, @"^[a-z]{5}$") &&
+                name != null &&
+                Regex.IsMatch(name, @"^[A-Za-z]{3,20}$"));
+
             Connect = ReactiveCommand.Create(() =>
             {
                 var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
-                    .Select(_ => DateTime.Now.Humanize())
+                    .Select(_ => DateTime.Now.ToString())
                     .Delay(TimeSpan.FromSeconds(2)).ToObservableChangeSet());
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
             }, canConnect);
+
+            Connect.ThrownExceptions.Subscribe(e => throw e);
         }
 
         public ReactiveCommand Connect { get; }
