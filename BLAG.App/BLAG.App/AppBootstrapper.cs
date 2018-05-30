@@ -16,11 +16,12 @@ namespace BLAG.App
         {
             Router = new RoutingState();
 
+            Locator.CurrentMutable.InitializeSplat();
+            Locator.CurrentMutable.InitializeReactiveUI();
+            Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
+
             using (var d = this.Log().Measure("IoC setup"))
             {
-                Locator.CurrentMutable.InitializeSplat();
-                Locator.CurrentMutable.InitializeReactiveUI();
-
                 Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
                 Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
                     typeof(IViewFor<AnswerTextChoiceViewModel>));
@@ -28,8 +29,6 @@ namespace BLAG.App
                     typeof(IViewFor<AnswerTextChoiceCellViewModel>));
                 Locator.CurrentMutable.Register(() => new StartView(),
                     typeof(IViewFor<StartViewModel>));
-
-                Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
             }
 
             var startViewModel = new StartViewModel();
