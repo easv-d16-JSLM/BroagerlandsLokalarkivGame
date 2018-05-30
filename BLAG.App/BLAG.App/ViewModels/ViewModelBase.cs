@@ -1,35 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ReactiveUI;
+﻿using ReactiveUI;
 using Splat;
 
 namespace BLAG.App.ViewModels
 {
-    public class ViewModelBase : ReactiveObject, IRoutableViewModel, ISupportsActivation
+    public abstract class ViewModelBase : ReactiveObject, IRoutableViewModel, IEnableLogger
     {
-        public string UrlPathSegment
-        {
-            get;
-            protected set;
-        }
-
-        public IScreen HostScreen
-        {
-            get;
-            protected set;
-        }
-
-        public ViewModelActivator Activator
-        {
-            get { return viewModelActivator; }
-        }
-
-        protected readonly ViewModelActivator viewModelActivator = new ViewModelActivator();
-
-        public ViewModelBase(IScreen hostScreen = null)
+        protected ViewModelBase(IScreen hostScreen = null)
         {
             HostScreen = hostScreen ?? Locator.Current.GetService<IScreen>();
         }
+
+        public IScreen HostScreen { get; protected set; }
+
+        public string UrlPathSegment { get; protected set; }
     }
 }
