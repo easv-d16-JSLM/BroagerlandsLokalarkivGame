@@ -11,7 +11,6 @@ namespace BLAG.App.Services
         {
             if ((int) logLevel < (int) Level) return;
 
-
             Debug.WriteLine(message);
         }
     }

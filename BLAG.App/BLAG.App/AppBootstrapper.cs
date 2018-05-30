@@ -19,7 +19,6 @@ namespace BLAG.App
             Locator.CurrentMutable.InitializeReactiveUI();
 
             Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
-            //Locator.CurrentMutable.RegisterViewsForViewModels(typeof(App).Assembly);
             Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
                 typeof(IViewFor<AnswerTextChoiceViewModel>));
             Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
@@ -27,9 +26,10 @@ namespace BLAG.App
             Locator.CurrentMutable.Register(() => new StartView(),
                 typeof(IViewFor<StartViewModel>));
 
-            
 
             Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
+
+            this.Log().Debug("setup done");
 
 
             Router
