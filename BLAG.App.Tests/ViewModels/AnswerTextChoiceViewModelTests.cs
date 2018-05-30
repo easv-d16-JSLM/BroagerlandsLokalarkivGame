@@ -24,9 +24,7 @@ namespace BLAG.App.Tests.ViewModels
                         Convert.ToInt32(i)));
                 var vm = new AnswerTextChoiceViewModel(obs.ToObservableChangeSet());
                 scheduler.Start();
-                scheduler.AdvanceByMs(1000);
-                vm.Answers.Should().HaveCount(0);
-                scheduler.AdvanceByMs(20000);
+                scheduler.AdvanceBy(1);
                 vm.Answers.Should().HaveCount(2);
             }
         }
@@ -41,8 +39,6 @@ namespace BLAG.App.Tests.ViewModels
             {
                 var vm = new AnswerTextChoiceViewModel(answerSource.Connect());
                 scheduler.Start();
-                scheduler.AdvanceBy(1);
-                vm.Answers.Should().HaveCount(0);
                 scheduler.AdvanceBy(1);
                 vm.Answers.Should().HaveCount(1);
                 answerSource.AddRange(Enumerable.Repeat("a", 10));
