@@ -25,7 +25,6 @@ namespace BLAG.App.ViewModels
 
         public IReadOnlyReactiveList<AnswerTextChoiceCellViewModel> Answers => _answers;
 
-
         public AnswerTextChoiceCellViewModel SelectedAnswer
         {
             get => _selectedAnswer;
