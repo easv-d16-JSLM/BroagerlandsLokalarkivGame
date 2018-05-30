@@ -13,10 +13,11 @@ import { AnswerComponent }   from './answer/answer/answer.component';
 
 
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'question/edit', component: TextComponent },
-  { path: 'question/view', component: TextComponent },
+  { path: 'question/view', component: TextViewComponent },
   { path: 'answer/view', component: AnswerComponent },
   { path: 'answer/edit', component: AnswerComponent },
   { path: 'questionnaire/view', component: QuestionnaireComponent },

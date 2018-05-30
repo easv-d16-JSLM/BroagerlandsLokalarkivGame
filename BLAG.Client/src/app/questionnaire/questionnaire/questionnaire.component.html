@@ -1,3 +1,17 @@
-<p>
-  questionnaire works!
-</p>
+<h2>{{ questionnaire.id }} Details</h2>
+<div><span>id: </span>{{questionnaire.id}}</div>
+<div>
+  <label>qustiontype:
+    <input type="text" [(ngModel)]="questionnaire.type" placeholder={{questionnaire.type}}>
+  </label>
+</div>
+<div>
+  <label>points:
+    <input type="number" step="1" min="10" max="10000" [(ngModel)]="questionnaire.points" placeholder={{questionnaire.points}}>
+  </label>
+</div>
+<div>
+  <label>time:
+      <input type="number" step="1" min="1" max="10000" [(ngModel)]="questionnaire.time" placeholder={{questionnaire.time}}>
+  </label>
+</div>

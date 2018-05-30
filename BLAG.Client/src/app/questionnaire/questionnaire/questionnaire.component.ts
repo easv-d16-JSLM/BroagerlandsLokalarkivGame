@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionnaireComponent implements OnInit {
 
+  questionnaire = {
+    id: 1,
+    type: "text test questionnaire",
+    points: 1,
+    time: 10,
+  };
+
   constructor() { }
 
   ngOnInit() {
