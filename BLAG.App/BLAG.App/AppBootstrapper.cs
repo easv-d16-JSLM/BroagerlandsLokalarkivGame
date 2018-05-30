@@ -14,18 +14,23 @@ namespace BLAG.App
         public AppBootstrapper()
         {
             Router = new RoutingState();
+
+            Locator.CurrentMutable.InitializeSplat();
+            Locator.CurrentMutable.InitializeReactiveUI();
+
             Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
+            //Locator.CurrentMutable.RegisterViewsForViewModels(typeof(App).Assembly);
             Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
                 typeof(IViewFor<AnswerTextChoiceViewModel>));
             Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
                 typeof(IViewFor<AnswerTextChoiceCellViewModel>));
             Locator.CurrentMutable.Register(() => new StartView(),
                 typeof(IViewFor<StartViewModel>));
-            //Locator.CurrentMutable.Register(() => new MovieDetailView(), typeof(IViewFor<MovieDetailViewModel>));
 
-            //Locator.CurrentMutable.Register(() => new Cache(), typeof(ICache<,>));
-            //Locator.CurrentMutable.Register(() => new ApiService(), typeof(IApiService));
+            
+
             Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
+
 
             Router
                 .NavigateAndReset
