@@ -11,7 +11,7 @@ namespace BLAG.App.ViewModels
         private readonly ReactiveList<AnswerTextChoiceCellViewModel> _answers =
             new ReactiveList<AnswerTextChoiceCellViewModel>();
 
-        private string _selectedAnswer;
+        private AnswerTextChoiceCellViewModel _selectedAnswer;
 
         public AnswerTextChoiceViewModel(IObservable<IChangeSet<string>> answers)
         {
@@ -26,7 +26,7 @@ namespace BLAG.App.ViewModels
         public IReadOnlyReactiveList<AnswerTextChoiceCellViewModel> Answers => _answers;
 
 
-        public string SelectedAnswer
+        public AnswerTextChoiceCellViewModel SelectedAnswer
         {
             get => _selectedAnswer;
             set => this.RaiseAndSetIfChanged(ref _selectedAnswer, value);
