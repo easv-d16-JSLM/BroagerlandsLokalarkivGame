@@ -29,7 +29,6 @@ namespace BLAG.Server.Controllers
             return _db.SingleById<GameSession>(id);
         }
 
-
         private string GenerateJoinCode()
         {
             var joinCode = "";
@@ -39,6 +38,7 @@ namespace BLAG.Server.Controllers
                 var c = (char) (r.Next(26) + 'a');
                 joinCode += c;
             }
+
             return joinCode;
         }
     }
