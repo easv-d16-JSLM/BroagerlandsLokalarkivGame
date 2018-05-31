@@ -7,13 +7,14 @@ namespace BLAG.Common
     {
         public double Score(Question question, TimeSpan time)
         {
-            var timeLapsed = time.TotalMilliseconds;
+            var timeElapsed = time.TotalMilliseconds;
             var timeMax = question.Time.TotalMilliseconds;
 
-            if (1 - timeLapsed / timeMax >= 0.9)
+            var timeUsed = timeElapsed / timeMax;
+            if (timeUsed <= 0.1)
                 return question.Points;
 
-            return question.Points * 1.05 - timeLapsed / timeMax / 2 * question.Points;
+            return question.Points * (1.05 - timeUsed / 2);
         }
     }
 }
