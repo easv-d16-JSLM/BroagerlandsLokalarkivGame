@@ -1,0 +1,17 @@
+<h2>{{ answer.id }} Details</h2>
+<div><span>id: </span>{{answer.id}}</div>
+<div>
+  <label>Answer:
+    <input type="text" [(ngModel)]="answer.text" placeholder={{answer.text}}>
+  </label>
+</div>
+<div>
+  <label>points:
+    <input type="number" step="1" min="10" max="10000" [(ngModel)]="answer.points" placeholder={{answer.points}}>
+  </label>
+</div>
+<div>
+  <label>time:
+      <input type="number" step="1" min="1" max="10000" [(ngModel)]="answer.time" placeholder={{answer.time}}>
+  </label>
+</div>
