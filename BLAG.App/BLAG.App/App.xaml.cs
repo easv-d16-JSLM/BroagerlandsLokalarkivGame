@@ -13,8 +13,9 @@ namespace BLAG.App
 		{
 			InitializeComponent();
 
-			MainPage = new BLAG.App.MainPage();
-		}
+		    var bootstrapper = new AppBootstrapper();
+		    MainPage = bootstrapper.CreateMainPage();
+        }
 
 		protected override void OnStart ()
 		{
