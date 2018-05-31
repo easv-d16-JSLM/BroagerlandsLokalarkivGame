@@ -26,11 +26,15 @@ namespace BLAG.App.Services
 
             PlayerCountUpdated = _client.Observe<int>(nameof(PlayerCountUpdated)).Publish();
             PlayerCountUpdated.Connect().DisposeWith(_disposable);
+
+            EndGameSession = _client.Observe(nameof(PlayerCountUpdated)).Publish();
+            EndGameSession.Connect().DisposeWith(_disposable);
         }
 
         //Client method that server calls. Has to be defined beforehand, other parts of app can subscribe.
         public IConnectableObservable<Unit> GameStarted { get; }
         public IConnectableObservable<int> PlayerCountUpdated { get; }
+        public IConnectableObservable<Unit> EndGameSession { get; }
 
         public void Dispose()
         {

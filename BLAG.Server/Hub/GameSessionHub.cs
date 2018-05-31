@@ -29,10 +29,10 @@ namespace BLAG.Server.Hub
             return _db.SingleById<GameSession>(id);
         }
 
-        public IEnumerable<Player> CurrentLeaderboard(GameSession currentSession)
+        public IEnumerable<Player> CurrentLeaderboard(int gameSessionId)
         {
             var leaderBoard = from player in _db.Fetch<Player>()
-                where player.GameSession.Id.Equals(currentSession.Id)
+                where player.GameSession.Id.Equals(gameSessionId)
                 select player;
 
             return leaderBoard.Reverse();
@@ -52,7 +52,20 @@ namespace BLAG.Server.Hub
             return true;
         }
 
-        public async Task StartGame(GameSession currentSession)
+        public Question RetrieveQuestion(int gameSessionId, int previus)
+        {
+
+            return null;
+        }
+
+        public async void SubmitAnswer(PlayerAnswer answer)
+        {
+            _db.Insert(answer);
+
+            await Clients.All.SendAsync("PlayerCountUpdated", 1); 
+        }
+
+        public async void StartGame(GameSession currentSession)
         {
             currentSession.StartTime = DateTime.Now;
             _db.Update(currentSession);

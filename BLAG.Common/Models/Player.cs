@@ -10,7 +10,7 @@ namespace BLAG.Common.Models
 
         public int CompareTo(Player other)
         {
-            return this.Score.CompareTo(other.Score);
+            return Score.CompareTo(other.Score);
         }
     }
 }
