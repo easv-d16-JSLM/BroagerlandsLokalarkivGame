@@ -1,6 +1,6 @@
 ﻿namespace BLAG.Common.Models
 {
-    public class Player
+    public class Player : ModelBase
     {
         public GameSession GameSession { get; set; }
         public string Name { get; set; }
