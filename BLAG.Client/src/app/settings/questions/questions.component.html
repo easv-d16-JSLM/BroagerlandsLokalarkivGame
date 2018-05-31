@@ -1,0 +1,36 @@
+<div class="card" style="margin: 1rem">
+  <div class="card-header text-white bg-info">
+    <h3>Questions
+      <a asp-action="Create" style="border-color: black" class="btn btn-success float-right">
+        <i class="fa fa-fw fa-plus-circle"></i> Create New</a>
+    </h3>
+
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Content</th>
+        <th scope="col">Type</th>
+        <th scope="col">Time</th>
+        <th scope="col">Points</th>
+        <th scope="col">Modify</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let x of questionsExamples">
+        <td>{{x.Content}}</td>
+        <td>{{x.Questiontype}}</td>
+        <td>{{x.Time}}</td>
+        <td>{{x.Points}}</td>
+        <td>
+          <a asp-action="Edit" asp-route-id="#">
+            <i class="fa fa-fw fa-edit"></i>
+          </a> |
+          <a asp-action="Details" asp-route-id="#">
+            <i class="fa fa-fw fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

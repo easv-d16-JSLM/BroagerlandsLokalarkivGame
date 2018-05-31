@@ -18,6 +18,11 @@ import { AnnouncementViewComponent } from './question/announcement/view/view.com
 import { AppRoutingModule } from './app-routing.module';
 import { QuestionnaireComponent } from './questionnaire/questionnaire/questionnaire.component';
 import { AnswerComponent } from './answer/answer/answer.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { HomeComponent } from './home/home.component';
+import { ConnectComponent } from './home/connect/connect.component';
+import { WaitComponent } from './home/wait/wait.component';
+import { QuestionsComponent } from './settings/questions/questions.component';
 
 
 @NgModule({
@@ -33,6 +38,11 @@ import { AnswerComponent } from './answer/answer/answer.component';
     VideoViewComponent,
     AudioViewComponent,
     AnnouncementViewComponent,
+    NavigationComponent,
+    HomeComponent,
+    ConnectComponent,
+    WaitComponent,
+    QuestionsComponent,
     QuestionnaireComponent,
     AnswerComponent
   ],
