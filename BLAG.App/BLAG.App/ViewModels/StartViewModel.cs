@@ -38,6 +38,7 @@ namespace BLAG.App.ViewModels
 
             _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)
                 .StartWith(false)
+                .Log(this, "IsLoading")
                 .ToProperty(this, x => x.IsLoading);
         }
 

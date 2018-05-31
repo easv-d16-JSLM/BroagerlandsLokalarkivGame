@@ -6,13 +6,22 @@
                    xmlns:vm="clr-namespace:BLAG.App.ViewModels;assembly=BLAG.App"
                    x:Class="BLAG.App.Views.StartView">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="Url" Placeholder="Hostname" />
-            <Entry x:Name="Code" Placeholder="Join Code" />
-            <Entry x:Name="Name" Placeholder="Username" />
-            <Button x:Name="Start" Text="Start" />
-            <ActivityIndicator x:Name="Indicator" HorizontalOptions="FillAndExpand"
-                               VerticalOptions="FillAndExpand" />
+        <StackLayout VerticalOptions="Fill" Padding="20">
+            <Label Text="Xamarin with ReactiveUI!" Margin="0, 10, 0, 0" HorizontalOptions="Center"
+                   TextColor="#8e24aa" FontAttributes="Bold" FontSize="Large" />
+            <StackLayout Margin="0, 20, 0, 0">
+                <Label Text="Server:" FontAttributes="Bold" FontSize="Medium" TextColor="#2196f3" />
+                <Entry x:Name="Url" />
+                <Label Text="JoinCode:" FontAttributes="Bold" FontSize="Medium" TextColor="#2196f3" />
+                <Entry x:Name="Code" />
+                <Label Text="Username:" FontAttributes="Bold" FontSize="Medium" Margin="0, 10, 0, 0"
+                       TextColor="#2196f3" />
+                <Entry x:Name="Name" />
+                <Button Text="Login" BackgroundColor="#2196f3" TextColor="White" x:Name="Start" />
+                <Label x:Name="messageLabel" />
+            </StackLayout>
+            <ActivityIndicator x:Name="Indicator" HorizontalOptions="Center"
+                               Margin="0, 10, 0, 0" />
         </StackLayout>
     </ContentPage.Content>
 </v:ContentPageBase>
