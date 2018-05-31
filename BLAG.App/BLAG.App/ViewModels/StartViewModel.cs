@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using DynamicData;
 using ReactiveUI;
 
@@ -8,6 +9,7 @@ namespace BLAG.App.ViewModels
 {
     public class StartViewModel : ViewModelBase
     {
+        private readonly ObservableAsPropertyHelper<bool> _isLoading;
         private string _joinCode = "abcde";
         private string _url;
         private string _username;
@@ -22,8 +24,10 @@ namespace BLAG.App.ViewModels
                 name != null &&
                 Regex.IsMatch(name, @"^[A-Za-z]{3,20}$"));
 
-            Connect = ReactiveCommand.Create(() =>
+            Connect = ReactiveCommand.CreateFromTask(async () =>
             {
+                //var service = await SignalRService.Initialize(Url);
+                await Task.Delay(5000);
                 var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
                     .Select(_ => DateTime.Now.ToString())
                     .Delay(TimeSpan.FromSeconds(2)).ToObservableChangeSet());
@@ -31,9 +35,15 @@ namespace BLAG.App.ViewModels
             }, canConnect);
 
             Connect.ThrownExceptions.Subscribe(e => throw e);
+
+            _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)
+                .StartWith(false)
+                .ToProperty(this, x => x.IsLoading);
         }
 
         public ReactiveCommand Connect { get; }
+
+        public bool IsLoading => _isLoading.Value;
 
         public string JoinCode
         {
