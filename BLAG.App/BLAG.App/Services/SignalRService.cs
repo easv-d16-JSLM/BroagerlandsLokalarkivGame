@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using BLAG.App.Helpers;
+using BLAG.Common.Models;
 using Microsoft.AspNetCore.SignalR.Client;
 using Splat;
 
@@ -19,14 +20,21 @@ namespace BLAG.App.Services
         private SignalRService(HubConnection client)
         {
             _client = client;
-            //Create observable for specified method name, make it so it can be connected to, all subscribtions will share the same one.
+            
             GameStarted = _client.Observe(nameof(GameStarted)).Publish();
-            //Connect ot the observable, so it's initialized and starts firing events. Keep the subscription active unitl this class is disposed.
             GameStarted.Connect().DisposeWith(_disposable);
+
+            PlayerCountUpdated = _client.Observe<int>(nameof(PlayerCountUpdated)).Publish();
+            PlayerCountUpdated.Connect().DisposeWith(_disposable);
+
+            EndGameSession = _client.Observe(nameof(PlayerCountUpdated)).Publish();
+            EndGameSession.Connect().DisposeWith(_disposable);
         }
 
         //Client method that server calls. Has to be defined beforehand, other parts of app can subscribe.
         public IConnectableObservable<Unit> GameStarted { get; }
+        public IConnectableObservable<int> PlayerCountUpdated { get; }
+        public IConnectableObservable<Unit> EndGameSession { get; }
 
         public void Dispose()
         {
@@ -42,9 +50,15 @@ namespace BLAG.App.Services
         }
 
         //Server method definition. Signature has to be kept in sync with server hub manually.
-        public Task SomeServerMethod(string somestring, int someInt)
+        public Task<bool> JoinGameSession(string userName, string joinCode)
         {
-            return _client.SendAsync(nameof(SomeServerMethod), somestring, someInt);
+            return _client.InvokeAsync<bool>(nameof(JoinGameSession), userName, joinCode);
+        }
+
+
+        public Task SubmitAnswer(PlayerAnswer answer)
+        {
+            return _client.InvokeAsync(nameof(SubmitAnswer), answer);
         }
     }
 }

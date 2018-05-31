@@ -1,21 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace BLAG.Common.Models
 {
     public class GameSession : ModelBase
     {
-        public Questionnaire Questionnaire { get; set; }
-        public DateTime StartTime { get; set; }
-        public string JoinCode { get; set; }
-
-        public void StartGame()
+        public GameSession()
         {
+            JoinCode = GenerateJoinCode();
         }
 
-        public IList<Player> GetLeaderboard()
+        public string JoinCode { get; set; }
+        public Questionnaire Questionnaire { get; set; }
+        public DateTime StartTime { get; set; }
+
+        private string GenerateJoinCode()
         {
-            return null;
+            var joinCode = "";
+            var r = new Random();
+            for (var i = 0; i < 5; i++)
+            {
+                var c = (char) (r.Next(26) + 'a');
+                joinCode += c;
+            }
+            return joinCode;
         }
     }
 }

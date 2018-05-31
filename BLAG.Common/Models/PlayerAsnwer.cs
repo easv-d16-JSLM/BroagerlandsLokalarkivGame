@@ -1,9 +1,12 @@
-﻿namespace BLAG.Common.Models
+﻿using System;
+
+namespace BLAG.Common.Models
 {
-    public class PlayerAsnwer<T> : ModelBase
+    public class PlayerAnswer : ModelBase
     {
         public Player Player;
-        public Answer Answer { get; set; }
-        public T PlayerAnswer { get; set; }
+        public string PlayerAnswered { get; set; }
+        public TimeSpan TimeAnswersGiven { get; set; }
+        public TimeSpan TimeAnswered { get; set; }
     }
 }

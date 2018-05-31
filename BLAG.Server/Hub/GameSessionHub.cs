@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using BLAG.Common.Models;
 using LiteDB;
@@ -15,28 +17,60 @@ namespace BLAG.Server.Hub
             _db = db;
         }
 
-        public async Task JoinGameSession(string userName, string joinCode)
+        public async Task<GameSession> CreateGameSession(int questionnaireId)
         {
-            try
+            var questionnaire = _db.SingleById<Questionnaire>(questionnaireId);
+            var newGameSession = new GameSession
             {
-                var session = (from gameSession in _db.Query<GameSession>()
-                    where gameSession.JoinCode.Equals(joinCode)
-                    select gameSession).First();
-                _db.Insert(new Player {Name = userName, GameSession = session});
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-
-            await Groups.AddToGroupAsync(Context.ConnectionId, "Players" + joinCode);
-            await OnConnectedAsync();
+                Questionnaire = questionnaire
+            };
+            var id = _db.Insert(newGameSession);
+            await Groups.AddToGroupAsync(Context.ConnectionId, "Server" + newGameSession.JoinCode);
+            return _db.SingleById<GameSession>(id);
         }
 
-        public async Task StartGame(string user, string message)
+        public IEnumerable<Player> CurrentLeaderboard(int gameSessionId)
         {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            var leaderBoard = from player in _db.Fetch<Player>()
+                where player.GameSession.Id.Equals(gameSessionId)
+                select player;
+
+            return leaderBoard.Reverse();
+        }
+
+        public async Task<bool> JoinGameSession(string userName, string joinCode)
+        {
+            var session = (from gameSession in _db.Query<GameSession>()
+                where gameSession.JoinCode.Equals(joinCode)
+                select gameSession).First();
+
+            _db.Insert(new Player {Name = userName, GameSession = session});
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, "Players" + joinCode);
+            await Clients.All.SendAsync("PlayerCountUpdated", 1);
+
+            return true;
+        }
+
+        public Question RetrieveQuestion(int gameSessionId, int previus)
+        {
+
+            return null;
+        }
+
+        public async void SubmitAnswer(PlayerAnswer answer)
+        {
+            _db.Insert(answer);
+
+            await Clients.All.SendAsync("PlayerCountUpdated", 1); 
+        }
+
+        public async void StartGame(GameSession currentSession)
+        {
+            currentSession.StartTime = DateTime.Now;
+            _db.Update(currentSession);
+
+            await Clients.All.SendAsync("GameStarted");
         }
     }
 }
