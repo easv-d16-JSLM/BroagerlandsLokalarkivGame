@@ -2,8 +2,11 @@
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using BLAG.App.Helpers;
+using BLAG.App.Services;
 using DynamicData;
 using ReactiveUI;
+using Splat;
 
 namespace BLAG.App.ViewModels
 {
@@ -11,8 +14,8 @@ namespace BLAG.App.ViewModels
     {
         private readonly ObservableAsPropertyHelper<bool> _isLoading;
         private string _joinCode = "abcde";
-        private string _url;
-        private string _username;
+        private string _url ="http://localhost:57580/gamesession";
+        private string _username = "testtest";
 
         public StartViewModel()
         {
@@ -26,8 +29,13 @@ namespace BLAG.App.ViewModels
 
             Connect = ReactiveCommand.CreateFromTask(async () =>
             {
-                //var service = await SignalRService.Initialize(Url);
-                await Task.Delay(5000);
+                SignalRService service;
+                using (var x = this.Log().Measure("Establishing SignalR connection"))
+                {
+                    service = await SignalRService.Initialize(Url);
+                }
+
+                var success = await service.JoinGameSession(Username, JoinCode);
                 var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
                     .Select(_ => DateTime.Now.ToString())
                     .Delay(TimeSpan.FromSeconds(2)).ToObservableChangeSet());
