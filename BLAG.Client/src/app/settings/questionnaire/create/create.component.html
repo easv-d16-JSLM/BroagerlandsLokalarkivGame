@@ -1,40 +1,14 @@
-<style>
-  .grid {
-    display: grid;
-    grid-template-columns: 15% 30% 10% 30% 15%;
-    grid-template-rows: 20% 50% 10% 20%;
-    text-align: center;
-  }
-
-  .item1 {
-
-    grid-row-start: 2;
-    grid-column-start: 2;
-
-  }
-
-  .item2 {
-    
-    grid-row-start: 2;
-    grid-column-start: 4;
-
-
-
-  }
-
-  .item3 {
-    grid-row-start: 2;
-    grid-column-start: 3;
-
-  }
-
-</style>
-
 <div class="grid" style="margin-top: 2rem">
 
   <div class="item1">
-    <select id="mySelect" size="20" style="min-width: 100%; min-height: 100%;">
+    <select multiple="multiple" id="ListofQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
       <option>Apple</option>
+      <option>Pear</option>
+      <option>Banana</option>
+      <option>Orange</option>
+      <option>Pear</option>
+      <option>Banana</option>
+      <option>Orange</option>
       <option>Pear</option>
       <option>Banana</option>
       <option>Orange</option>
@@ -42,14 +16,15 @@
   </div>
 
   <div class="item3">
-    <button>>></button>
+    <input type="button" id="btnRight" value=">" class="btn btn-default" />
+    <br />
     <p></p>
-    <button>
-      <<</button>
+    <input type="button" id="btnLeft" value="<" class="btn btn-default" />
+    <br />
   </div>
 
   <div class="item2">
-    <select id="mySelect" size="20" style="min-width: 100%; min-height: 100%;">
+    <select multiple="multiple" id="SelectedQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
       <option>Apple</option>
       <option>Pear</option>
       <option>Banana</option>
@@ -57,4 +32,8 @@
     </select>
   </div>
 
-</div>
+  <div class="item4">
+    <button class="button" ng-href="#">Save</button>
+  </div>
+
+  <div class="clearfix"></div>
