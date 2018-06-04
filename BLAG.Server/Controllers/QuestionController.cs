@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BLAG.Server.Controllers
 {
     [Produces("application/json")]
-    [Route("api/QuestionAnnouncement")]
+    [Route("api/Question")]
     public class QuestionController : Controller
     {
         private readonly LiteRepository _db;

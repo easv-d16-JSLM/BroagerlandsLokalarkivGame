@@ -21,7 +21,11 @@ namespace BLAG.Server
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseSwagger();
-            app.UseCors("CorsPolicy");
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+        );
+
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1"); });
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
@@ -33,6 +37,7 @@ namespace BLAG.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
             var repository = new LiteRepository(Configuration.GetConnectionString("MainDatabase"));
