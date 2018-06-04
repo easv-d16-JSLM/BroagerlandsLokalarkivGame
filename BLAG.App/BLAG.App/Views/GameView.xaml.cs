@@ -10,11 +10,13 @@ using Xamarin.Forms.Xaml;
 namespace BLAG.App.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class GameView : ContentPage
+	public partial class GameView
 	{
 		public GameView ()
 		{
 			InitializeComponent ();
+
+            
 		}
 	}
 }
