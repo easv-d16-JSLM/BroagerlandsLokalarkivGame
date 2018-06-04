@@ -16,13 +16,19 @@ import { VideoViewComponent } from './question/video/view/view.component';
 import { AudioViewComponent } from './question/audio/view/view.component';
 import { AnnouncementViewComponent } from './question/announcement/view/view.component';
 import { AppRoutingModule } from './app-routing.module';
-import { QuestionnaireComponent } from './questionnaire/questionnaire/questionnaire.component';
 import { AnswerComponent } from './answer/answer/answer.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { ConnectComponent } from './home/connect/connect.component';
 import { WaitComponent } from './home/wait/wait.component';
 import { QuestionsComponent } from './settings/questions/questions.component';
+import { CreateComponentQuestion } from './settings/questions/create/create.component';
+import { EditComponentQuestion } from './settings/questions/edit/edit.component';
+import { CreateComponentQuestionnaire } from './settings/questionnaire/create/create.component';
+import { EditComponentQuestionnaire } from './settings/questionnaire/edit/edit.component';
+import { QuestionnaireComponent } from './settings/questionnaire/questionnaire.component';
+import { SessionsComponent } from './settings/sessions/sessions.component';
+import { AnswersComponent } from './settings/answers/answers.component';
 
 
 @NgModule({
@@ -42,9 +48,15 @@ import { QuestionsComponent } from './settings/questions/questions.component';
     HomeComponent,
     ConnectComponent,
     WaitComponent,
+    AnswerComponent,
     QuestionsComponent,
+    CreateComponentQuestion,
+    EditComponentQuestion,
     QuestionnaireComponent,
-    AnswerComponent
+    CreateComponentQuestionnaire,
+    EditComponentQuestionnaire,
+    SessionsComponent,
+    AnswersComponent
   ],
   imports: [
     BrowserModule,
