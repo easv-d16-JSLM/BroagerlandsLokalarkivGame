@@ -9,13 +9,13 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackLayout>
-                <Label x:Name="PlayersLabel"/>
+                <Label x:Name="PlayersLabel" />
             </StackLayout>
-            <Label Grid.Row="1" x:Name="AnswerLabel"/>
+            <Label Grid.Row="1" x:Name="AnswerLabel" />
         </Grid>
     </ContentPage.Content>
 </v:ContentPageBase>
