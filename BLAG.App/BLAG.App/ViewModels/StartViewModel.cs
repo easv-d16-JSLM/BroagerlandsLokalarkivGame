@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using BLAG.App.Helpers;
 using BLAG.App.Services;
 using DynamicData;
@@ -14,7 +13,7 @@ namespace BLAG.App.ViewModels
     {
         private readonly ObservableAsPropertyHelper<bool> _isLoading;
         private string _joinCode = "abcde";
-        private string _url ="http://localhost:57580/gamesession";
+        private string _url = "http://localhost:57851/gamesession";
         private string _username = "testtest";
 
         public StartViewModel()

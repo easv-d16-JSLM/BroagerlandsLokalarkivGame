@@ -18,11 +18,13 @@ namespace BLAG.Server
         {
             var questionnaire1 = _db.Insert(new Questionnaire
             {
-                Title = "Broager i 1864"
+                Title = "Broager i 1864",
+                Questions = new List<Question>()
             });
             var questionnaire2 = _db.Insert(new Questionnaire
             {
-                Title = "Broager i Bronzealderen"
+                Title = "Broager i Bronzealderen",
+                Questions = new List<Question>()
             });
 
             var question1 = _db.Insert(new Question
@@ -125,12 +127,14 @@ namespace BLAG.Server
             _db.Insert(new GameSession
             {
                 Questionnaire = _db.SingleById<Questionnaire>(questionnaire1),
-                StartTime = DateTime.Now
+                StartTime = DateTime.Now,
+                JoinCode = "abcde"
             });
             _db.Insert(new GameSession
             {
                 Questionnaire = _db.SingleById<Questionnaire>(questionnaire2),
-                StartTime = DateTime.Now
+                StartTime = DateTime.Now,
+                JoinCode = "12345"
             });
         }
     }
