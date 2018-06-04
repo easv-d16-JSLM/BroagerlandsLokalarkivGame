@@ -1,4 +1,5 @@
-﻿using BLAG.App.Services;
+﻿using System.Reactive.Linq;
+using BLAG.App.Services;
 using BLAG.Common.Models;
 using ReactiveUI;
 
@@ -13,7 +14,7 @@ namespace BLAG.App.ViewModels
         {
             _signal = signal;
 
-            _playerCount = _signal.PlayerCountUpdated.ToProperty(this, x => x.PlayerCount);
+            _playerCount = _signal.PlayerCountUpdated.ObserveOn(RxApp.MainThreadScheduler).ToProperty(this, x => x.PlayerCount);
 
             _signal.JoinGameSession("test", "abcde");
         }
