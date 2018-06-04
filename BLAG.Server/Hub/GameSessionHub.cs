@@ -52,12 +52,6 @@ namespace BLAG.Server.Hub
             return true;
         }
 
-        public Question RetrieveQuestion(int gameSessionId, int previus)
-        {
-
-            return null;
-        }
-
         public async void SubmitAnswer(PlayerAnswer answer)
         {
             _db.Insert(answer);
