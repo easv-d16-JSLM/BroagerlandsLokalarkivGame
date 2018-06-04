@@ -16,6 +16,11 @@ namespace BLAG.Server
 
         public void SeedDatabase()
         {
+            foreach (var collectionName in _db.Database.GetCollectionNames())
+            {
+                _db.Database.DropCollection(collectionName);
+            }
+
             var questionnaire1 = _db.Insert(new Questionnaire
             {
                 Title = "Broager i 1864",
