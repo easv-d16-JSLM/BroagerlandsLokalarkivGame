@@ -33,11 +33,7 @@ namespace BLAG.App.ViewModels
                 {
                     service = await SignalRService.Initialize(Url);
                 }
-
-                var success = await service.JoinGameSession(Username, JoinCode);
-                var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
-                    .Select(_ => DateTime.Now.ToString())
-                    .Delay(TimeSpan.FromSeconds(2)).ToObservableChangeSet());
+                var vm = new GameViewModel(service);
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
             }, canConnect);
 
