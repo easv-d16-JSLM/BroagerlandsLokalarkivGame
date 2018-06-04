@@ -25,7 +25,9 @@ import { WaitComponent } from './home/wait/wait.component';
 import { QuestionsComponent } from './settings/questions/questions.component';
 import { GameFlowComponent } from './game-flow/game-flow.component';
 import { MatTableModule } from '@angular/material';
-import { APIService } from './Services/APIServices'
+import { APIService } from './Services/APIServices';
+import { HttpClientModule } from '@angular/common/http'; 
+import { TextDataSource } from './question/text/text.component';
 
 
 
@@ -54,10 +56,13 @@ import { APIService } from './Services/APIServices'
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
+    HttpClientModule,
+    
   ],
-  providers: [APIService],
+  providers: [APIService, HttpClient, HttpModule, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

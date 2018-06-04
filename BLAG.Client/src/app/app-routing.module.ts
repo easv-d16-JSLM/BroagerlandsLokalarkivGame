@@ -15,7 +15,7 @@ import { AnswerComponent }   from './answer/answer/answer.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'question/edit', component: TextComponent },
   { path: 'question/view', component: TextViewComponent },
   { path: 'answer/view', component: AnswerComponent },

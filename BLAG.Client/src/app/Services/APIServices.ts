@@ -1,20 +1,21 @@
 import { Injectable, Inject } from '@angular/core';  
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Http, Response } from '@angular/http';  
 import { Observable, of } from 'rxjs';  
 import { Router } from '@angular/router';  
 import { map, catchError, tap } from 'rxjs/operators';
 import { Text } from '../question/text/text';
+
 //import 'rxjs/add/operator/catch';  
 //import 'rxjs/add/observable/throw';  
 //import 'rxjs/add/operator/map';
   
 @Injectable()  
 export class APIService {  
-    myAppUrl: string = "";  
+    myAppUrl: string = "http://localhost:57851/";  
   
-    constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {  
-        this.myAppUrl = baseUrl;  
+    constructor(private _http: HttpClient) {  
+        
     }  
 
 
@@ -242,11 +243,11 @@ export class APIService {
             .pipe(catchError(this.errorHandler))
     } 
     //Text Question
-    getTextQuestions() {  
-        return this._http.get(this.myAppUrl + 'api/QuestionText')
-            .pipe(map((response: Response) => response.json()))
-            .pipe(catchError(this.errorHandler))
-    }
+    //getTextQuestions() {  
+    //    return this._http.get(this.myAppUrl + 'api/QuestionText')
+    //        .pipe(map((response: Response) => response.json()))
+    //        .pipe(catchError(this.errorHandler))
+    //}
     
     //getTextQuestionById(id: number) {  
     //    return this._http.get(this.myAppUrl + 'api/QuestionText/' + id)  
@@ -272,9 +273,15 @@ export class APIService {
     //        .pipe(catchError(this.errorHandler))  
     //} 
 
+    getTextQuestions(): Observable<any> {
+        
+        return this._http.get<any>(this.myAppUrl + 'api/Question')
+            .pipe(catchError(this.errorHandler));
+    }
+
     getTextQuestionById(id: number): Observable<Text> {
         
-        return this._http.get<Text>('api/QuestionText/' + id)
+        return this._http.get<Text>('api/Question/' + id)
             .pipe(catchError(this.errorHandler));
     }
 

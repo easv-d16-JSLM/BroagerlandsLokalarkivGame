@@ -12,7 +12,7 @@ import { DataSource } from '@angular/cdk/collections';
 export class TextComponent implements OnInit {
 
   dataSource = new TextDataSource(this.apiservice);
-  displayedColumns = ['id', 'text', 'points', 'time'];
+  displayedColumns = ['points', 'questionnaire', 'time', 'content', 'questiontype', 'id'];
 
   //constructor() { }
 
@@ -32,7 +32,7 @@ export class TextDataSource extends DataSource<any> {
   constructor(private apiservice: APIService) {
     super();
   }
-  connect(): Observable<Text[]> {
+  connect(): Observable<any> {
     return this.apiservice.getTextQuestions();
   }
   disconnect() {}

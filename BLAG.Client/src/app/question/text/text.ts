@@ -1,6 +1,8 @@
 export class Text {
-    id: number;
-    text: string;
     points: number;
+    questionnaire: {title: string;};
     time: number;
+    content: string;
+    questiontype: any;
+    id: number;
   }
