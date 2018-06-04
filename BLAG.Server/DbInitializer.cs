@@ -122,17 +122,16 @@ namespace BLAG.Server
                 Question = _db.SingleById<Question>(question4)
             });
 
-            _db.Insert(new GameSession()
+            _db.Insert(new GameSession
             {
                 Questionnaire = _db.SingleById<Questionnaire>(questionnaire1),
                 StartTime = DateTime.Now
             });
-            _db.Insert(new GameSession()
+            _db.Insert(new GameSession
             {
                 Questionnaire = _db.SingleById<Questionnaire>(questionnaire2),
                 StartTime = DateTime.Now
             });
-
         }
     }
 }
