@@ -40,10 +40,7 @@ namespace BLAG.Server.Hub
 
         public async Task<bool> JoinGameSession(string userName, string joinCode)
         {
-            var session = (from gameSession in _db.Query<GameSession>()
-                where gameSession.JoinCode.Equals(joinCode)
-                select gameSession).First();
-
+            var session = _db.Single<GameSession>(gs => gs.JoinCode == joinCode);
             _db.Insert(new Player {Name = userName, GameSession = session});
 
             await Groups.AddToGroupAsync(Context.ConnectionId, "Players" + joinCode);
