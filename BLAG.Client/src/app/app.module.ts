@@ -24,6 +24,8 @@ import { ConnectComponent } from './home/connect/connect.component';
 import { WaitComponent } from './home/wait/wait.component';
 import { QuestionsComponent } from './settings/questions/questions.component';
 import { GameFlowComponent } from './game-flow/game-flow.component';
+import { MatTableModule } from '@angular/material';
+import { APIService } from './Services/APIServices'
 
 
 
@@ -52,9 +54,10 @@ import { GameFlowComponent } from './game-flow/game-flow.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
