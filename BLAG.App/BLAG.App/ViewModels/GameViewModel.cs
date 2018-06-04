@@ -15,8 +15,6 @@ namespace BLAG.App.ViewModels
             _signal = signal;
 
             _playerCount = _signal.PlayerCountUpdated.ObserveOn(RxApp.MainThreadScheduler).ToProperty(this, x => x.PlayerCount);
-
-            _signal.JoinGameSession("test", "abcde");
         }
 
         public Answer CurrentAnswer { get; set; }

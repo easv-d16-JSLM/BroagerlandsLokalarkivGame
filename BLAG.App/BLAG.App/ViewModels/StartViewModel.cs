@@ -12,6 +12,7 @@ namespace BLAG.App.ViewModels
     public class StartViewModel : ViewModelBase
     {
         private readonly ObservableAsPropertyHelper<bool> _isLoading;
+        private readonly ObservableAsPropertyHelper<bool> invalidJoinCode;
         private string _joinCode = "abcde";
         private string _url = "http://localhost:57851/gamesession";
         private string _username = "testtest";
@@ -34,15 +35,19 @@ namespace BLAG.App.ViewModels
                     service = await SignalRService.Initialize(Url);
                 }
                 var vm = new GameViewModel(service);
+                if (!await service.JoinGameSession(Username, JoinCode))
+                {
+                    throw new ArgumentException("The join code does not exist", nameof(JoinCode));
+                }
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
             }, canConnect);
 
-            Connect.ThrownExceptions.Subscribe(e => throw e);
+            invalidJoinCode = Connect.ThrownExceptions.Select(e => e is ArgumentException).ToProperty(this, x => x.InvalidJoinCode);
 
             _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)
                 .StartWith(false)
-                .Log(this, "IsLoading")
                 .ToProperty(this, x => x.IsLoading);
+            
         }
 
         public ReactiveCommand Connect { get; }
@@ -55,6 +60,7 @@ namespace BLAG.App.ViewModels
             set => this.RaiseAndSetIfChanged(ref _joinCode, value);
         }
 
+        public bool InvalidJoinCode => invalidJoinCode.Value;
         public string Url
         {
             get => _url;
