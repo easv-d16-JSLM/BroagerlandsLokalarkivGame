@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Timers;
 using BLAG.Common.Models;
 using LiteDB;
 using Microsoft.AspNetCore.SignalR;
@@ -62,7 +63,16 @@ namespace BLAG.Server.Hub
             currentSession.StartTime = DateTime.Now;
             _db.Update(currentSession);
 
-            await Clients.All.SendAsync("GameStarted");
+            await Clients.All.SendAsync("CurrentLeaderboard",null);
+
+            var t = new Timer(10000);
+            t.Elapsed += async (sender, args) =>
+            {
+                await Clients.All.SendAsync("CurrentQuestion",null,null);
+                
+            };
+            t.Start();
         }
+
     }
 }
