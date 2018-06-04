@@ -23,6 +23,8 @@ import { HomeComponent } from './home/home.component';
 import { ConnectComponent } from './home/connect/connect.component';
 import { WaitComponent } from './home/wait/wait.component';
 import { QuestionsComponent } from './settings/questions/questions.component';
+import { GameFlowComponent } from './game-flow/game-flow.component';
+
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { QuestionsComponent } from './settings/questions/questions.component';
     WaitComponent,
     QuestionsComponent,
     QuestionnaireComponent,
-    AnswerComponent
+    AnswerComponent,
+    GameFlowComponent,    
   ],
   imports: [
     BrowserModule,

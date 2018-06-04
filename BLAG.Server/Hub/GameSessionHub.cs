@@ -52,12 +52,6 @@ namespace BLAG.Server.Hub
             return true;
         }
 
-        public Question RetrieveQuestion(int gameSessionId, int previus)
-        {
-
-            return null;
-        }
-
         public async void SubmitAnswer(PlayerAnswer answer)
         {
             _db.Insert(answer);
@@ -65,8 +59,9 @@ namespace BLAG.Server.Hub
             await Clients.All.SendAsync("PlayerCountUpdated", 1); 
         }
 
-        public async void StartGame(GameSession currentSession)
+        public async void StartGame(int currentSessionId)
         {
+            var currentSession =_db.SingleById<GameSession>(currentSessionId);
             currentSession.StartTime = DateTime.Now;
             _db.Update(currentSession);
 

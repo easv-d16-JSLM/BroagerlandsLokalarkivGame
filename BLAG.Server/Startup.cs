@@ -35,7 +35,10 @@ namespace BLAG.Server
         {
             services.AddMvc();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Info {Title = "My API", Version = "v1"}); });
-            services.AddSingleton(new LiteRepository(Configuration.GetConnectionString("MainDatabase")));
+            var repository = new LiteRepository(Configuration.GetConnectionString("MainDatabase"));
+            DbInitializer testData = new DbInitializer(repository);
+            testData.SeedDatabase();
+            services.AddSingleton(repository);
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {

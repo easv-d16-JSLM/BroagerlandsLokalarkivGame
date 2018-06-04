@@ -6,6 +6,7 @@ namespace BLAG.Common.Models
     {
         public string CorrectAnswer { get; set; }
         public IList<string> Options { get; set; }
-        public QuestionType QuestionType { get; set; }
+        public Question Question { get; set; }
+        public QuestionType AnswerType { get; set; }
     }
 }
