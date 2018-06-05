@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using BLAG.App.Helpers;
@@ -11,7 +12,6 @@ namespace BLAG.App.ViewModels
     public class StartViewModel : ViewModelBase
     {
         private readonly ObservableAsPropertyHelper<bool> _isLoading;
-        private readonly ObservableAsPropertyHelper<bool> invalidJoinCode;
         private string _joinCode = "abcde";
         private string _url = "http://localhost:57851/gamesession";
         private string _username = "testtest";
@@ -29,19 +29,22 @@ namespace BLAG.App.ViewModels
             Connect = ReactiveCommand.CreateFromTask(async () =>
             {
                 SignalRService service;
-                using (var x = this.Log().Measure("Establishing SignalR connection"))
+                using (this.Log().Measure("Establishing SignalR connection"))
                 {
                     service = await SignalRService.Initialize(Url);
                 }
 
-                var vm = new GameViewModel(service);
-                if (await service.JoinGameSession(Username, JoinCode) == null)
-                    throw new ArgumentException("The join code does not exist", nameof(JoinCode));
+                var player = await service.JoinGameSession(Username, JoinCode);
+
+                if (player == null)
+                {
+                    await Error.Handle("The Join Code was invalid");
+                    return;
+                }
+
+                var vm = new GameViewModel(service, player);
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
             }, canConnect);
-
-            invalidJoinCode = Connect.ThrownExceptions.Select(e => e is ArgumentException)
-                .ToProperty(this, x => x.InvalidJoinCode);
 
             _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)
                 .StartWith(false)
@@ -50,7 +53,8 @@ namespace BLAG.App.ViewModels
 
         public ReactiveCommand Connect { get; }
 
-        public bool InvalidJoinCode => invalidJoinCode.Value;
+        public Interaction<string, Unit> Error { get; } = new Interaction<string, Unit>(RxApp.MainThreadScheduler);
+
 
         public bool IsLoading => _isLoading.Value;
 
