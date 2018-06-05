@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as signalR from '@aspnet/signalr';
 import { HubConnection } from '@aspnet/signalr';
+import { Player } from '../player/player';
+import { Question } from '../question/question';
 
 @Component({
   selector: 'app-game-flow',
@@ -9,13 +11,14 @@ import { HubConnection } from '@aspnet/signalr';
   styleUrls: ['./game-flow.component.css']
 })
 export class GameFlowComponent implements OnInit {
+
   public _hubConnection: HubConnection;
-  public 
+
 
   ngOnInit() {
     this._hubConnection = new signalR.HubConnectionBuilder() 
           .configureLogging(signalR.LogLevel.Trace) 
-          .withUrl("/gamesession") 
+          .withUrl("http://localhost:57851/gamesession") 
           .build(); 
 
     this._hubConnection.start()
@@ -27,17 +30,31 @@ export class GameFlowComponent implements OnInit {
         });
 
     console.log(this._hubConnection);
+
+
+    this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
+     
+    });
+
+    this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any) => {
+ 
+    });
+
+    this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: any) => {
+    
+    });
+
   }
 
-  CreateGameSession(questionnaireId: number){
-    this._hubConnection.invoke("CreateGameSession", questionnaireId)
+  async CreateGameSession(questionnaireId: number){
+    console.log("Starting questionnaire " + questionnaireId);
+    var session = await this._hubConnection.invoke("CreateGameSession", questionnaireId);
+    console.log(session);
   }
 
   StartGame(currentGameSessionId : number){
     this._hubConnection.invoke("StartGame", currentGameSessionId )
   }
-
-  RetrieveStatistics(currentGameSessionId : number){
-    this._hubConnection.invoke("CurrentLeaderboard", currentGameSessionId)
-  }
+  
+  
 }

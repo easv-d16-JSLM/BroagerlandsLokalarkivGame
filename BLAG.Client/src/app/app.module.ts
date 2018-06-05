@@ -20,7 +20,6 @@ import { AnswerComponent } from './answer/answer/answer.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { ConnectComponent } from './home/connect/connect.component';
-import { WaitComponent } from './home/wait/wait.component';
 import { QuestionsComponent } from './settings/questions/questions.component';
 import { CreateComponentQuestion } from './settings/questions/create/create.component';
 import { EditComponentQuestion } from './settings/questions/edit/edit.component';
@@ -58,7 +57,6 @@ import { ViewquestionnaireComponent } from './questionnaire/viewquestionnaire/vi
     NavigationComponent,
     HomeComponent,
     ConnectComponent,
-    WaitComponent,
     AnswerComponent,
     QuestionsComponent,
     CreateComponentQuestion,

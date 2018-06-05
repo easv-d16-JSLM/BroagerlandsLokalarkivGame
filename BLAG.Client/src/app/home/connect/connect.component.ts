@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { APIService } from '../../Services/APIServices'
+import { DataSource } from '@angular/cdk/collections';
+import { GameFlowComponent } from "../../game-flow/game-flow.component";
+import { Observable } from 'rxjs';
+import * as signalR from '@aspnet/signalr';
+import { HubConnection } from '@aspnet/signalr';
+import { ViewquestionnaireComponent } from "../../../app/questionnaire/viewquestionnaire/viewquestionnaire.component";
+import { Sessions } from '../../settings/sessions/sessions';
 
 @Component({
   selector: 'app-connect-view',
@@ -7,9 +15,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectComponent implements OnInit {
 
+  @Input("hub") _hubConnection: HubConnection;
+
+  @Input("session") _session: Sessions;
+
+  
+
   constructor() { }
+  
 
   ngOnInit() {
   }
 
+  public SetSession(session:Sessions){
+    console.log(session);
+    this._session=session;
+  }
+
+  StartGame(currentGameSessionId : number){
+    this._hubConnection.invoke("StartGame", this._session.id )
+  }
 }

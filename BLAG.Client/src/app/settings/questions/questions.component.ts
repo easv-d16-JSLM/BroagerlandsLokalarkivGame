@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionTypes } from '../../question/question-types.enum';
 import { Question } from '../../question/question';
+import { APIService } from '../../Services/APIServices'
+import { DataSource } from '@angular/cdk/collections';
+import { GameFlowComponent } from "../../game-flow/game-flow.component";
+import { Observable } from 'rxjs';
+import * as signalR from '@aspnet/signalr';
+import { HubConnection } from '@aspnet/signalr';
+
 
 @Component({
   selector: 'app-questions-view',
@@ -9,6 +16,8 @@ import { Question } from '../../question/question';
 })
 
 export class QuestionsComponent implements OnInit {
+
+  public _hubConnection: HubConnection;
 
   constructor() {}
 
@@ -33,6 +42,28 @@ export class QuestionsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.questionsExamples);
+
+    this._hubConnection = new signalR.HubConnectionBuilder() 
+    .configureLogging(signalR.LogLevel.Trace) 
+    .withUrl("http://localhost:57851/gamesession") 
+    .build(); 
+
+    this._hubConnection.start()
+      .then(() => {
+      console.log('Hub connection started')
+  })
+  .catch(err => {
+      console.log('Error while establishing connection')
+  });
+
+console.log(this._hubConnection);
+    
+
+this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: Date) => {
+
+});
+
+
   }
 
 }
