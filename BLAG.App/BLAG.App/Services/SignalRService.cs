@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Reactive;
+using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BLAG.App.Helpers;
 using BLAG.Common.Models;
 using Microsoft.AspNetCore.SignalR.Client;
+using ReactiveUI;
 using Splat;
 
 namespace BLAG.App.Services
@@ -20,21 +21,36 @@ namespace BLAG.App.Services
         private SignalRService(HubConnection client)
         {
             _client = client;
-            
-            GameStarted = _client.Observe(nameof(GameStarted)).Publish();
-            GameStarted.Connect().DisposeWith(_disposable);
 
-            PlayerCountUpdated = _client.Observe<int>(nameof(PlayerCountUpdated)).Publish();
-            PlayerCountUpdated.Connect().DisposeWith(_disposable);
+            CurrentAnswer = _client
+                .Observe<Answer, DateTime>(nameof(CurrentAnswer))
+                .Log(this, nameof(CurrentAnswer))
+                .Publish();
+            CurrentAnswer
+                .Connect()
+                .DisposeWith(_disposable);
 
-            EndGameSession = _client.Observe(nameof(PlayerCountUpdated)).Publish();
-            EndGameSession.Connect().DisposeWith(_disposable);
+            CurrentLeaderboard = _client
+                .Observe<IList<Player>>(nameof(CurrentLeaderboard))
+                .Log(this, nameof(CurrentLeaderboard))
+                .Publish();
+            CurrentLeaderboard
+                .Connect()
+                .DisposeWith(_disposable);
+
+            PlayerCountUpdated = _client
+                .Observe<int>(nameof(PlayerCountUpdated))
+                .Log(this, nameof(PlayerCountUpdated))
+                .Publish();
+            PlayerCountUpdated
+                .Connect().DisposeWith(_disposable);
         }
 
-        //Client method that server calls. Has to be defined beforehand, other parts of app can subscribe.
-        public IConnectableObservable<Unit> GameStarted { get; }
+        public IConnectableObservable<Tuple<Answer, DateTime>> CurrentAnswer { get; }
+
+        public IConnectableObservable<IList<Player>> CurrentLeaderboard { get; }
+
         public IConnectableObservable<int> PlayerCountUpdated { get; }
-        public IConnectableObservable<Unit> EndGameSession { get; }
 
         public void Dispose()
         {
@@ -49,12 +65,10 @@ namespace BLAG.App.Services
             return service;
         }
 
-        //Server method definition. Signature has to be kept in sync with server hub manually.
-        public Task<bool> JoinGameSession(string userName, string joinCode)
+        public Task<Player> JoinGameSession(string userName, string joinCode)
         {
-            return _client.InvokeAsync<bool>(nameof(JoinGameSession), userName, joinCode);
+            return _client.InvokeAsync<Player>(nameof(JoinGameSession), userName, joinCode);
         }
-
 
         public Task SubmitAnswer(PlayerAnswer answer)
         {

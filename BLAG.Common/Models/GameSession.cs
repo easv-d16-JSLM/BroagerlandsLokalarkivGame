@@ -9,6 +9,8 @@ namespace BLAG.Common.Models
             JoinCode = GenerateJoinCode();
         }
 
+        public int CurrentQuestionIndex { get; set; }
+
         public string JoinCode { get; set; }
         public Questionnaire Questionnaire { get; set; }
         public DateTime StartTime { get; set; }

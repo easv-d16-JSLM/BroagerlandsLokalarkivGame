@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using BLAG.App.Helpers;
 using BLAG.App.Services;
-using DynamicData;
 using ReactiveUI;
 using Splat;
 
@@ -29,27 +29,32 @@ namespace BLAG.App.ViewModels
             Connect = ReactiveCommand.CreateFromTask(async () =>
             {
                 SignalRService service;
-                using (var x = this.Log().Measure("Establishing SignalR connection"))
+                using (this.Log().Measure("Establishing SignalR connection"))
                 {
                     service = await SignalRService.Initialize(Url);
                 }
 
-                var success = await service.JoinGameSession(Username, JoinCode);
-                var vm = new AnswerTextChoiceViewModel(Observable.Interval(TimeSpan.FromSeconds(1))
-                    .Select(_ => DateTime.Now.ToString())
-                    .Delay(TimeSpan.FromSeconds(2)).ToObservableChangeSet());
+                var player = await service.JoinGameSession(Username, JoinCode);
+
+                if (player == null)
+                {
+                    await Error.Handle("The Join Code was invalid");
+                    return;
+                }
+
+                var vm = new GameViewModel(service, player);
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
             }, canConnect);
 
-            Connect.ThrownExceptions.Subscribe(e => throw e);
-
             _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)
                 .StartWith(false)
-                .Log(this, "IsLoading")
                 .ToProperty(this, x => x.IsLoading);
         }
 
         public ReactiveCommand Connect { get; }
+
+        public Interaction<string, Unit> Error { get; } = new Interaction<string, Unit>(RxApp.MainThreadScheduler);
+
 
         public bool IsLoading => _isLoading.Value;
 

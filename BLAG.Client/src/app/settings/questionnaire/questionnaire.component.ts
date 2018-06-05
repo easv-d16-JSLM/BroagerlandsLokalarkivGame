@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Questionnaire } from '../../questionnaire/questionnaire/questionnaire';
+import { QuestionTypes } from '../../question/question-types.enum';
 
 @Component({
   selector: 'app-questionnaire-view',

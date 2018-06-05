@@ -16,6 +16,11 @@ namespace BLAG.Server
 
         public void SeedDatabase()
         {
+            foreach (var collectionName in _db.Database.GetCollectionNames())
+            {
+                _db.Database.DropCollection(collectionName);
+            }
+
             var questionnaire1 = _db.Insert(new Questionnaire
             {
                 Title = "Broager i 1864",
@@ -31,7 +36,6 @@ namespace BLAG.Server
             {
                 Content = "Hvem af disse personer deltog i krigen ved dybbøl?",
                 Points = 700,
-                Questionnaire = _db.SingleById<Questionnaire>(questionnaire1),
                 QuestionType = QuestionType.Text,
                 Time = TimeSpan.FromSeconds(30)
             });
@@ -40,7 +44,6 @@ namespace BLAG.Server
             {
                 Content = "Hvem af disse personer døde i krigen ved dybbøl?",
                 Points = 500,
-                Questionnaire = _db.SingleById<Questionnaire>(questionnaire1),
                 QuestionType = QuestionType.Text,
                 Time = TimeSpan.FromSeconds(30)
             });
@@ -53,7 +56,6 @@ namespace BLAG.Server
             {
                 Content = "Hvor stor var Broager i Bronzealderen?",
                 Points = 600,
-                Questionnaire = _db.SingleById<Questionnaire>(questionnaire2),
                 QuestionType = QuestionType.Text,
                 Time = TimeSpan.FromSeconds(30)
             });
@@ -61,7 +63,6 @@ namespace BLAG.Server
             {
                 Content = "Hvor mange boede i broager i Bronzealderen?",
                 Points = 400,
-                Questionnaire = _db.SingleById<Questionnaire>(questionnaire2),
                 QuestionType = QuestionType.Text,
                 Time = TimeSpan.FromSeconds(30)
             });

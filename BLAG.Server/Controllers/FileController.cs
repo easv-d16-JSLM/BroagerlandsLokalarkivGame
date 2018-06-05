@@ -16,6 +16,13 @@ namespace BLAG.Server.Controllers
             _db = db;
         }
 
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public void Delete(string id)
+        {
+            _db.FileStorage.Delete(id);
+        }
+
         // GET: api/File/5
         [HttpGet("{id}")]
         public FileStreamResult Get(string id)
@@ -31,13 +38,6 @@ namespace BLAG.Server.Controllers
         {
             var fi = _db.FileStorage.Upload(Guid.NewGuid().ToString(), file.FileName, file.OpenReadStream());
             return fi;
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(string id)
-        {
-            _db.FileStorage.Delete(id);
         }
     }
 }
