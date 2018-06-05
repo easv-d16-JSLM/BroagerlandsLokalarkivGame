@@ -33,6 +33,8 @@ import { CreateComponentAnswers } from './settings/answers/create/create.compone
 import { EditComponentAnswers } from './settings/answers/edit/edit.component';
 import { ScoreboardComponent } from './home/scoreboard/scoreboard.component';
 import { GameFlowComponent } from './game-flow/game-flow.component';
+import { MatTableModule } from '@angular/material';
+import { APIService } from './Services/APIServices'
 
 
 @NgModule({
@@ -69,9 +71,10 @@ import { GameFlowComponent } from './game-flow/game-flow.component';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTableModule
   ],
-  providers: [],
+  providers: [APIService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

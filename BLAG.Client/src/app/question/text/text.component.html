@@ -15,3 +15,26 @@
       <input type="number" step="1" min="1" max="10000" [(ngModel)]="text.time" placeholder={{text.time}}>
   </label>
 </div>
+
+<div>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{text.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="text">
+      <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{text.text}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="points">
+      <mat-header-cell *matHeaderCellDef> Points </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{text.points}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+      <mat-cell *matCellDef="let user"> {{text.time}} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
