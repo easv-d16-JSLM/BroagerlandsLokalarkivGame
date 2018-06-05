@@ -16,6 +16,13 @@ namespace BLAG.Server.Controllers
             _db = db;
         }
 
+        // DELETE: api/ApiWithActions/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _db.Delete<Answer>(id);
+        }
+
         // GET: api/Answer
         [HttpGet]
         public IEnumerable<Answer> Get()
@@ -42,13 +49,6 @@ namespace BLAG.Server.Controllers
         public void Put([FromBody] Answer answer)
         {
             _db.Update(answer);
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            _db.Delete<Answer>(id);
         }
     }
 }
