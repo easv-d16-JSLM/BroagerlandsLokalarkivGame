@@ -12,20 +12,12 @@ import { DataSource } from '@angular/cdk/collections';
 export class TextComponent implements OnInit {
 
   dataSource = new TextDataSource(this.apiservice);
-  displayedColumns = ['points', 'questionnaire', 'time', 'content', 'questiontype', 'id'];
-
-  //constructor() { }
+  displayedColumns = ['points', 'questionnaire', 'time', 'content', 'questiontypes', 'id', 'actions'];
 
   constructor(private apiservice: APIService) { }
 
   ngOnInit() {
-   // this.getTextQuestions
   }
-
-  //getTextQuestions(): void {
-  //  this.apiservice.getTextQuestions()
-  //  .subscribe(text => this.getTextQuestions = text);
-  //}
 }
 
 export class TextDataSource extends DataSource<any> {

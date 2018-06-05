@@ -12,7 +12,7 @@ import { DataSource } from '@angular/cdk/collections';
 export class ViewquestionnaireComponent implements OnInit {
 
   dataSource = new QuestionnaireDataSource(this.apiservice);
-  displayedColumns = ['id', 'title', 'questionlist'];
+  displayedColumns = ['id', 'title', 'questionlist', 'actions'];
 
   constructor(private apiservice: APIService) { }
 

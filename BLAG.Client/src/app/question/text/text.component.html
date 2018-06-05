@@ -18,13 +18,26 @@
       <mat-header-cell *matHeaderCellDef> Content </mat-header-cell>
       <mat-cell *matCellDef="let text"> {{text.content}} </mat-cell>
     </ng-container>
-    <ng-container matColumnDef="questiontype">
+    <ng-container matColumnDef="questiontypes">
       <mat-header-cell *matHeaderCellDef> Questiontype </mat-header-cell>
-      <mat-cell *matCellDef="let text"> {{text.questiontype}} </mat-cell>
+      <mat-cell *matCellDef="let text"> {{text.questiontypes}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
       <mat-cell *matCellDef="let text"> {{text.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <a mat-icon-button color="accent"><i class="fa fa-plus mat-icon"></i></a>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+            <a  mat-icon-button color="primary" focusable="false" >
+              <i class="fa fa-fw fa-edit"></i>
+            </a>|
+            <a  mat-icon-button color="primary" focusable="false" >
+              <i class="fa fa-fw fa-trash"></i>
+            </a>
+      </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

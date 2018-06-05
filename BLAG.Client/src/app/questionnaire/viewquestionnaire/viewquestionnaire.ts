@@ -1,6 +1,6 @@
 export class Viewquestionnaire {
     id: number;
-    title: any;
+    title: string;
     questions: any[];
 
   }
