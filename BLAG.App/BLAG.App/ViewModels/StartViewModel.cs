@@ -3,7 +3,6 @@ using System.Reactive.Linq;
 using System.Text.RegularExpressions;
 using BLAG.App.Helpers;
 using BLAG.App.Services;
-using DynamicData;
 using ReactiveUI;
 using Splat;
 
@@ -34,23 +33,24 @@ namespace BLAG.App.ViewModels
                 {
                     service = await SignalRService.Initialize(Url);
                 }
+
                 var vm = new GameViewModel(service);
-                if (!await service.JoinGameSession(Username, JoinCode))
-                {
+                if (await service.JoinGameSession(Username, JoinCode) == null)
                     throw new ArgumentException("The join code does not exist", nameof(JoinCode));
-                }
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
             }, canConnect);
 
-            invalidJoinCode = Connect.ThrownExceptions.Select(e => e is ArgumentException).ToProperty(this, x => x.InvalidJoinCode);
+            invalidJoinCode = Connect.ThrownExceptions.Select(e => e is ArgumentException)
+                .ToProperty(this, x => x.InvalidJoinCode);
 
             _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)
                 .StartWith(false)
                 .ToProperty(this, x => x.IsLoading);
-            
         }
 
         public ReactiveCommand Connect { get; }
+
+        public bool InvalidJoinCode => invalidJoinCode.Value;
 
         public bool IsLoading => _isLoading.Value;
 
@@ -60,7 +60,6 @@ namespace BLAG.App.ViewModels
             set => this.RaiseAndSetIfChanged(ref _joinCode, value);
         }
 
-        public bool InvalidJoinCode => invalidJoinCode.Value;
         public string Url
         {
             get => _url;
