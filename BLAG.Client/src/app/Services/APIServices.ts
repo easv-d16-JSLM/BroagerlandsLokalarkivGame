@@ -281,22 +281,22 @@ export class APIService {
 
     getTextQuestionById(id: number): Observable<Text> {
         
-        return this._http.get<Text>('api/Question/' + id)
+        return this._http.get<Text>(this.myAppUrl + 'api/Question/' + id)
             .pipe(catchError(this.errorHandler));
     }
 
     postTextQuestion (text: Text): Observable<Text> {
-        return this._http.post<Text>('api/QuestionText/', text)
+        return this._http.post<Text>(this.myAppUrl + 'api/QuestionText/', text)
             .pipe(catchError(this.errorHandler));
     }
 
     updateTextQuestion (text: Text): Observable<any> {
-        return this._http.put('api/QuestionText/', text)
+        return this._http.put(this.myAppUrl + 'api/QuestionText/', text)
             .pipe(catchError(this.errorHandler));
     }
 
     deleteTextQuestionById (id: number): Observable<Text> {     
-        return this._http.delete<Text>('api/ApiWithActions/' + id)
+        return this._http.delete<Text>(this.myAppUrl + 'api/ApiWithActions/' + id)
             .pipe(catchError(this.errorHandler));
     }
 
