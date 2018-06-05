@@ -24,7 +24,12 @@
   .item4 {
     grid-row-start: 3;
     grid-column-start: 4;
-    margin-top: 1rem;
+  }
+
+  .item5 {
+    grid-row-start: 1;
+    grid-column: 2/5;
+    margin-bottom: 2rem;
   }
 
   .button {

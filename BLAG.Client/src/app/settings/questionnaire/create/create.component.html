@@ -1,6 +1,14 @@
-<div class="grid" style="margin-top: 2rem">
+<div class="grid" style="margin-top: 1rem">
+  <div class="item5">
+    <div asp-validation-summary="ModelOnly" class="text-danger">   
+      <label asp-for="Text" class="control-label col-sm-3 col-form-label"></label>
+        <input asp-for="Text" class="form-control" placeholder="Questionnaire Title" />
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+  </div>
 
   <div class="item1">
+    <label class="form-text">Avaiable Questions</label>
     <select multiple="multiple" id="ListofQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
       <option>Apple</option>
       <option>Pear</option>
@@ -15,7 +23,7 @@
     </select>
   </div>
 
-  <div class="item3">
+  <div class="item3" style="margin-top: 12rem">
     <input type="button" id="btnRight" value=">" class="btn btn-default" />
     <br />
     <p></p>
@@ -24,6 +32,7 @@
   </div>
 
   <div class="item2">
+    <label class="form-text">Chosen Questions</label>
     <select multiple="multiple" id="SelectedQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
       <option>Apple</option>
       <option>Pear</option>
@@ -33,7 +42,5 @@
   </div>
 
   <div class="item4">
-    <button class="button" ng-href="#">Save</button>
+    <button class="button form-control btn btn-lg btn-success btn-block" style="margin-top: 1rem" ng-href="#" >Create</button>
   </div>
-
-  <div class="clearfix"></div>
