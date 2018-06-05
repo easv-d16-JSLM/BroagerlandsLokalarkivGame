@@ -16,6 +16,8 @@ import { CreateComponentQuestionnaire } from './settings/questionnaire/create/cr
 import { EditComponentQuestion } from './settings/questions/edit/edit.component';
 import { SessionsComponent } from './settings/sessions/sessions.component';
 import { AnswersComponent } from './settings/answers/answers.component';
+import { CreateComponentAnswers } from './settings/answers/create/create.component';
+import { EditComponentAnswers } from './settings/answers/edit/edit.component';
 
 
 const routes: Routes = [
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: 'questionnaire/edit', component: QuestionnaireComponent },
   { path: 'session', component: SessionsComponent},
   { path: 'answer', component: AnswersComponent},
+  { path: 'answer/create', component: CreateComponentAnswers},
+  { path: 'answer/edit', component: EditComponentAnswers},
   
 ];
 

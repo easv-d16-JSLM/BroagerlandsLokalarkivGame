@@ -29,6 +29,9 @@ import { EditComponentQuestionnaire } from './settings/questionnaire/edit/edit.c
 import { QuestionnaireComponent } from './settings/questionnaire/questionnaire.component';
 import { SessionsComponent } from './settings/sessions/sessions.component';
 import { AnswersComponent } from './settings/answers/answers.component';
+import { CreateComponentAnswers } from './settings/answers/create/create.component';
+import { EditComponentAnswers } from './settings/answers/edit/edit.component';
+import { ScoreboardComponent } from './home/scoreboard/scoreboard.component';
 
 
 @NgModule({
@@ -56,7 +59,10 @@ import { AnswersComponent } from './settings/answers/answers.component';
     CreateComponentQuestionnaire,
     EditComponentQuestionnaire,
     SessionsComponent,
-    AnswersComponent
+    AnswersComponent,
+    CreateComponentAnswers,
+    EditComponentAnswers,
+    ScoreboardComponent
   ],
   imports: [
     BrowserModule,
