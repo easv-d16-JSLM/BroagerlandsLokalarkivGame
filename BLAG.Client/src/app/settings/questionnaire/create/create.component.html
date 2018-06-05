@@ -1,55 +1,39 @@
-<style>
-  .grid {
-    display: grid;
-    grid-template-columns: 15% 30% 10% 30% 15%;
-    grid-template-rows: 20% 50% 10% 20%;
-    text-align: center;
-  }
-
-  .item1 {
-
-    grid-row-start: 2;
-    grid-column-start: 2;
-
-  }
-
-  .item2 {
-    
-    grid-row-start: 2;
-    grid-column-start: 4;
-
-
-
-  }
-
-  .item3 {
-    grid-row-start: 2;
-    grid-column-start: 3;
-
-  }
-
-</style>
-
-<div class="grid" style="margin-top: 2rem">
+<div class="grid" style="margin-top: 1rem">
+  <div class="item5">
+    <div asp-validation-summary="ModelOnly" class="text-danger">   
+      <label asp-for="Text" class="control-label col-sm-3 col-form-label"></label>
+        <input asp-for="Text" class="form-control" placeholder="Questionnaire Title" />
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+  </div>
 
   <div class="item1">
-    <select id="mySelect" size="20" style="min-width: 100%; min-height: 100%;">
+    <label class="form-text">Avaiable Questions</label>
+    <select multiple="multiple" id="ListofQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
       <option>Apple</option>
+      <option>Pear</option>
+      <option>Banana</option>
+      <option>Orange</option>
+      <option>Pear</option>
+      <option>Banana</option>
+      <option>Orange</option>
       <option>Pear</option>
       <option>Banana</option>
       <option>Orange</option>
     </select>
   </div>
 
-  <div class="item3">
-    <button>>></button>
+  <div class="item3" style="margin-top: 12rem">
+    <input type="button" id="btnRight" value=">" class="btn btn-default" />
+    <br />
     <p></p>
-    <button>
-      <<</button>
+    <input type="button" id="btnLeft" value="<" class="btn btn-default" />
+    <br />
   </div>
 
   <div class="item2">
-    <select id="mySelect" size="20" style="min-width: 100%; min-height: 100%;">
+    <label class="form-text">Chosen Questions</label>
+    <select multiple="multiple" id="SelectedQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
       <option>Apple</option>
       <option>Pear</option>
       <option>Banana</option>
@@ -57,4 +41,6 @@
     </select>
   </div>
 
-</div>
+  <div class="item4">
+    <button class="button form-control btn btn-lg btn-success btn-block" style="margin-top: 1rem" ng-href="#" >Create</button>
+  </div>

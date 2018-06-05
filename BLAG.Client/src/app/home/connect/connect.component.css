@@ -2,7 +2,7 @@
     position: relative;
     display: grid;
     grid-template-columns: 20% 60% 20%;
-    grid-template-rows: 30vh 50vh 20vh
+    grid-template-rows: 20vh 60vh 20vh
   }
 
   .item1 {
@@ -13,4 +13,17 @@
     font-size: 300%;
   }
 
-
+  .button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    padding: 40px 100px;
+    max-width: 500px;
+  }

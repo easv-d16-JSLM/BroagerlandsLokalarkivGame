@@ -1,62 +1,47 @@
-<div class="container">
-  <div class="row justify-content-md-center">
-    <div class="col-sm-12 col-md-10 col-lg-7">
-      <form asp-action="Edit">
-        <div class="form-group row" style="margin-top: 1rem">
-          <label asp-for="QuestionnaireId" class="control-label col-sm-3 col-form-label"></label>
-          <div class="col-sm-9">
-            <h3>Edit</h3>
-          </div>
-        </div>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group row">
-          <label asp-for="Text" class="control-label col-sm-3 col-form-label"></label>
-          <div class="col-sm-9">
-            <input asp-for="Text" class="form-control" />
-            <span asp-validation-for="Text" class="text-danger"></span>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label asp-for="QuestionnaireId" class="control-label col-sm-3 col-form-label"></label>
-          <div class="col-sm-9">
-            <select asp-for="QuestionnaireId" class="form-control" asp-items="ViewBag.QuestionnaireId"></select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label asp-for="Text" class="control-label col-sm-3 col-form-label"></label>
-          <div class="col-sm-9">
-            <input asp-for="Text" class="form-control" />
-            <span asp-validation-for="Text" class="text-danger"></span>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label asp-for="Multiplier" class="control-label col-sm-3 col-form-label"></label>
-          <div class="col-sm-9">
-            <input asp-for="Multiplier" class="form-control" />
-            <span asp-validation-for="Multiplier" class="text-danger"></span>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label asp-for="QuestionnaireId" class="control-label col-sm-3 col-form-label"></label>
-          <div class="col-sm-9">
-            <select asp-for="QuestionnaireId" class="form-control" asp-items="ViewBag.QuestionnaireId"></select>
-          </div>
-        </div>
-        <div class="form-group row justify-content-md-center">
-          <label class="control-label col-sm-3 col-form-label"></label>
-          <div class="col-sm-9">
-            <input type="submit" value="Save" class="form-control btn btn-lg btn-success btn-block" />
-          </div>
-        </div>
-        <div>
-          <div class="form-group row">
-            <label asp-for="QuestionnaireId" class="control-label col-sm-3 col-form-label"></label>
-            <div class="col-sm-9">
-              <a asp-action="Index">Back to List</a>
-            </div>
-          </div>
-        </div>
-      </form>
+<div class="grid" style="margin-top: 1rem">
+    <div class="item5">
+      <div asp-validation-summary="ModelOnly" class="text-danger">   
+        <label asp-for="Text" class="control-label col-sm-3 col-form-label"></label>
+          <input asp-for="Text" class="form-control" placeholder="Questionnaire Title" />
+          <span asp-validation-for="Text" class="text-danger"></span>
+      </div>
     </div>
-  </div>
-</div>
+  
+    <div class="item1">
+      <label class="form-text">Avaiable Questions</label>
+      <select multiple="multiple" id="ListofQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
+        <option>Apple</option>
+        <option>Pear</option>
+        <option>Banana</option>
+        <option>Orange</option>
+        <option>Pear</option>
+        <option>Banana</option>
+        <option>Orange</option>
+        <option>Pear</option>
+        <option>Banana</option>
+        <option>Orange</option>
+      </select>
+    </div>
+  
+    <div class="item3" style="margin-top: 12rem">
+      <input type="button" id="btnRight" value=">" class="btn btn-default" />
+      <br />
+      <p></p>
+      <input type="button" id="btnLeft" value="<" class="btn btn-default" />
+      <br />
+    </div>
+  
+    <div class="item2">
+      <label class="form-text">Chosen Questions</label>
+      <select multiple="multiple" id="SelectedQuestions" size="20" style="min-width: 100%; min-height: 100%;" class="form-control">
+        <option>Apple</option>
+        <option>Pear</option>
+        <option>Banana</option>
+        <option>Orange</option>
+      </select>
+    </div>
+  
+    <div class="item4">
+      <button class="button form-control btn btn-lg btn-success btn-block" style="margin-top: 1rem" ng-href="#" >Save</button>
+    </div>
+  
