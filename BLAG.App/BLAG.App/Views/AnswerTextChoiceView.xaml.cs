@@ -12,13 +12,10 @@ namespace BLAG.App.Views
         {
             InitializeComponent();
 
-            this.WhenActivated(d =>
-            {
-                ViewModel.SelectedAnswer = null;
-                d(this.OneWayBind(ViewModel, x => x.Answers, x => x.AnswerList.ItemsSource));
-                d(this.OneWayBind(ViewModel, x => x.Answers.Count, x => x.Title));
-                d(this.Bind(ViewModel, x => x.SelectedAnswer, x => x.AnswerList.SelectedItem));
-            });
+            this.OneWayBind(ViewModel, x => x.Answers, x => x.AnswerList.ItemsSource);
+            this.OneWayBind(ViewModel, x => x.Answers.Count, x => x.Title);
+            this.Bind(ViewModel, x => x.SelectedAnswer, x => x.AnswerList.SelectedItem);
+            this.OneWayBind(ViewModel, vm => vm.TimeLeft, v => v.TimeLeftLabel.Text);
         }
     }
 }

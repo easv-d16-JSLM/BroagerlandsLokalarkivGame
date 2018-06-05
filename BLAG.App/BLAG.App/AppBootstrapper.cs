@@ -25,8 +25,6 @@ namespace BLAG.App
                 Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
                 Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
                     typeof(IViewFor<AnswerTextChoiceViewModel>));
-                Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
-                    typeof(IViewFor<AnswerTextChoiceCellViewModel>));
                 Locator.CurrentMutable.Register(() => new StartView(),
                     typeof(IViewFor<StartViewModel>));
                 Locator.CurrentMutable.Register(() => new GameView(), 
