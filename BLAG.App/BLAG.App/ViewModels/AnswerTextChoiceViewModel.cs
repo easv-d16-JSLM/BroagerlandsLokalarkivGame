@@ -1,34 +1,35 @@
 ﻿using System;
 using System.Reactive.Linq;
-using DynamicData;
-using DynamicData.ReactiveUI;
+using BLAG.Common.Models;
+using Humanizer;
 using ReactiveUI;
 
 namespace BLAG.App.ViewModels
 {
     public class AnswerTextChoiceViewModel : ViewModelBase
     {
-        private readonly ReactiveList<AnswerTextChoiceCellViewModel> _answers =
-            new ReactiveList<AnswerTextChoiceCellViewModel>();
+        private readonly ReactiveList<string> _answers;
+        private readonly ObservableAsPropertyHelper<string> _timeLeft;
 
-        private AnswerTextChoiceCellViewModel _selectedAnswer;
+        private string _selectedAnswer;
 
-        public AnswerTextChoiceViewModel(IObservable<IChangeSet<string>> answers)
+        public AnswerTextChoiceViewModel(Answer answer, DateTime time)
         {
-            answers
-                .Transform(answer => new AnswerTextChoiceCellViewModel(answer))
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .Bind(_answers)
-                .DisposeMany()
-                .Subscribe();
+            _answers = new ReactiveList<string>(answer.Options);
+
+
+            _timeLeft = Observable.Interval(100.Milliseconds()).Select(_ => (time - DateTime.Now).Humanize(2))
+                .ToProperty(this, vm => vm.TimeLeft);
         }
 
-        public IReadOnlyReactiveList<AnswerTextChoiceCellViewModel> Answers => _answers;
+        public IReadOnlyReactiveList<string> Answers => _answers;
 
-        public AnswerTextChoiceCellViewModel SelectedAnswer
+        public string SelectedAnswer
         {
             get => _selectedAnswer;
             set => this.RaiseAndSetIfChanged(ref _selectedAnswer, value);
         }
+
+        public string TimeLeft => _timeLeft.Value;
     }
 }
