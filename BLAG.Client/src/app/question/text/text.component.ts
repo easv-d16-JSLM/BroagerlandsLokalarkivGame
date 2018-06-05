@@ -12,13 +12,15 @@ import { DataSource } from '@angular/cdk/collections';
 export class TextComponent implements OnInit {
 
   dataSource = new TextDataSource(this.apiservice);
-  displayedColumns = ['points', 'questionnaire', 'time', 'content', 'questiontypes', 'id', 'actions'];
+  displayedColumns = ['points', 'time', 'content', 'questiontypes', 'id', 'actions'];
 
   constructor(private apiservice: APIService) { }
 
   ngOnInit() {
   }
 }
+
+
 
 export class TextDataSource extends DataSource<any> {
   constructor(private apiservice: APIService) {

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Viewquestionnaire } from './viewquestionnaire'
 import { APIService } from '../../Services/APIServices'
-import { Observable } from 'rxjs';
 import { DataSource } from '@angular/cdk/collections';
+import { GameFlowComponent } from "../../game-flow/game-flow.component";
+import { Observable } from 'rxjs';
+import * as signalR from '@aspnet/signalr';
+import { HubConnection } from '@aspnet/signalr';
+
 
 @Component({
   selector: 'app-viewquestionnaire',
@@ -11,12 +15,35 @@ import { DataSource } from '@angular/cdk/collections';
 })
 export class ViewquestionnaireComponent implements OnInit {
 
-  dataSource = new QuestionnaireDataSource(this.apiservice);
-  displayedColumns = ['id', 'title', 'questionlist', 'actions'];
+  public _hubConnection: HubConnection;
 
-  constructor(private apiservice: APIService) { }
+  
+  dataSource = new QuestionnaireDataSource(this.apiservice);
+  displayedColumns = ['id', 'title', 'actions'];
+
+  constructor(private apiservice: APIService ) { }
 
   ngOnInit() {
+
+    this._hubConnection = new signalR.HubConnectionBuilder() 
+    .configureLogging(signalR.LogLevel.Trace) 
+    .withUrl("http://localhost:57851/gamesession") 
+    .build(); 
+
+this._hubConnection.start()
+  .then(() => {
+      console.log('Hub connection started')
+  })
+  .catch(err => {
+      console.log('Error while establishing connection')
+  });
+
+console.log(this._hubConnection);
+    
+  }
+
+  CreateGameSession(questionnaireId: number){
+    this._hubConnection.invoke("CreateGameSession", questionnaireId)
   }
 
 }
