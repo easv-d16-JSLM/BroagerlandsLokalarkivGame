@@ -1,4 +1,5 @@
-﻿using BLAG.App.ViewModels;
+﻿using System.Reactive;
+using BLAG.App.ViewModels;
 using ReactiveUI;
 using Splat;
 using Xamarin.Forms.Xaml;
@@ -16,7 +17,14 @@ namespace BLAG.App.Views
             this.Bind(ViewModel, x => x.JoinCode, x => x.Code.Text);
             this.Bind(ViewModel, x => x.Username, x => x.Name.Text);
             this.BindCommand(ViewModel, x => x.Connect, x => x.Start);
-            this.Bind(ViewModel, x => x.IsLoading, v => v.Indicator.IsRunning);
+            this.OneWayBind(ViewModel, x => x.IsLoading, v => v.Indicator.IsRunning);
+            this.OneWayBind(ViewModel, x => x.IsLoading, v => v.messageLabel.Text);
+
+            ViewModel.Error.RegisterHandler(async interaction =>
+            {
+                await DisplayAlert("Error", interaction.Input, "OK");
+                interaction.SetOutput(Unit.Default);
+            });
         }
     }
 }

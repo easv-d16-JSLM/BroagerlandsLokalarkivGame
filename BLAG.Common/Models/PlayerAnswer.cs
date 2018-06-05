@@ -6,7 +6,7 @@ namespace BLAG.Common.Models
     {
         public Player Player;
         public string PlayerAnswered { get; set; }
-        public TimeSpan TimeAnswersGiven { get; set; }
+        public Question Question { get; set; }
         public TimeSpan TimeAnswered { get; set; }
     }
 }

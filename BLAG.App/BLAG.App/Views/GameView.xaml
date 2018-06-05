@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<v:ContentPageBase x:TypeArguments="vm:GameViewModel"
+                   xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:vm="clr-namespace:BLAG.App.ViewModels;assembly=BLAG.App"
+                   xmlns:v="clr-namespace:BLAG.App.Views;assembly=BLAG.App"
+                   x:Class="BLAG.App.Views.GameView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout>
+                <Label x:Name="PlayersLabel" />
+            </StackLayout>
+            <Label Grid.Row="1" x:Name="AnswerLabel" />
+        </Grid>
+    </ContentPage.Content>
+</v:ContentPageBase>

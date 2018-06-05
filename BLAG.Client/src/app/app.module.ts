@@ -32,6 +32,7 @@ import { AnswersComponent } from './settings/answers/answers.component';
 import { CreateComponentAnswers } from './settings/answers/create/create.component';
 import { EditComponentAnswers } from './settings/answers/edit/edit.component';
 import { ScoreboardComponent } from './home/scoreboard/scoreboard.component';
+import { GameFlowComponent } from './game-flow/game-flow.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { ScoreboardComponent } from './home/scoreboard/scoreboard.component';
     AnswersComponent,
     CreateComponentAnswers,
     EditComponentAnswers,
-    ScoreboardComponent
+    ScoreboardComponent,
+    GameFlowComponent    
   ],
   imports: [
     BrowserModule,

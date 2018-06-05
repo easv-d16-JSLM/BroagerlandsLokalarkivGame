@@ -29,6 +29,8 @@ namespace BLAG.App
                     typeof(IViewFor<AnswerTextChoiceCellViewModel>));
                 Locator.CurrentMutable.Register(() => new StartView(),
                     typeof(IViewFor<StartViewModel>));
+                Locator.CurrentMutable.Register(() => new GameView(), 
+                    typeof(IViewFor<GameViewModel>));
             }
 
             var startViewModel = new StartViewModel();
