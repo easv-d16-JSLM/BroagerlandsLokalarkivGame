@@ -1,5 +1,5 @@
 export class Questionnaire {
     id: number;
-    qustiontype: any;
-    question: any;
+    title: string;
+    questionlist: any;
   }

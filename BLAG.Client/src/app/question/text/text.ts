@@ -1,6 +1,10 @@
+import { QuestionTypes } from "../question-types.enum";
+
 export class Text {
-    id: number;
-    text: string;
     points: number;
+    questionnaire: {title: string;};
     time: number;
+    content: string;
+    questiontypes: QuestionTypes;
+    id: number;
   }

@@ -12,27 +12,19 @@ import { DataSource } from '@angular/cdk/collections';
 export class TextComponent implements OnInit {
 
   dataSource = new TextDataSource(this.apiservice);
-  displayedColumns = ['id', 'text', 'points', 'time'];
-
-  //constructor() { }
+  displayedColumns = ['points', 'questionnaire', 'time', 'content', 'questiontypes', 'id', 'actions'];
 
   constructor(private apiservice: APIService) { }
 
   ngOnInit() {
-   // this.getTextQuestions
   }
-
-  //getTextQuestions(): void {
-  //  this.apiservice.getTextQuestions()
-  //  .subscribe(text => this.getTextQuestions = text);
-  //}
 }
 
 export class TextDataSource extends DataSource<any> {
   constructor(private apiservice: APIService) {
     super();
   }
-  connect(): Observable<Text[]> {
+  connect(): Observable<any> {
     return this.apiservice.getTextQuestions();
   }
   disconnect() {}

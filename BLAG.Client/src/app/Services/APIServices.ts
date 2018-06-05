@@ -1,20 +1,21 @@
 import { Injectable, Inject } from '@angular/core';  
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Http, Response } from '@angular/http';  
 import { Observable, of } from 'rxjs';  
 import { Router } from '@angular/router';  
 import { map, catchError, tap } from 'rxjs/operators';
 import { Text } from '../question/text/text';
+
 //import 'rxjs/add/operator/catch';  
 //import 'rxjs/add/observable/throw';  
 //import 'rxjs/add/operator/map';
   
 @Injectable()  
 export class APIService {  
-    myAppUrl: string = "";  
+    myAppUrl: string = "http://localhost:57851/";  
   
-    constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {  
-        this.myAppUrl = baseUrl;  
+    constructor(private _http: HttpClient) {  
+        
     }  
 
 
@@ -242,11 +243,11 @@ export class APIService {
             .pipe(catchError(this.errorHandler))
     } 
     //Text Question
-    getTextQuestions() {  
-        return this._http.get(this.myAppUrl + 'api/QuestionText')
-            .pipe(map((response: Response) => response.json()))
-            .pipe(catchError(this.errorHandler))
-    }
+    //getTextQuestions() {  
+    //    return this._http.get(this.myAppUrl + 'api/QuestionText')
+    //        .pipe(map((response: Response) => response.json()))
+    //        .pipe(catchError(this.errorHandler))
+    //}
     
     //getTextQuestionById(id: number) {  
     //    return this._http.get(this.myAppUrl + 'api/QuestionText/' + id)  
@@ -272,26 +273,62 @@ export class APIService {
     //        .pipe(catchError(this.errorHandler))  
     //} 
 
+    getTextQuestions(): Observable<any> {
+        
+        return this._http.get<any>(this.myAppUrl + 'api/Question')
+            .pipe(catchError(this.errorHandler));
+    }
+
     getTextQuestionById(id: number): Observable<Text> {
         
-        return this._http.get<Text>('api/QuestionText/' + id)
+        return this._http.get<Text>(this.myAppUrl + 'api/Question/' + id)
             .pipe(catchError(this.errorHandler));
     }
 
     postTextQuestion (text: Text): Observable<Text> {
-        return this._http.post<Text>('api/QuestionText/', text)
+        return this._http.post<Text>(this.myAppUrl + 'api/QuestionText/', text)
             .pipe(catchError(this.errorHandler));
     }
 
     updateTextQuestion (text: Text): Observable<any> {
-        return this._http.put('api/QuestionText/', text)
+        return this._http.put(this.myAppUrl + 'api/QuestionText/', text)
             .pipe(catchError(this.errorHandler));
     }
 
     deleteTextQuestionById (id: number): Observable<Text> {     
-        return this._http.delete<Text>('api/ApiWithActions/' + id)
+        return this._http.delete<Text>(this.myAppUrl + 'api/ApiWithActions/' + id)
             .pipe(catchError(this.errorHandler));
     }
+
+    //api/Questionnaire
+
+    getQuestionnaires(): Observable<any> {
+        
+        return this._http.get<any>(this.myAppUrl + 'api/Questionnaire')
+            .pipe(catchError(this.errorHandler));
+    }
+
+    getQuestionnaireById(id: number): Observable<Text> {
+        
+        return this._http.get<Text>(this.myAppUrl + 'api/Questionnaire' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    postQuestionnaire (text: Text): Observable<Text> {
+        return this._http.post<Text>(this.myAppUrl + 'api/Questionnaire', text)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    updateQuestionnaire (text: Text): Observable<any> {
+        return this._http.put(this.myAppUrl + 'api/Questionnaire', text)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    deleteQuestionnaireById (id: number): Observable<Text> {     
+        return this._http.delete<Text>(this.myAppUrl + 'api/Questionnaire' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+
 
 
     //Video Question

@@ -1,0 +1,35 @@
+
+<div>
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+      <mat-cell *matCellDef="let questionnaire"> {{questionnaire.id}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+      <mat-cell *matCellDef="let questionnaire"> {{questionnaire.title}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="questionlist">
+      <mat-header-cell *matHeaderCellDef> Questions </mat-header-cell>
+      <mat-cell *matCellDef="let questionnaire"> {{questionnaire.questionlist}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <a mat-icon-button color="accent"><i class="fa fa-plus mat-icon"></i></a>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+            <a  mat-icon-button color="primary" focusable="false" >
+              <i class="fa fa-fw fa-edit"></i>
+            </a>|
+            <a  mat-icon-button color="primary" focusable="false" >
+              <i class="fa fa-fw fa-trash"></i>
+            </a>| 
+            <a mat-icon-button color="primary" focusable="false">
+              <i class="fa fa-fw fa-play"></i>
+            </a>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

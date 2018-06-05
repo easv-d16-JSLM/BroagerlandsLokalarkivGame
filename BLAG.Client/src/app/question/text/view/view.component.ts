@@ -10,12 +10,12 @@ export class TextViewComponent implements OnInit {
 
   constructor() { }
 
-  text: Text = {
-    id: 1,
-    text: "Test Question",
-    points: 1,
-    time: 10,
-  };
+  //text: Text = {
+  //  id: 1,
+  //  text: "Test Question",
+  //  points: 1,
+  //  time: 10,
+  //};
 
 
   ngOnInit() {
