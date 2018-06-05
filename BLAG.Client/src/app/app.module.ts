@@ -28,6 +28,7 @@ import { MatTableModule } from '@angular/material';
 import { APIService } from './Services/APIServices';
 import { HttpClientModule } from '@angular/common/http'; 
 import { TextDataSource } from './question/text/text.component';
+import { PlayerComponent } from './player/player.component';
 
 
 
@@ -51,7 +52,8 @@ import { TextDataSource } from './question/text/text.component';
     QuestionsComponent,
     QuestionnaireComponent,
     AnswerComponent,
-    GameFlowComponent,    
+    GameFlowComponent,
+    PlayerComponent,    
   ],
   imports: [
     BrowserModule,
