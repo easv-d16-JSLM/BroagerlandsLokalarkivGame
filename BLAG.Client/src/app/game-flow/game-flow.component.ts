@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as signalR from '@aspnet/signalr';
 import { HubConnection } from '@aspnet/signalr';
 import { Player } from '../player/player';
 import { Question } from '../question/question';
+import { ScoreboardComponent } from '../home/scoreboard/scoreboard.component';
 
 @Component({
   selector: 'app-game-flow',
@@ -13,7 +14,12 @@ import { Question } from '../question/question';
 export class GameFlowComponent implements OnInit {
 
   public _hubConnection: HubConnection;
-
+  public _playerList: any[];
+  public _currentQuestion: Question; 
+  public _playerCountUpdate: number;
+  
+  @ViewChild(ScoreboardComponent)
+  private con: ScoreboardComponent;
 
   ngOnInit() {
     this._hubConnection = new signalR.HubConnectionBuilder() 
@@ -33,28 +39,18 @@ export class GameFlowComponent implements OnInit {
 
 
     this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
-     
+     this._playerCountUpdate = PlayerCount;
     });
 
     this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any) => {
- 
+      this._playerList = leaderboardList;
+      this.con.SetPlayerList(this._playerList);
     });
 
     this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: any) => {
-    
+    this._currentQuestion = currentQuestion;
     });
 
   }
-
-  async CreateGameSession(questionnaireId: number){
-    console.log("Starting questionnaire " + questionnaireId);
-    var session = await this._hubConnection.invoke("CreateGameSession", questionnaireId);
-    console.log(session);
-  }
-
-  StartGame(currentGameSessionId : number){
-    this._hubConnection.invoke("StartGame", currentGameSessionId )
-  }
-  
   
 }

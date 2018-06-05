@@ -14,13 +14,25 @@ import { HubConnection } from '@aspnet/signalr';
 })
 export class ScoreboardComponent implements OnInit {
 
+  
+
   @Input("hub") _hubConnection: HubConnection;
+  @Input("playerlist") _playerList: any[]; 
+
+  dataSource = this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any)=> {
+      
+  });;
+
+  displayedColumns = ['id', 'title', 'actions'];
 
   constructor() { }
 
   ngOnInit() {
-console.log(this._hubConnection + "TESSSST");
 }
+
+  public SetPlayerList(playerList:any){
+    this._playerList=playerList;
+  }
 
 
 
