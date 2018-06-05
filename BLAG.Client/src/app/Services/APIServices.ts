@@ -300,6 +300,36 @@ export class APIService {
             .pipe(catchError(this.errorHandler));
     }
 
+    //api/Questionnaire
+
+    getQuestionnaires(): Observable<any> {
+        
+        return this._http.get<any>(this.myAppUrl + 'api/Questionnaire')
+            .pipe(catchError(this.errorHandler));
+    }
+
+    getQuestionnaireById(id: number): Observable<Text> {
+        
+        return this._http.get<Text>(this.myAppUrl + 'api/Questionnaire' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    postQuestionnaire (text: Text): Observable<Text> {
+        return this._http.post<Text>(this.myAppUrl + 'api/Questionnaire', text)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    updateQuestionnaire (text: Text): Observable<any> {
+        return this._http.put(this.myAppUrl + 'api/Questionnaire', text)
+            .pipe(catchError(this.errorHandler));
+    }
+
+    deleteQuestionnaireById (id: number): Observable<Text> {     
+        return this._http.delete<Text>(this.myAppUrl + 'api/Questionnaire' + id)
+            .pipe(catchError(this.errorHandler));
+    }
+
+
 
     //Video Question
     getVideoQuestions() {  
