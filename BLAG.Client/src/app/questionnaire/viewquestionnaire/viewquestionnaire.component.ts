@@ -40,11 +40,34 @@ this._hubConnection.start()
 
 console.log(this._hubConnection);
     
+// this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
+//   const text = `${nick}: ${receivedMessage}`;
+//   this.messages.push(text);
+// });
+
+// this._hubConnection.on('CurrentLeaderboard', (leaderboardList: Player) => {
+//   const text = `${nick}: ${receivedMessage}`;
+//   this.messages.push(text);
+// });
+
+// this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: Date) => {
+//   const text = `${nick}: ${receivedMessage}`;
+//   this.messages.push(text);
+// });
+
+}
+  async CreateGameSession(questionnaireId: number){
+    console.log("Starting questionnaire " + questionnaireId);
+    var session = await this._hubConnection.invoke("CreateGameSession", questionnaireId);
+    console.log(session);
   }
 
-  CreateGameSession(questionnaireId: number){
-    this._hubConnection.invoke("CreateGameSession", questionnaireId)
-  }
+  StartGame(currentGameSessionId : number){
+    this._hubConnection.invoke("StartGame", currentGameSessionId )
+
+}
+
+
 
 }
 
