@@ -1,28 +1,20 @@
 <div class="card" style="margin: 1rem">
   <div class="card-header text-white bg-secondary">
-    <h3>Questions
+    <h3>Questionnaire
       <a href="questionnaire/create" style="border-color: black" class="btn btn-success float-right">
         <i class="fa fa-fw fa-plus-circle"></i> Create New</a>
     </h3>
-
   </div>
   <div class="scroll">
     <table class="table table-fixed">
       <thead>
         <tr>
-          <th scope="col">Content</th>
-          <th scope="col">Type</th>
-          <th scope="col">Time</th>
-          <th scope="col">Points</th>
-          <th scope="col">Modify</th>
+          <th scope="col">Title</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let x of questionsExamples">
-          <td>{{x.Content}}</td>
-          <td>{{x.Questiontype}}</td>
-          <td>{{x.Time}}</td>
-          <td>{{x.Points}}</td>
+        <tr *ngFor="let x of questionnaireExamples">
+          <td>{{x.title}}</td>
           <td>
             <a asp-action="Edit" asp-route-id="#">
               <i class="fa fa-fw fa-edit"></i>
