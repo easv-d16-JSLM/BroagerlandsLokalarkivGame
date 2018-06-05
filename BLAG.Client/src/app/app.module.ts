@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TextDataSource } from './question/text/text.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayeranswerComponent } from './playeranswer/playeranswer.component';
+import { ViewquestionnaireComponent } from './questionnaire/viewquestionnaire/viewquestionnaire.component';
 
 
 
@@ -55,7 +56,8 @@ import { PlayeranswerComponent } from './playeranswer/playeranswer.component';
     AnswerComponent,
     GameFlowComponent,
     PlayerComponent,
-    PlayeranswerComponent,    
+    PlayeranswerComponent,
+    ViewquestionnaireComponent,    
   ],
   imports: [
     BrowserModule,
