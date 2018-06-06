@@ -42,15 +42,15 @@ export class GameFlowComponent implements OnInit {
 
     this._hubConnection = new signalR.HubConnectionBuilder()
       .configureLogging(signalR.LogLevel.Trace)
-      .withUrl("http://localhost:57851/gamesession")
+      .withUrl('http://localhost:57851/gamesession')
       .build();
 
     this._hubConnection.start()
       .then(async () => {
-        await this.CreateGameSession(id)
+        await this.CreateGameSession(id);
       })
       .catch(err => {
-        console.log('Error while establishing connection')
+        console.log('Error while establishing connection');
       });
 
     console.log(this._hubConnection);
@@ -67,13 +67,12 @@ export class GameFlowComponent implements OnInit {
     // });
 
     // this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: any) => {
-    //   this._currentQuestion = currentQuestion;  
+    //   this._currentQuestion = currentQuestion;
     //   console.log(this.gs);
     //   this.gs.SetCurrentQuestions(this._currentQuestion, this._endTime);
 
     // });
 
-    this.SetSession;
 
 
 
@@ -86,12 +85,12 @@ export class GameFlowComponent implements OnInit {
   }
 
   async CreateGameSession(questionnaireId: number) {
-    console.log("Starting questionnaire " + questionnaireId);
-    var _session = await this._hubConnection.invoke("CreateGameSession", questionnaireId);
+    console.log('Starting questionnaire ' + questionnaireId);
+    let _session = await this._hubConnection.invoke('CreateGameSession', questionnaireId);
     console.log(_session);
 
-    //show joincode
+    // show joincode
 
   }
-  //start function calls signalr startgame
+  // start function calls signalr startgame
 }
