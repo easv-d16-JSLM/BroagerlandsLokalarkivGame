@@ -4,16 +4,19 @@ using System.Threading.Tasks;
 using BLAG.Common.Models;
 using LiteDB;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 
 namespace BLAG.Server.Hub
 {
     public class GameSessionHub : Microsoft.AspNetCore.SignalR.Hub
     {
         private readonly LiteRepository _db;
+        private readonly ILogger<GameSessionHub> _logger;
 
-        public GameSessionHub(LiteRepository db)
+        public GameSessionHub(LiteRepository db, ILogger<GameSessionHub> logger)
         {
             _db = db;
+            _logger = logger;
         }
 
         public async Task<GameSession> CreateGameSession(int questionnaireId)
@@ -48,8 +51,10 @@ namespace BLAG.Server.Hub
             return _db.SingleById<Player>(id);
         }
 
-        private static async void LeaderBoards(int currentSessionId, LiteRepository db, IHubCallerClients clients)
+        private static async void LeaderBoards(int currentSessionId, LiteRepository db, IHubCallerClients clients,
+            ILogger log)
         {
+            log.LogWarning("Showing Leaderboards");
             var currentSession = db.SingleById<GameSession>(currentSessionId);
             var leaderboard = from player in db.Fetch<Player>()
                 where player.GameSession.Id.Equals(currentSessionId)
@@ -60,24 +65,25 @@ namespace BLAG.Server.Hub
 
             await Task.Delay(TimeSpan.FromSeconds(10));
             if (currentSession.CurrentQuestionIndex < currentSession.Questionnaire.Questions.Count)
-                NextQuestion(currentSessionId, db, clients);
+                NextQuestion(currentSessionId, db, clients, log);
         }
 
-        private static async void NextQuestion(int currentSessionId, LiteRepository db, IHubCallerClients clients)
+        private static async void NextQuestion(int currentSessionId, LiteRepository db, IHubCallerClients clients,
+            ILogger log)
         {
+            log.LogWarning("Showing Question");
             var currentSession = db.SingleById<GameSession>(currentSessionId);
             var qi = currentSession.CurrentQuestionIndex;
             var question = currentSession.Questionnaire.Questions[qi];
             var answer = db.Single<Answer>(ans => ans.Question.Id == question.Id);
-            var delaySeconds = question.Time.Seconds;
-            var endTime = DateTime.Now.AddSeconds(delaySeconds).ToUniversalTime();
+            var endTime = DateTime.Now.Add(question.Time).ToUniversalTime();
             await Task.WhenAll(
                 clients.Group("Players" + currentSession.JoinCode).SendAsync("CurrentAnswer", answer, endTime),
                 clients.Group("Server" + currentSession.JoinCode).SendAsync("CurrentQuestion", question, endTime),
-                Task.Delay(delaySeconds));
+                Task.Delay(question.Time));
             currentSession.CurrentQuestionIndex++;
             db.Update(currentSession);
-            LeaderBoards(currentSessionId, db, clients);
+            LeaderBoards(currentSessionId, db, clients, log);
         }
 
 
@@ -86,7 +92,7 @@ namespace BLAG.Server.Hub
             var currentSession = _db.SingleById<GameSession>(currentSessionId);
             currentSession.StartTime = DateTime.Now;
             _db.Update(currentSession);
-            LeaderBoards(currentSessionId, _db, Clients);
+            LeaderBoards(currentSessionId, _db, Clients, _logger);
         }
 
 

@@ -19,7 +19,9 @@ namespace BLAG.App.ViewModels
 
 
             _timeLeft = Observable.Interval(100.Milliseconds()).Select(_ => (time - DateTime.Now).Humanize(2))
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .ToProperty(this, vm => vm.TimeLeft);
+        
         }
 
         public IReadOnlyReactiveList<string> Answers => _answers;
