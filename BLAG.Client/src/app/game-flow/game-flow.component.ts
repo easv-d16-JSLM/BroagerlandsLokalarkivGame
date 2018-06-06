@@ -18,16 +18,16 @@ import { ConnectComponent } from '../home/connect/connect.component';
 export class GameFlowComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
-    
+
   }
 
   public _session: Sessions;
   public _hubConnection: HubConnection;
   public _playerList: any[];
-  public _currentQuestion: Question; 
+  public _currentQuestion: Question;
   public _playerCountUpdate: number;
   public _endTime: any;
-  
+
   // @ViewChild(ConnectComponent)
   // private conn: ConnectComponent;
 
@@ -40,24 +40,24 @@ export class GameFlowComponent implements OnInit {
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
 
-    this._hubConnection = new signalR.HubConnectionBuilder() 
-          .configureLogging(signalR.LogLevel.Trace) 
-          .withUrl("http://localhost:57851/gamesession") 
-          .build(); 
+    this._hubConnection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Trace)
+      .withUrl("http://localhost:57851/gamesession")
+      .build();
 
     this._hubConnection.start()
-        .then(async () => {
-          await this.CreateGameSession(id)
-        })
-        .catch(err => {
-            console.log('Error while establishing connection')
-        });
+      .then(async () => {
+        await this.CreateGameSession(id)
+      })
+      .catch(err => {
+        console.log('Error while establishing connection')
+      });
 
     console.log(this._hubConnection);
 
 
     this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
-     this._playerCountUpdate = PlayerCount;
+      this._playerCountUpdate = PlayerCount;
     });
 
     // this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any) => {
@@ -70,19 +70,19 @@ export class GameFlowComponent implements OnInit {
     //   this._currentQuestion = currentQuestion;  
     //   console.log(this.gs);
     //   this.gs.SetCurrentQuestions(this._currentQuestion, this._endTime);
-    
+
     // });
 
     this.SetSession;
- 
-    
-    
+
+
+
   }
 
-  public SetSession(session:Sessions){
+  public SetSession(session: Sessions) {
     console.log(session);
-    
-    this._session=session;
+
+    this._session = session;
   }
 
   async CreateGameSession(questionnaireId: number) {
@@ -90,7 +90,7 @@ export class GameFlowComponent implements OnInit {
     var _session = await this._hubConnection.invoke("CreateGameSession", questionnaireId);
     console.log(_session);
 
-      //show joincode
+    //show joincode
 
   }
   //start function calls signalr startgame
