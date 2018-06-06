@@ -7,7 +7,7 @@ import { Question } from '../question/question';
 import { ScoreboardComponent } from '../home/scoreboard/scoreboard.component';
 import { GamescreenComponent } from '../settings/gamescreen/gamescreen.component';
 import { RouterModule, Routes, Route, ActivatedRoute } from '@angular/router';
-import { Sessions } from '../settings/sessions/sessions';
+import { Session } from '../settings/sessions/sessions';
 import { ConnectComponent } from '../home/connect/connect.component';
 
 @Component({
@@ -21,21 +21,8 @@ export class GameFlowComponent implements OnInit {
 
   }
 
-  public _session: Sessions;
+  public _session: Session;
   public _hubConnection: HubConnection;
-  public _playerList: any[];
-  public _currentQuestion: Question;
-  public _playerCountUpdate: number;
-  public _endTime: any;
-
-  // @ViewChild(ConnectComponent)
-  // private conn: ConnectComponent;
-
-  // @ViewChild(ScoreboardComponent)
-  // private con: ScoreboardComponent;
-
-  // @ViewChild(GamescreenComponent)
-  // private gs: GamescreenComponent;
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -47,7 +34,9 @@ export class GameFlowComponent implements OnInit {
 
     this._hubConnection.start()
       .then(async () => {
-        await this.CreateGameSession(id);
+        console.log('Starting questionnaire ' + id);
+        this._session = await this._hubConnection.invoke('CreateGameSession', id);
+        console.log(this._session);
       })
       .catch(err => {
         console.log('Error while establishing connection');
@@ -56,9 +45,9 @@ export class GameFlowComponent implements OnInit {
     console.log(this._hubConnection);
 
 
-    this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
-      this._playerCountUpdate = PlayerCount;
-    });
+    // this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
+    //  this._playerCountUpdate = PlayerCount;
+    // });
 
     // this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any) => {
     //   this._playerList = leaderboardList;
@@ -78,19 +67,5 @@ export class GameFlowComponent implements OnInit {
 
   }
 
-  public SetSession(session: Sessions) {
-    console.log(session);
-
-    this._session = session;
-  }
-
-  async CreateGameSession(questionnaireId: number) {
-    console.log('Starting questionnaire ' + questionnaireId);
-    let _session = await this._hubConnection.invoke('CreateGameSession', questionnaireId);
-    console.log(_session);
-
-    // show joincode
-
-  }
   // start function calls signalr startgame
 }

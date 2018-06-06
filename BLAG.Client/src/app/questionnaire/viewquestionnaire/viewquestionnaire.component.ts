@@ -2,10 +2,10 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Viewquestionnaire } from './viewquestionnaire'
 import { APIService } from '../../Services/APIServices'
 import { DataSource } from '@angular/cdk/collections';
-import { GameFlowComponent } from "../../game-flow/game-flow.component";
+import { GameFlowComponent } from '../../game-flow/game-flow.component';
 import { Observable } from 'rxjs';
 import { HubConnection } from '@aspnet/signalr';
-import { Sessions } from '../../settings/sessions/sessions';
+import { Session } from '../../settings/sessions/sessions';
 import { ConnectComponent } from '../../home/connect/connect.component';
 
 @Component({
@@ -17,9 +17,9 @@ export class ViewquestionnaireComponent implements OnInit {
 
 
 
-  @Input("hub") _hubConnection: HubConnection;
+  @Input('hub') _hubConnection: HubConnection;
 
-  public _session: Sessions;
+  public _session: Session;
 
   @ViewChild(ConnectComponent)
   private con: ConnectComponent;
@@ -35,8 +35,8 @@ export class ViewquestionnaireComponent implements OnInit {
   }
 
   async CreateGameSession(questionnaireId: number) {
-    console.log("Starting questionnaire " + questionnaireId);
-    var _session = await this._hubConnection.invoke("CreateGameSession", questionnaireId);
+    console.log('Starting questionnaire ' + questionnaireId);
+    var _session = await this._hubConnection.invoke('CreateGameSession', questionnaireId);
     console.log(_session);
     this.con.SetSession(_session);
   }

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import * as signalR from '@aspnet/signalr';
 import { HubConnection } from '@aspnet/signalr';
 import { ViewquestionnaireComponent } from "../../../app/questionnaire/viewquestionnaire/viewquestionnaire.component";
-import { Sessions } from '../../settings/sessions/sessions';
+import { Session } from '../../settings/sessions/sessions';
 
 @Component({
   selector: 'app-connect-view',
@@ -17,24 +17,24 @@ export class ConnectComponent implements OnInit {
 
   @Input("hub") _hubConnection: HubConnection;
 
-  @Input("session") _session: Sessions;
+  @Input("session") _session: Session;
 
-  
+
 
   constructor() { }
-  
+
 
   ngOnInit() {
   }
 
-  public SetSession(session:Sessions){
+  public SetSession(session: Session) {
     console.log(session);
-    
-    this._session=session;
+
+    this._session = session;
   }
 
-  StartGame(){
+  StartGame() {
     console.log(this._hubConnection + "Middagspause")
-    this._hubConnection.invoke("StartGame", this._session.id )
+    this._hubConnection.invoke("StartGame", this._session.id)
   }
 }
