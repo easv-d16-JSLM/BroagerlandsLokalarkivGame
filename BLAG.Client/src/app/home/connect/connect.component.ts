@@ -29,10 +29,12 @@ export class ConnectComponent implements OnInit {
 
   public SetSession(session:Sessions){
     console.log(session);
+    
     this._session=session;
   }
 
-  StartGame(currentGameSessionId : number){
+  StartGame(){
+    console.log(this._hubConnection + "Middagspause")
     this._hubConnection.invoke("StartGame", this._session.id )
   }
 }

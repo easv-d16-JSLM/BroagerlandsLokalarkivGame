@@ -5,6 +5,7 @@ import { HubConnection } from '@aspnet/signalr';
 import { Player } from '../player/player';
 import { Question } from '../question/question';
 import { ScoreboardComponent } from '../home/scoreboard/scoreboard.component';
+import { GamescreenComponent } from '../settings/gamescreen/gamescreen.component';
 
 @Component({
   selector: 'app-game-flow',
@@ -17,9 +18,13 @@ export class GameFlowComponent implements OnInit {
   public _playerList: any[];
   public _currentQuestion: Question; 
   public _playerCountUpdate: number;
+  public _endTime: any;
   
   @ViewChild(ScoreboardComponent)
   private con: ScoreboardComponent;
+
+  @ViewChild(GamescreenComponent)
+  private gs: GamescreenComponent;
 
   ngOnInit() {
     this._hubConnection = new signalR.HubConnectionBuilder() 
@@ -48,7 +53,9 @@ export class GameFlowComponent implements OnInit {
     });
 
     this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: any) => {
-    this._currentQuestion = currentQuestion;
+      this._currentQuestion = currentQuestion;  
+      this.gs.SetCurrentQuestions(this._currentQuestion, this._endTime);
+    
     });
 
   }

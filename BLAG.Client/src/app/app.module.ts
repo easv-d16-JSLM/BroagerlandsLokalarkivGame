@@ -39,6 +39,7 @@ import { TextDataSource } from './question/text/text.component';
 import { PlayerComponent } from './player/player.component';
 import { PlayeranswerComponent } from './playeranswer/playeranswer.component';
 import { ViewquestionnaireComponent } from './questionnaire/viewquestionnaire/viewquestionnaire.component';
+import { GamescreenComponent } from './settings/gamescreen/gamescreen.component';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { ViewquestionnaireComponent } from './questionnaire/viewquestionnaire/vi
     CreateComponentAnswers,
     EditComponentAnswers,
     ScoreboardComponent,
-    GameFlowComponent    
+    GameFlowComponent,
+    GamescreenComponent    
   ],
   imports: [
     BrowserModule,

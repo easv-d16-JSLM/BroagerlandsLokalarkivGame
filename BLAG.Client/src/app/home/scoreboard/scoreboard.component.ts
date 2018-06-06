@@ -19,9 +19,9 @@ export class ScoreboardComponent implements OnInit {
   @Input("hub") _hubConnection: HubConnection;
   @Input("playerlist") _playerList: any[]; 
 
-  dataSource = this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any)=> {
+  // dataSource = this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any)=> {
       
-  });;
+  // });;
 
   displayedColumns = ['id', 'title', 'actions'];
 
