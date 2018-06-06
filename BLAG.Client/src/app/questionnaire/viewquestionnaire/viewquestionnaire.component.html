@@ -20,7 +20,7 @@
             <a  mat-icon-button color="primary" focusable="false" >
               <i class="fa fa-fw fa-trash"></i>
             </a>| 
-            <a mat-icon-button color="primary"  focusable="false" (click)="CreateGameSession(row.id);">
+            <a mat-icon-button color="primary" routerLink="/game/{{row.id}}" focusable="false"  >
               <i class="fa fa-fw fa-play"></i>
             </a>
       </mat-cell>
@@ -30,4 +30,3 @@
   </mat-table>
 </div>
 
-<app-connect-view [hub]="_hubConnection"></app-connect-view>

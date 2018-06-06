@@ -18,6 +18,9 @@ import { SessionsComponent } from './settings/sessions/sessions.component';
 import { AnswersComponent } from './settings/answers/answers.component';
 import { CreateComponentAnswers } from './settings/answers/create/create.component';
 import { EditComponentAnswers } from './settings/answers/edit/edit.component';
+import { GameFlowComponent } from './game-flow/game-flow.component';
+import { ConnectComponent } from './home/connect/connect.component';
+import { ViewquestionnaireComponent } from './questionnaire/viewquestionnaire/viewquestionnaire.component';
 
 
 const routes: Routes = [
@@ -28,14 +31,19 @@ const routes: Routes = [
   { path: 'question/create', component: CreateComponentQuestion },
   { path: 'answer/view', component: AnswerComponent },
   { path: 'answer/edit', component: AnswerComponent },
-  { path: 'questionnaire', component: QuestionnaireComponent },
+  { path: 'questionnaire', component: ViewquestionnaireComponent },
   { path: 'questionnaire/create', component: CreateComponentQuestionnaire },
-  { path: 'questionnaire/view', component: QuestionnaireComponent },
+  { path: 'questionnaire/view', component: ViewquestionnaireComponent },
   { path: 'questionnaire/edit', component: QuestionnaireComponent },
   { path: 'session', component: SessionsComponent},
   { path: 'answer', component: AnswersComponent},
   { path: 'answer/create', component: CreateComponentAnswers},
   { path: 'answer/edit', component: EditComponentAnswers},
+  { path: 'game', component: GameFlowComponent},
+  { path: 'game/:id', component: GameFlowComponent },
+  { path: 'connect', component: ConnectComponent},
+
+
   
 ];
 

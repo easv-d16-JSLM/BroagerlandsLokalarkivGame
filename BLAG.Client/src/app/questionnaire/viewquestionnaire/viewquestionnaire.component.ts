@@ -15,6 +15,8 @@ import { ConnectComponent } from '../../home/connect/connect.component';
 })
 export class ViewquestionnaireComponent implements OnInit {
 
+
+
   @Input("hub") _hubConnection: HubConnection;
 
   public _session: Sessions;

@@ -28,6 +28,7 @@ export class ScoreboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
 }
 
   public SetPlayerList(playerList:any){

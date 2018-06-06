@@ -1,1 +1,12 @@
-<app-viewquestionnaire [hub]="_hubConnection"></app-viewquestionnaire>
+<div class="grid-container">
+        <div class="item1">
+          <h1 style="font-size: 2em">
+            <label>Code: {{_session.joinCode}} </label>
+          </h1>
+          <h1 style="font-size: 1em">
+            <p class="text-form text-inactive">Players: 18</p>
+          </h1>
+      
+          <button class="button form-control btn btn-lg btn-success btn-block" ng-href="#" style="margin-top: 4rem" (click)="StartGame()">PLAY </button>
+        </div>
+      </div>
