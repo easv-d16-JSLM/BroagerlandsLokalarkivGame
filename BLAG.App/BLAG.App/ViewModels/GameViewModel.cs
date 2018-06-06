@@ -1,4 +1,5 @@
-﻿using System.Reactive.Linq;
+﻿using System;
+using System.Reactive.Linq;
 using BLAG.App.Services;
 using BLAG.Common.Models;
 using ReactiveUI;
@@ -21,9 +22,13 @@ namespace BLAG.App.ViewModels
                 .ToProperty(this, x => x.PlayerCount);
 
             _currentAnswer = _signal.CurrentAnswer.Select(a => new AnswerTextChoiceViewModel(a.Item1, a.Item2))
+                .ObserveOn(RxApp.MainThreadScheduler)
                 .ToProperty(this, vm => vm.CurrentAnswer);
 
-            
+            _currentAnswer.ThrownExceptions
+                .Subscribe(e => throw e);
+            _playerCount.ThrownExceptions
+                .Subscribe(e => throw e);
         }
 
         public AnswerTextChoiceViewModel CurrentAnswer => _currentAnswer.Value;

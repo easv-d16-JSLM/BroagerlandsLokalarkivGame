@@ -39,42 +39,45 @@ namespace BLAG.Server.Hub
             {
                 return null;
             }
+
             var id = _db.Insert(new Player {Name = userName, GameSession = session});
             await Groups.AddToGroupAsync(Context.ConnectionId, "Players" + joinCode);
-            await Clients.Groups("Players" + session.JoinCode, "Server" + session.JoinCode).SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p => p.GameSession.Id == session.Id));
+            await Clients.Groups("Players" + session.JoinCode, "Server" + session.JoinCode)
+                .SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p => p.GameSession.Id == session.Id));
 
             return _db.SingleById<Player>(id);
         }
 
-        private async void LeaderBoards(int currentSessionId)
+        private static async void LeaderBoards(int currentSessionId, LiteRepository db, IHubCallerClients clients)
         {
-            var currentSession = _db.SingleById<GameSession>(currentSessionId);
-            var leaderboard = from player in _db.Fetch<Player>()
+            var currentSession = db.SingleById<GameSession>(currentSessionId);
+            var leaderboard = from player in db.Fetch<Player>()
                 where player.GameSession.Id.Equals(currentSessionId)
                 orderby player.Score descending
                 select player;
-            await Clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode).SendAsync("CurrentLeaderboard", leaderboard);
+            await clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode)
+                .SendAsync("CurrentLeaderboard", leaderboard);
 
             await Task.Delay(TimeSpan.FromSeconds(10));
             if (currentSession.CurrentQuestionIndex < currentSession.Questionnaire.Questions.Count)
-                NextQuestion(currentSessionId);
+                NextQuestion(currentSessionId, db, clients);
         }
 
-        private async void NextQuestion(int currentSessionId)
+        private static async void NextQuestion(int currentSessionId, LiteRepository db, IHubCallerClients clients)
         {
-            var currentSession = _db.SingleById<GameSession>(currentSessionId);
+            var currentSession = db.SingleById<GameSession>(currentSessionId);
             var qi = currentSession.CurrentQuestionIndex;
             var question = currentSession.Questionnaire.Questions[qi];
-            var answer = _db.Single<Answer>(ans => ans.Question.Id == question.Id);
+            var answer = db.Single<Answer>(ans => ans.Question.Id == question.Id);
             var delaySeconds = question.Time.Seconds;
             var endTime = DateTime.Now.AddSeconds(delaySeconds).ToUniversalTime();
             await Task.WhenAll(
-                Clients.Group("Players" + currentSession.JoinCode).SendAsync("CurrentAnswer", answer, endTime),
-                Clients.Group("Server" + currentSession.JoinCode).SendAsync("CurrentQuestion", question, endTime),
+                clients.Group("Players" + currentSession.JoinCode).SendAsync("CurrentAnswer", answer, endTime),
+                clients.Group("Server" + currentSession.JoinCode).SendAsync("CurrentQuestion", question, endTime),
                 Task.Delay(delaySeconds));
             currentSession.CurrentQuestionIndex++;
-            _db.Update(currentSession);
-            LeaderBoards(currentSessionId);
+            db.Update(currentSession);
+            LeaderBoards(currentSessionId, db, clients);
         }
 
 
@@ -83,7 +86,7 @@ namespace BLAG.Server.Hub
             var currentSession = _db.SingleById<GameSession>(currentSessionId);
             currentSession.StartTime = DateTime.Now;
             _db.Update(currentSession);
-            LeaderBoards(currentSessionId);
+            LeaderBoards(currentSessionId, _db, Clients);
         }
 
 
@@ -91,7 +94,8 @@ namespace BLAG.Server.Hub
         {
             var currentSession = _db.SingleById<GameSession>(currentSessionId);
             _db.Insert(answer);
-            await Clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode).SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p=>p.GameSession.Id==currentSessionId));
+            await Clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode)
+                .SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p => p.GameSession.Id == currentSessionId));
         }
     }
 }

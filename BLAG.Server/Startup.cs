@@ -1,4 +1,6 @@
-﻿using BLAG.Server.Hub;
+﻿using System;
+using BLAG.Common.Models;
+using BLAG.Server.Hub;
 using LiteDB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,6 +45,7 @@ namespace BLAG.Server
             var repository = new LiteRepository(Configuration.GetConnectionString("MainDatabase"));
             DbInitializer testData = new DbInitializer(repository);
             testData.SeedDatabase();
+            Console.WriteLine(repository.Single<GameSession>(s => s.JoinCode == "abcde").Id);
             services.AddSingleton(repository);
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
