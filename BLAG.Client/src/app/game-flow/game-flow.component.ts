@@ -21,33 +21,21 @@ export class GameFlowComponent implements OnInit {
 
   }
 
-  public _session: Session;
-  public _hubConnection: HubConnection;
+  _session: Session;
+  _hubConnection: HubConnection;
+  joinCode: String = 'Please wait...';
+  playerCount: String = 'Not connected';
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
 
     this._hubConnection = new signalR.HubConnectionBuilder()
-      .configureLogging(signalR.LogLevel.Trace)
       .withUrl('http://localhost:57851/gamesession')
       .build();
 
-    this._hubConnection.start()
-      .then(async () => {
-        console.log('Starting questionnaire ' + id);
-        this._session = await this._hubConnection.invoke('CreateGameSession', id);
-        console.log(this._session);
-      })
-      .catch(err => {
-        console.log('Error while establishing connection');
-      });
-
-    console.log(this._hubConnection);
-
-
-    // this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
-    //  this._playerCountUpdate = PlayerCount;
-    // });
+    this._hubConnection.on('PlayerCountUpdated', (PlayerCount: number) => {
+      this.playerCount = PlayerCount.toString();
+    });
 
     // this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any) => {
     //   this._playerList = leaderboardList;
@@ -63,7 +51,13 @@ export class GameFlowComponent implements OnInit {
     // });
 
 
-
+    this._hubConnection.start()
+      .then(async () => {
+        this._session = await this._hubConnection.invoke('CreateGameSession', id);
+        this.joinCode = this._session.joinCode;
+        this.playerCount = '0';
+        console.log(this._session);
+      });
 
   }
 
