@@ -20,13 +20,11 @@ namespace BLAG.App
             Locator.CurrentMutable.InitializeReactiveUI();
             Locator.CurrentMutable.RegisterConstant(new LoggingService {Level = LogLevel.Debug}, typeof(ILogger));
 
-            using (var d = this.Log().Measure("IoC setup"))
+            using (var d = this.Log().Measure("IoC View setup"))
             {
                 Locator.CurrentMutable.RegisterConstant(this, typeof(IScreen));
                 Locator.CurrentMutable.Register(() => new AnswerTextChoiceView(),
                     typeof(IViewFor<AnswerTextChoiceViewModel>));
-                Locator.CurrentMutable.Register(() => new AnswerTextChoiceCellView(),
-                    typeof(IViewFor<AnswerTextChoiceCellViewModel>));
                 Locator.CurrentMutable.Register(() => new StartView(),
                     typeof(IViewFor<StartViewModel>));
                 Locator.CurrentMutable.Register(() => new GameView(), 

@@ -29,10 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\AnswerTextChoiceCellView.xaml">
+    <EmbeddedResource Update="Views\GameView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\GameView.xaml">
+    <EmbeddedResource Update="Views\LeaderboardView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StartView.xaml">

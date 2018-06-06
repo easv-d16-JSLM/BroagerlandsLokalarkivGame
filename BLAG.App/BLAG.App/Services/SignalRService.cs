@@ -57,6 +57,12 @@ namespace BLAG.App.Services
             _disposable?.Dispose();
         }
 
+        [Obsolete]
+        public Task StartGame(int currentSessionId)
+        {
+            return _client.InvokeAsync(nameof(StartGame), currentSessionId);
+        }
+
         public static async Task<SignalRService> Initialize(string url)
         {
             var client = new HubConnectionBuilder().WithUrl(url).Build();

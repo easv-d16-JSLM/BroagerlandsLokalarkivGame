@@ -11,7 +11,7 @@ namespace BLAG.App.Views
             InitializeComponent();
 
             this.OneWayBind(ViewModel, vm => vm.PlayerCount, v => v.PlayersLabel.Text);
-            this.OneWayBind(ViewModel, vm => vm.CurrentAnswer.CorrectAnswer, v => v.AnswerLabel.Text);
+            this.OneWayBind(ViewModel, vm => vm.CurrentAnswer, v => v.Content.ViewModel);
         }
     }
 }

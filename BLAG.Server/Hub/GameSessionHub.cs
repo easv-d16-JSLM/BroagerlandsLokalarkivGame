@@ -4,16 +4,19 @@ using System.Threading.Tasks;
 using BLAG.Common.Models;
 using LiteDB;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
 
 namespace BLAG.Server.Hub
 {
     public class GameSessionHub : Microsoft.AspNetCore.SignalR.Hub
     {
         private readonly LiteRepository _db;
+        private readonly ILogger<GameSessionHub> _logger;
 
-        public GameSessionHub(LiteRepository db)
+        public GameSessionHub(LiteRepository db, ILogger<GameSessionHub> logger)
         {
             _db = db;
+            _logger = logger;
         }
 
         public async Task<GameSession> CreateGameSession(int questionnaireId)
@@ -39,42 +42,48 @@ namespace BLAG.Server.Hub
             {
                 return null;
             }
+
             var id = _db.Insert(new Player {Name = userName, GameSession = session});
             await Groups.AddToGroupAsync(Context.ConnectionId, "Players" + joinCode);
-            await Clients.Groups("Players" + session.JoinCode, "Server" + session.JoinCode).SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p => p.GameSession.Id == session.Id));
+            await Clients.Groups("Players" + session.JoinCode, "Server" + session.JoinCode)
+                .SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p => p.GameSession.Id == session.Id));
 
             return _db.SingleById<Player>(id);
         }
 
-        private async void LeaderBoards(int currentSessionId)
+        private static async void LeaderBoards(int currentSessionId, LiteRepository db, IHubCallerClients clients,
+            ILogger log)
         {
-            var currentSession = _db.SingleById<GameSession>(currentSessionId);
-            var leaderboard = from player in _db.Fetch<Player>()
+            log.LogWarning("Showing Leaderboards");
+            var currentSession = db.SingleById<GameSession>(currentSessionId);
+            var leaderboard = from player in db.Fetch<Player>()
                 where player.GameSession.Id.Equals(currentSessionId)
                 orderby player.Score descending
                 select player;
-            await Clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode).SendAsync("CurrentLeaderboard", leaderboard);
+            await clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode)
+                .SendAsync("CurrentLeaderboard", leaderboard);
 
             await Task.Delay(TimeSpan.FromSeconds(10));
             if (currentSession.CurrentQuestionIndex < currentSession.Questionnaire.Questions.Count)
-                NextQuestion(currentSessionId);
+                NextQuestion(currentSessionId, db, clients, log);
         }
 
-        private async void NextQuestion(int currentSessionId)
+        private static async void NextQuestion(int currentSessionId, LiteRepository db, IHubCallerClients clients,
+            ILogger log)
         {
-            var currentSession = _db.SingleById<GameSession>(currentSessionId);
+            log.LogWarning("Showing Question");
+            var currentSession = db.SingleById<GameSession>(currentSessionId);
             var qi = currentSession.CurrentQuestionIndex;
             var question = currentSession.Questionnaire.Questions[qi];
-            var answer = _db.Single<Answer>(ans => ans.Question.Id == question.Id);
-            var delaySeconds = question.Time.Seconds;
-            var endTime = DateTime.Now.AddSeconds(delaySeconds).ToUniversalTime();
+            var answer = db.Single<Answer>(ans => ans.Question.Id == question.Id);
+            var endTime = DateTime.Now.Add(question.Time).ToUniversalTime();
             await Task.WhenAll(
-                Clients.Group("Players" + currentSession.JoinCode).SendAsync("CurrentAnswer", answer, endTime),
-                Clients.Group("Server" + currentSession.JoinCode).SendAsync("CurrentQuestion", question, endTime),
-                Task.Delay(delaySeconds));
+                clients.Group("Players" + currentSession.JoinCode).SendAsync("CurrentAnswer", answer, endTime),
+                clients.Group("Server" + currentSession.JoinCode).SendAsync("CurrentQuestion", question, endTime),
+                Task.Delay(question.Time));
             currentSession.CurrentQuestionIndex++;
-            _db.Update(currentSession);
-            LeaderBoards(currentSessionId);
+            db.Update(currentSession);
+            LeaderBoards(currentSessionId, db, clients, log);
         }
 
 
@@ -83,7 +92,7 @@ namespace BLAG.Server.Hub
             var currentSession = _db.SingleById<GameSession>(currentSessionId);
             currentSession.StartTime = DateTime.Now;
             _db.Update(currentSession);
-            LeaderBoards(currentSessionId);
+            LeaderBoards(currentSessionId, _db, Clients, _logger);
         }
 
 
@@ -91,7 +100,8 @@ namespace BLAG.Server.Hub
         {
             var currentSession = _db.SingleById<GameSession>(currentSessionId);
             _db.Insert(answer);
-            await Clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode).SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p=>p.GameSession.Id==currentSessionId));
+            await Clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode)
+                .SendAsync("PlayerCountUpdated", _db.Fetch<Player>().Count(p => p.GameSession.Id == currentSessionId));
         }
     }
 }

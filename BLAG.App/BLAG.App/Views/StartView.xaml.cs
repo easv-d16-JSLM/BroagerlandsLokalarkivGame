@@ -20,10 +20,13 @@ namespace BLAG.App.Views
             this.OneWayBind(ViewModel, x => x.IsLoading, v => v.Indicator.IsRunning);
             this.OneWayBind(ViewModel, x => x.IsLoading, v => v.messageLabel.Text);
 
-            ViewModel.Error.RegisterHandler(async interaction =>
+            this.WhenActivated(d =>
             {
-                await DisplayAlert("Error", interaction.Input, "OK");
-                interaction.SetOutput(Unit.Default);
+                ViewModel.Error.RegisterHandler(async interaction =>
+                {
+                    await DisplayAlert("Error", interaction.Input, "OK");
+                    interaction.SetOutput(Unit.Default);
+                });
             });
         }
     }

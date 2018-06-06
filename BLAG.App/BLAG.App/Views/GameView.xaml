@@ -5,6 +5,7 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:vm="clr-namespace:BLAG.App.ViewModels;assembly=BLAG.App"
                    xmlns:v="clr-namespace:BLAG.App.Views;assembly=BLAG.App"
+                   xmlns:rx="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
                    x:Class="BLAG.App.Views.GameView">
     <ContentPage.Content>
         <Grid>
@@ -15,7 +16,7 @@
             <StackLayout>
                 <Label x:Name="PlayersLabel" />
             </StackLayout>
-            <Label Grid.Row="1" x:Name="AnswerLabel" />
+            <rx:ViewModelViewHost Grid.Row="1" x:Name="Content" />
         </Grid>
     </ContentPage.Content>
 </v:ContentPageBase>

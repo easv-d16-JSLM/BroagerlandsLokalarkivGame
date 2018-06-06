@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BLAG.Common.Models;
 using LiteDB;
 
@@ -16,21 +17,12 @@ namespace BLAG.Server
 
         public void SeedDatabase()
         {
-            //foreach (var collectionName in _db.Database.GetCollectionNames())
-            //{
-            //    _db.Database.DropCollection(collectionName);
-            //}
+            while (_db.Database.GetCollectionNames().Any())
+            {
+                _db.Database.DropCollection(_db.Database.GetCollectionNames().First());
+            }
 
-            var questionnaire1 = _db.Insert(new Questionnaire
-            {
-                Title = "Broager i 1864",
-                Questions = new List<Question>()
-            });
-            var questionnaire2 = _db.Insert(new Questionnaire
-            {
-                Title = "Broager i Bronzealderen",
-                Questions = new List<Question>()
-            });
+           
 
             var question1 = _db.Insert(new Question
             {
@@ -47,10 +39,13 @@ namespace BLAG.Server
                 QuestionType = QuestionType.Text,
                 Time = TimeSpan.FromSeconds(30)
             });
-            var update1 = _db.SingleById<Questionnaire>(questionnaire1);
-            update1.Questions.Add(_db.SingleById<Question>(question1));
-            update1.Questions.Add(_db.SingleById<Question>(question2));
-            _db.Update(update1);
+
+            var questionnaire1 = _db.Insert(new Questionnaire
+            {
+                Title = "Broager i 1864",
+                Questions = new List<Question>() { _db.SingleById<Question>(question1) , _db.SingleById<Question>(question2) }
+            });
+            var x = _db.Fetch<Questionnaire>();
 
             var question3 = _db.Insert(new Question
             {
@@ -67,10 +62,11 @@ namespace BLAG.Server
                 Time = TimeSpan.FromSeconds(30)
             });
 
-            var update2 = _db.SingleById<Questionnaire>(questionnaire2);
-            update2.Questions.Add(_db.SingleById<Question>(question3));
-            update2.Questions.Add(_db.SingleById<Question>(question4));
-            _db.Update(update2);
+            var questionnaire2 = _db.Insert(new Questionnaire
+            {
+                Title = "Broager i Bronzealderen",
+                Questions = new List<Question>() { _db.SingleById<Question>(question3), _db.SingleById<Question>(question4) }
+            });
 
             _db.Insert(new Answer
             {
