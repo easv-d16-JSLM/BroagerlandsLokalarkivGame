@@ -8,7 +8,7 @@ namespace BLAG.App.ViewModels
 {
     public class GameViewModel : ViewModelBase
     {
-        private readonly ObservableAsPropertyHelper<AnswerTextChoiceViewModel> _currentAnswer;
+        private readonly ObservableAsPropertyHelper<ViewModelBase> _currentContent;
         private readonly Player _player;
         private readonly ObservableAsPropertyHelper<int> _playerCount;
         private readonly SignalRService _signal;
@@ -21,17 +21,18 @@ namespace BLAG.App.ViewModels
             _playerCount = _signal.PlayerCountUpdated.ObserveOn(RxApp.MainThreadScheduler)
                 .ToProperty(this, x => x.PlayerCount);
 
-            _currentAnswer = _signal.CurrentAnswer.Select(a => new AnswerTextChoiceViewModel(a.Item1, a.Item2))
-                .ObserveOn(RxApp.MainThreadScheduler)
-                .ToProperty(this, vm => vm.CurrentAnswer);
+            var answer = _signal.CurrentAnswer.Select(a => new AnswerTextChoiceViewModel(a.Item1, a.Item2));
+            var leaderboard = _signal.CurrentLeaderboard.Select(l => new LeaderboardViewModel(l));
+            _currentContent= Observable.Merge<ViewModelBase>(answer, leaderboard).ObserveOn(RxApp.MainThreadScheduler).ToProperty(this, x => x.CurrentContent);
+                
 
-            _currentAnswer.ThrownExceptions
+            _currentContent.ThrownExceptions
                 .Subscribe(e => throw e);
             _playerCount.ThrownExceptions
                 .Subscribe(e => throw e);
         }
 
-        public AnswerTextChoiceViewModel CurrentAnswer => _currentAnswer.Value;
+        public ViewModelBase CurrentContent => _currentContent.Value;
 
         public int PlayerCount => _playerCount.Value;
     }
