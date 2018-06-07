@@ -1,6 +1,6 @@
 export class Player {
 
-  public Name: string;
+  public name: string;
 
-  public Score: number;
+  public score: number;
 }

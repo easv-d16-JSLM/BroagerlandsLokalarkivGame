@@ -61,7 +61,7 @@ namespace BLAG.Server.Hub
                 orderby player.Score descending
                 select player;
             await clients.Groups("Players" + currentSession.JoinCode, "Server" + currentSession.JoinCode)
-                .SendAsync("CurrentLeaderboard", leaderboard.ToList();
+                .SendAsync("CurrentLeaderboard", leaderboard.ToList());
 
             await Task.Delay(TimeSpan.FromSeconds(10));
             if (currentSession.CurrentQuestionIndex < currentSession.Questionnaire.Questions.Count)

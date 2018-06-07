@@ -43,7 +43,7 @@ export class GameFlowComponent implements OnInit {
       console.log(leaderboardList);
       this.leaderboard = '';
       leaderboardList.forEach(p => {
-        this.leaderboard += p.Score + ' ' + p.Name;
+        this.leaderboard += p.score + ' ' + p.name;
       });
     });
 
