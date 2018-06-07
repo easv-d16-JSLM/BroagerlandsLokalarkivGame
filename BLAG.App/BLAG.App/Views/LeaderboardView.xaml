@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<v:ContentPageBase x:TypeArguments="vm:LeaderboardViewModel"
+<rx:ReactiveContentView x:TypeArguments="vm:LeaderboardViewModel"
                    xmlns="http://xamarin.com/schemas/2014/forms"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:vm="clr-namespace:BLAG.App.ViewModels;assembly=BLAG.App"
                    xmlns:v="clr-namespace:BLAG.App.Views;assembly=BLAG.App"
                    xmlns:rx="clr-namespace:ReactiveUI.XamForms;assembly=ReactiveUI.XamForms"
              x:Class="BLAG.App.Views.LeaderboardView">
-    <ContentPage.Content>
-        <ListView x:Name="playerList"/>
-    </ContentPage.Content>
-</v:ContentPageBase>
+    <ListView x:Name="playerList"/>
+</rx:ReactiveContentView>
