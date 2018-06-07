@@ -12,6 +12,7 @@ namespace BLAG.App.ViewModels
     public class StartViewModel : ViewModelBase
     {
         private readonly ObservableAsPropertyHelper<bool> _isLoading;
+        private readonly ReactiveCommand<Unit,Unit> _connect;
         private string _joinCode = "abcde";
         private string _url = "http://localhost:57851/gamesession";
         private string _username = "testtest";
@@ -26,14 +27,9 @@ namespace BLAG.App.ViewModels
                 name != null &&
                 Regex.IsMatch(name, @"^[A-Za-z]{3,20}$"));
 
-            Connect = ReactiveCommand.CreateFromTask(async () =>
+            _connect = ReactiveCommand.CreateFromTask(async () =>
             {
-                SignalRService service;
-                using (this.Log().Measure("Establishing SignalR connection"))
-                {
-                    service = await SignalRService.Initialize(Url);
-                }
-
+                var service = await SignalRService.Initialize(Url);
                 var player = await service.JoinGameSession(Username, JoinCode);
 
                 if (player == null)
@@ -44,15 +40,14 @@ namespace BLAG.App.ViewModels
 
                 var vm = new GameViewModel(service, player);
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
-            }, canConnect,RxApp.TaskpoolScheduler);
+            }, canConnect, RxApp.TaskpoolScheduler);
 
             _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)
                 .StartWith(false)
                 .ToProperty(this, x => x.IsLoading);
         }
 
-        public ReactiveCommand Connect { get; }
-
+        public ReactiveCommand<Unit,Unit> Connect => _connect;
         public Interaction<string, Unit> Error { get; } = new Interaction<string, Unit>(RxApp.MainThreadScheduler);
 
 
