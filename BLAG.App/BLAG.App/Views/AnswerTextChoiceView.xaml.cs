@@ -15,6 +15,7 @@ namespace BLAG.App.Views
             this.OneWayBind(ViewModel, x => x.Answers, x => x.AnswerList.ItemsSource);
             this.Bind(ViewModel, x => x.SelectedAnswer, x => x.AnswerList.SelectedItem);
             this.OneWayBind(ViewModel, vm => vm.TimeLeft, v => v.TimeLeftLabel.Text);
+            this.BindCommand(ViewModel, vm => vm.SubmitAnswer, v => v.SubmitAnswerButton);
         }
     }
 }

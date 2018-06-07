@@ -17,6 +17,6 @@
         </Grid.RowDefinitions>
         <Label x:Name="TimeLeftLabel" />
         <ListView Grid.Row="1" x:Name="AnswerList" />
-        <Button Grid.Row="2" Text="Submit" />
+        <Button Grid.Row="2" Text="Submit" x:Name="SubmitAnswerButton"/>
     </Grid>
 </rx:ReactiveContentView>
