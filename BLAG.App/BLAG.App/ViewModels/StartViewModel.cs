@@ -44,7 +44,6 @@ namespace BLAG.App.ViewModels
 
                 var vm = new GameViewModel(service, player);
                 HostScreen.Router.Navigate.Execute(vm).Subscribe();
-                service.StartGame(1);
             }, canConnect);
 
             _isLoading = this.WhenAnyObservable(x => x.Connect.IsExecuting)

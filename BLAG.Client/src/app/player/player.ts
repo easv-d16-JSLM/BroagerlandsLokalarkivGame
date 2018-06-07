@@ -1,4 +1,6 @@
 export class Player {
-player: any[];
 
-  }
+  public Name: string;
+
+  public Score: number;
+}

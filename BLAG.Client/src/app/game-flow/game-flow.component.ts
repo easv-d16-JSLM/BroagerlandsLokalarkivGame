@@ -25,6 +25,8 @@ export class GameFlowComponent implements OnInit {
   _hubConnection: HubConnection;
   joinCode: String = 'Please wait...';
   playerCount: String = 'Not connected';
+  questionText: String;
+  leaderboard: String;
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -37,18 +39,18 @@ export class GameFlowComponent implements OnInit {
       this.playerCount = PlayerCount.toString();
     });
 
-    // this._hubConnection.on('CurrentLeaderboard', (leaderboardList: any) => {
-    //   this._playerList = leaderboardList;
-    //   console.log(this.con);
-    //   this.con.SetPlayerList(this._playerList);
-    // });
+    this._hubConnection.on('CurrentLeaderboard', (leaderboardList: Player[]) => {
+      console.log(leaderboardList);
+      this.leaderboard = '';
+      leaderboardList.forEach(p => {
+        this.leaderboard += p.Score + ' ' + p.Name;
+      });
+    });
 
-    // this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: any) => {
-    //   this._currentQuestion = currentQuestion;
-    //   console.log(this.gs);
-    //   this.gs.SetCurrentQuestions(this._currentQuestion, this._endTime);
-
-    // });
+    this._hubConnection.on('CurrentQuestion', (currentQuestion: Question, endTime: any) => {
+      console.log(currentQuestion);
+      this.questionText = currentQuestion.content;
+    });
 
 
     this._hubConnection.start()
@@ -61,5 +63,7 @@ export class GameFlowComponent implements OnInit {
 
   }
 
-  // start function calls signalr startgame
+  async StartGame() {
+    await this._hubConnection.invoke('StartGame', this._session.id);
+  }
 }
