@@ -13,7 +13,7 @@ namespace BLAG.App.Helpers
             return Disposable.Create(() =>
             {
                 var elapsed = DateTime.Now - start;
-                (logLevel ?? log.Info)(message + " took " + elapsed.Humanize());
+                (logLevel ?? log.Info)(message + " took " + elapsed.Humanize(2));
             });
         }
     }

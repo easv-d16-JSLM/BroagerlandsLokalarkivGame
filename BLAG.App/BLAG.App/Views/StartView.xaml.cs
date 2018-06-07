@@ -17,8 +17,7 @@ namespace BLAG.App.Views
             this.Bind(ViewModel, x => x.JoinCode, x => x.Code.Text);
             this.Bind(ViewModel, x => x.Username, x => x.Name.Text);
             this.BindCommand(ViewModel, x => x.Connect, x => x.Start);
-            this.OneWayBind(ViewModel, x => x.IsLoading, v => v.Indicator.IsRunning);
-            this.OneWayBind(ViewModel, x => x.IsLoading, v => v.messageLabel.Text);
+            this.OneWayBind(ViewModel, x => x.IsLoading, v => v.Start.Text, b => b ? "Connecting...": "Connect");
 
             this.WhenActivated(d =>
             {
