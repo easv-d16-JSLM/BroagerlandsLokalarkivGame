@@ -21,7 +21,7 @@ namespace BLAG.App.ViewModels
             _playerCount = _signal.PlayerCountUpdated.ObserveOn(RxApp.MainThreadScheduler)
                 .ToProperty(this, x => x.PlayerCount);
 
-            var answer = _signal.CurrentAnswer.Select(a => new AnswerTextChoiceViewModel(a.Item1, a.Item2));
+            var answer = _signal.CurrentAnswer.Select(a => new AnswerTextChoiceViewModel(a.Item1, a.Item2,_signal,_player));
             var leaderboard = _signal.CurrentLeaderboard.Select(l => new LeaderboardViewModel(l));
             _currentContent= Observable.Merge<ViewModelBase>(answer, leaderboard).ObserveOn(RxApp.MainThreadScheduler).ToProperty(this, x => x.CurrentContent);
                 
